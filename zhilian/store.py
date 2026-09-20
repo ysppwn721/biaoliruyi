@@ -12,7 +12,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
+from decimal import Decimal
+
 from .engine import extract_claims, inspect, check, number, unmatched_spans
+from .graph import Derivations, DerivationError, compute, impact
 from .office import read_facts, read_document, digest, apply_document, update_workbook
 
 
@@ -55,7 +58,12 @@ class Store:
 
     def scan(self, ws, folder, old_claims=()):
         source = next(d for d in ws['documents'] if d['kind'] == 'xlsx')
-        ws['facts'] = read_facts(folder / source['stored_name'], source['id'])
+        base = read_facts(folder / source['stored_name'], source['id'])
+        ws['source_facts'] = base
+        # 上一轮的派生值必须先取出来：build_facts 会覆盖 graph_values，
+        # 而判断"哪个派生值真的变了"正需要它。
+        previous_values = ws.get('graph_values')
+        ws['facts'] = self.build_facts(base, ws, previous=previous_values)
         claims, blocks, old = [], [], {c['id']: c for c in old_claims}
         for d in ws['documents']:
             d['sha256'] = digest(folder / d['stored_name'])
@@ -77,7 +85,62 @@ class Store:
                         c['extraction'] = previous['extraction']
                 claims.append(c)
         ws['claims'], ws['blocks'] = claims, blocks
+        # 级联标记只对触发它的那一次变更有效，扫完即清，避免后续操作误报。
+        ws['graph_changed'] = []
         return ws
+
+    # ---- 事实依赖图 --------------------------------------------------------
+    def derivations_of(self, ws):
+        return Derivations(ws.get('derivations') or [])
+
+    def build_facts(self, base, ws, previous=None, overrides=None):
+        """在基础事实之上按拓扑序算出派生事实，返回合并后的完整事实表。
+
+        论证与图表都可以引用派生事实（如「成本占比」「利润」），
+        因此合并结果才是 engine.check() 应该看到的事实集合。
+        """
+        derivations = self.derivations_of(ws)
+        if not derivations.records:
+            ws['graph'] = {'derived': [], 'errors': {}, 'details': {}, 'affected': [],
+                           'changed': [], 'radius': 0.0, 'cycles': []}
+            ws['graph_values'] = {}
+            return list(base)
+        outcome = compute(base, derivations, changed=ws.get('graph_changed') or [],
+                          overrides=overrides, previous=previous)
+        ws['graph'] = {
+            # 派生值是 Decimal，落盘前必须转 float，否则 json.dumps 会拒绝序列化。
+            'derived': [{'id': f['id'], 'op': f['op'], 'inputs': f['inputs'], 'unit': f['unit'],
+                         'metric': f['metric'], 'value': float(f['value'])} for f in outcome['facts']
+                        if f.get('derived')],
+            'errors': outcome['errors'], 'details': outcome['details'],
+            'affected': outcome['affected'], 'changed': outcome['changed'],
+            'radius': round(outcome['radius'], 4),
+            'cycles': [c for c in derivations.cycles],
+        }
+        # 保存本轮值供下一次变更做对比：没有它就无法判断派生值究竟有没有变。
+        ws['graph_values'] = {k: (float(v) if isinstance(v, Decimal) else v)
+                              for k, v in outcome['values'].items()}
+        # 事实表里的派生值同样要给下游 JSON（HTTP 响应）用，统一降为 float。
+        return [dict(f, value=float(f['value'])) if f.get('derived') and f.get('value') is not None else f
+                for f in outcome['facts']]
+
+    def save_derivations(self, ws, records):
+        """替换派生定义前先做完整校验，非法定义不写盘。"""
+        derivations = Derivations(records)
+        base_ids = {f['id'] for f in ws.get('source_facts') or ws['facts']}
+        problems = derivations.validate(base_ids)
+        if problems:
+            raise ValueError('；'.join(problems))
+        ws['derivations'] = derivations.records
+        return derivations
+
+    def graph_summary(self, ws):
+        graph = ws.get('graph') or {}
+        return {'derived': len(graph.get('derived') or []),
+                'errors': len(graph.get('errors') or {}),
+                'affected': len(graph.get('affected') or []),
+                'radius': graph.get('radius', 0.0),
+                'cycles': len(graph.get('cycles') or [])}
 
     def create(self, name, paths, demo=False):
         with self.lock:
@@ -89,6 +152,7 @@ class Store:
             current.mkdir(parents=True)
             ws = {'id': wid, 'name': name.strip()[:100] or '未命名项目', 'created_at': now(),
                   'revision': 0, 'generation': 'v0', 'demo': demo, 'documents': [],
+                  'derivations': [], 'graph': None, 'graph_changed': [],
                   'history': [], 'audit': [], 'last_repair': None}
             try:
                 for i, path in enumerate(paths):
@@ -116,6 +180,10 @@ class Store:
         result['summary']['unmatched_segments'] = len(segments)
         # Keep the original block count for clients that used the first API.
         result['summary']['unmatched_blocks'] = sum(not any(c['file_id'] == b['file_id'] and c['location'] == b['location'] for c in ws['claims']) for b in ws['blocks'])
+        # 派生事实、依赖图与实际使用的值是过程数据，不重复下发给前端。
+        result.pop('source_facts', None)
+        result.pop('graph_changed', None)
+        result['summary'].update(self.graph_summary(ws))
         for d in result['documents']:
             d.pop('stored_name', None)
             d['download_url'] = f'/api/projects/{ws["id"]}/files/{d["id"]}'
@@ -158,9 +226,11 @@ class Store:
         with self.lock:
             ws = self.read(wid)
             self.verify(ws, revision)
-            facts = {f['id']: f for f in ws['facts']}
+            # 只允许改基础事实：派生事实由表达式决定，直接写入会与其定义矛盾。
+            base = ws.get('source_facts') or ws['facts']
+            facts = {f['id']: f for f in base}
             if not values or any(i not in facts for i in values):
-                raise ValueError('没有有效的事实更新')
+                raise ValueError('没有有效的事实更新；派生事实由表达式决定，不能直接修改')
             changes = {i: float(number(v)) for i, v in values.items() if float(number(v)) != facts[i]['value']}
             if not changes:
                 raise ValueError('数值没有变化')
@@ -171,20 +241,40 @@ class Store:
             shutil.copytree(root / ws['generation'], target)
             try:
                 source = next(d for d in ws['documents'] if d['kind'] == 'xlsx')
-                update_workbook(root / ws['generation'] / source['stored_name'], target / source['stored_name'], ws['facts'], changes)
+                update_workbook(root / ws['generation'] / source['stored_name'], target / source['stored_name'], base, changes)
+                ws['graph_changed'] = sorted(changes)
                 self.scan(ws, target, ws['claims'])
+                affected = self.last_impact(ws, sorted(changes))
                 ws['history'].append({'revision': previous['revision'], 'generation': previous['generation'], 'action': '数据变更',
                                       'changes': [{'id': i, 'before': facts[i]['value'], 'after': v} for i, v in changes.items()], 'time': now()})
                 ws['generation'] = generation
                 ws['revision'] += 1
                 ws['last_repair'] = None
-                ws['audit'].append({'time': now(), 'event': '数据变更', 'detail': '；'.join(f'{i}: {facts[i]["value"]} → {v}' for i, v in changes.items())})
+                ws['audit'].append({'time': now(), 'event': '数据变更',
+                                    'detail': '；'.join(f'{i}: {facts[i]["value"]} → {v}' for i, v in changes.items())})
                 (target / 'previous-state.json').write_text(json.dumps(previous, ensure_ascii=False), encoding='utf-8')
                 self.write(ws)
-                return self.public(ws)
+                result = self.public(ws)
+                result['cascade'] = affected
+                return result
             except Exception:
-                shutil.rmtree(target)
+                target = root / generation
+                shutil.rmtree(target, ignore_errors=True)
                 raise
+
+    def last_impact(self, ws, changed_ids):
+        """本次变更的级联结果：派生事实变化、直接与间接受影响的论断。"""
+        derivations = self.derivations_of(ws)
+        grouped = impact(derivations, ws['claims'], changed_ids) if derivations.records else {
+            'direct': [c['id'] for c in ws['claims'] if set(c['refs']) & set(changed_ids)],
+            'indirect': [], 'affected_facts': [], 'total': 0}
+        graph = ws.get('graph') or {}
+        return {'changed_facts': changed_ids,
+                'changed_derived': graph.get('changed') or [],
+                'affected_facts': grouped['affected_facts'],
+                'direct_claims': grouped['direct'],
+                'indirect_claims': grouped['indirect'],
+                'radius': graph.get('radius', 0.0)}
 
     def source_update(self, ws, revision, path):
         """Validate an edited workbook for both preview and transactional import."""
@@ -210,15 +300,30 @@ class Store:
             ws = self.read(wid)
             _, incoming, changes = self.source_update(ws, revision, path)
             changed = {c['id'] for c in changes}
+            # 派生事实必须在同一事务性内存里联动重算：只比基础事实会漏掉
+            # 「改成本 → 成本占比失效 → 引用占比的句子失效」这类间接影响。
+            graph_before = copy.deepcopy(ws.get('graph'))
+            values_before = copy.deepcopy(ws.get('graph_values'))
+            after_facts = self.build_facts(incoming, ws, previous=values_before,
+                                           overrides={c['id']: c['after'] for c in changes})
+            graph_state = copy.deepcopy(ws.get('graph'))
+            ws['graph'] = graph_before
+            ws['graph_values'] = values_before
+            derivations = self.derivations_of(ws)
+            grouped = impact(derivations, ws['claims'], sorted(changed)) if derivations.records else {
+                'direct': [c['id'] for c in ws['claims'] if changed.intersection(c['refs'])],
+                'indirect': [], 'affected_facts': []}
+            relevant = set(grouped['direct']) | set(grouped['indirect'])
             affected = []
             summary = {'changed_facts': len(changes), 'affected_claims': 0,
                        'consistent': 0, 'inconsistent': 0, 'unverifiable': 0, 'repairable': 0}
             for claim in ws['claims']:
-                if not changed.intersection(claim['refs']):
+                if claim['id'] not in relevant:
                     continue
                 before = check(claim, ws['facts'])
-                after = check(claim, incoming)
+                after = check(claim, after_facts)
                 affected.append({'claim_id': claim['id'],
+                                 'cascade': 'indirect' if claim['id'] in set(grouped['indirect']) else 'direct',
                                  'before': before, 'after': after,
                                  # Keep the compact fields for API consumers that
                                  # only need a status summary.
@@ -227,7 +332,13 @@ class Store:
                 summary[after['status']] += 1
                 summary['repairable'] += int(claim['confirmed'] and after['status'] == 'inconsistent')
             summary['affected_claims'] = len(affected)
-            return {'revision': ws['revision'], 'changes': changes, 'affected': affected, 'summary': summary}
+            return {'revision': ws['revision'], 'changes': changes, 'affected': affected, 'summary': summary,
+                    'cascade': {'changed_facts': sorted(changed),
+                                'changed_derived': graph_state.get('changed') or [],
+                                'affected_facts': grouped['affected_facts'],
+                                'direct_claims': len(grouped['direct']),
+                                'indirect_claims': len(grouped['indirect']),
+                                'radius': graph_state.get('radius', 0.0)}}
 
     def import_source(self, wid, revision, path):
         """Import an externally edited workbook without silently reusing changed meanings."""
@@ -241,7 +352,9 @@ class Store:
             shutil.copytree(root / ws['generation'], target)
             try:
                 shutil.copyfile(path, target / source['stored_name'])
+                ws['graph_changed'] = sorted(c['id'] for c in changes)
                 self.scan(ws, target, ws['claims'])
+                cascade = self.last_impact(ws, sorted(c['id'] for c in changes))
                 ws['generation'] = generation
                 ws['revision'] += 1
                 ws['last_repair'] = None
@@ -252,10 +365,40 @@ class Store:
                                     'detail': '；'.join(f'{c["id"]}: {c["before"]} → {c["after"]}' for c in changes)})
                 (target / 'previous-state.json').write_text(json.dumps(previous, ensure_ascii=False), encoding='utf-8')
                 self.write(ws)
-                return self.public(ws)
+                result = self.public(ws)
+                result['cascade'] = cascade
+                return result
             except Exception:
-                shutil.rmtree(target)
+                shutil.rmtree(target, ignore_errors=True)
                 raise
+
+    # ---- 派生事实定义的增删 -------------------------------------------------
+    def set_derivations(self, wid, revision, records):
+        with self.lock:
+            ws = self.read(wid)
+            self.verify(ws, revision)
+            self.save_derivations(ws, records)
+            self.scan(ws, self.folder(wid) / ws['generation'], ws['claims'])
+            ws['revision'] += 1
+            ws['last_repair'] = None
+            ws['audit'].append({'time': now(), 'event': '定义派生事实',
+                                'detail': f'共{len(ws["derivations"])}项派生事实；引用完整性校验通过'})
+            self.write(ws)
+            return self.public(ws)
+
+    def remove_derivation(self, wid, revision, rid):
+        with self.lock:
+            ws = self.read(wid)
+            self.verify(ws, revision)
+            derivations = self.derivations_of(ws)
+            derivations.remove(rid)
+            ws['derivations'] = derivations.records
+            self.scan(ws, self.folder(wid) / ws['generation'], ws['claims'])
+            ws['revision'] += 1
+            ws['last_repair'] = None
+            ws['audit'].append({'time': now(), 'event': '删除派生事实', 'detail': rid})
+            self.write(ws)
+            return self.public(ws)
 
     def repair(self, wid, revision, ids):
         with self.lock:

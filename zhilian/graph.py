@@ -88,11 +88,15 @@ def eval_expr(op: str, sources: list) -> tuple:
     """
     if op not in OPERATIONS:
         raise DerivationError('不支持的运算：%s' % op)
+    # 基础事实来自 Excel，数值是 float；派生值在内存里是 Decimal。
+    # 统一经 number() 归一化，避免 float 与 Decimal 混算抛 TypeError。
     values = []
     for fact in sources:
         if fact.get('value') is None:
             raise DerivationError('来源事实「%s」缺少数值' % fact.get('id', '?'))
         values.append(number(fact['value']))
+    if op != 'sum':
+        values = [number(v) for v in values]
 
     if op == 'sum':
         first = sources[0]
@@ -302,6 +306,9 @@ def compute(base_facts, derivations, changed=(), overrides=None, previous=None):
         radius       影响半径：受影响节点数 ÷ 全图节点数
     """
     overrides = dict(overrides or {})
+    # previous 允许传「值字典」或「事实列表」；两种写法都不应让调用方踩坑。
+    if isinstance(previous, (list, tuple)):
+        previous = {f['id']: f.get('value') for f in previous if isinstance(f, dict) and 'id' in f}
     base = []
     for fact in base_facts:
         item = dict(fact)

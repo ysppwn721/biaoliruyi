@@ -60,6 +60,18 @@ class RevisionRequest(BaseModel):
     revision: int
 
 
+class Derivation(BaseModel):
+    id: str = Field(max_length=80)
+    expr: str = Field(max_length=500)
+    unit: str = Field('', max_length=16)
+    label: str = Field('', max_length=80)
+
+
+class DerivationsRequest(BaseModel):
+    revision: int
+    derivations: list[Derivation] = Field(max_length=2000)
+
+
 def create_app(data_dir=None):
     load_environment()
     store = Store(data_dir or os.getenv('ZHILIAN_DATA_DIR', str(BASE / '.zhilian')))
@@ -160,6 +172,23 @@ def create_app(data_dir=None):
     @app.post('/api/projects/{wid}/facts')
     def change(wid: str, body: ChangeRequest):
         return store.change(wid, body.revision, body.values)
+
+    @app.get('/api/projects/{wid}/derivations')
+    def list_derivations(wid: str):
+        with store.lock:
+            ws = store.read(wid)
+            derivations = store.derivations_of(ws)
+            return {'revision': ws['revision'], 'derivations': derivations.records,
+                    'order': derivations.order, 'cycles': derivations.cycles,
+                    'graph': ws.get('graph') or {}}
+
+    @app.post('/api/projects/{wid}/derivations')
+    def set_derivations(wid: str, body: DerivationsRequest):
+        return store.set_derivations(wid, body.revision, [i.model_dump() for i in body.derivations])
+
+    @app.delete('/api/projects/{wid}/derivations/{rid}')
+    def remove_derivation(wid: str, rid: str, revision: int):
+        return store.remove_derivation(wid, revision, rid)
 
     async def uploaded_source(wid, revision, file, operation):
         try:
