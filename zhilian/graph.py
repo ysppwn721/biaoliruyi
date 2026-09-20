@@ -38,13 +38,6 @@ class DerivationError(ValueError):
     """派生定义非法。错误信息面向用户，可直接在界面上展示。"""
 
 
-def _collapse_zero(text: str) -> str:
-    """去掉定点表示里无意义的尾零，但不使用科学计数法。"""
-    if '.' in text:
-        text = text.rstrip('0').rstrip('.')
-    return text or '0'
-
-
 def _quantize(value: Decimal, places: str) -> Decimal:
     return value.quantize(Decimal(places), rounding=ROUND_HALF_UP)
 

@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import hashlib
-import math
 import re
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
@@ -45,30 +44,109 @@ def stable_id(*parts):
     return hashlib.sha256('|'.join(map(str, parts)).encode()).hexdigest()[:18]
 
 
-def best_facts(text, facts, *, period=None):
-    scored = []
+# 主体为这些值时不参与加分：它们描述的是"整体"，任何句子都可能命中。
+GENERIC_SUBJECTS = ('总计', '整体', '全部')
+
+
+def _descriptors(fact):
+    """一条事实的**定位**描述符：指标与非泛指主体。
+
+    期间刻意不放进这里。旧实现中期间只参与加分，不参与"能否匹配"的判断；
+    早先把它列为必需项会让「A产品销量最高」这类没有写期间的句子匹配不到
+    任何事实。需要限制期间时由 `best_facts(period=...)` 显式过滤。
+    """
+    keys = []
+    if fact.get('metric'):
+        keys.append(fact['metric'])
+    if fact.get('subject') and fact['subject'] not in GENERIC_SUBJECTS:
+        keys.append(fact['subject'])
+    return keys
+
+
+def build_index(facts):
+    """描述符 → 事实ID 的反向索引。
+
+    原实现在每段文本上都遍历全部事实做子串包含判断，因此一段文本的开销是
+    O(事实数 × 描述符数)。索引把"哪些事实可能相关"提前算好，长文档导入时
+    每段只需检查命中描述符所涉及的事实。
+    """
+    token_ids = {}
     for fact in facts:
-        score = 0
-        if fact['metric'] and fact['metric'] in text:
-            score += 5
-        if fact['subject'] not in ('总计', '整体', '全部') and fact['subject'] in text:
+        for key in _descriptors(fact):
+            token_ids.setdefault(key, set()).add(fact['id'])
+    return {'token_ids': token_ids}
+
+
+def best_facts(text, facts, *, period=None, index=None):
+    """找出文本对应的唯一事实来源。
+
+    语义与旧实现一致：指标、非泛指主体都必须出现在文本中（至少含指标），
+    期间出现在文本中时额外加分；`period` 是额外的显式过滤条件。
+    多条并列时返回全部候选，由上层判为"口径不唯一"并转人工确认。
+    """
+    if not text:
+        return []
+    index = index or build_index(facts)
+    token_ids = index['token_ids']
+    hit_tokens = [token for token in token_ids if token in text]
+    if hit_tokens:
+        wanted = set()
+        for token in hit_tokens:
+            wanted |= token_ids[token]
+        candidates = [f for f in facts if f['id'] in wanted]
+    else:
+        candidates = facts
+
+    scored = []
+    for fact in candidates:
+        keys = _descriptors(fact)
+        if not keys or fact['metric'] not in text:
+            continue
+        if any(key not in text for key in keys):
+            continue
+        if period and fact['period'] != period:
+            continue
+        score = 5
+        if fact['subject'] not in GENERIC_SUBJECTS:
             score += 4
         if fact['period'] and fact['period'] in text:
             score += 3
-        if period and fact['period'] != period:
-            continue
-        if score >= 5:
-            scored.append((score, fact))
+        scored.append((score, fact))
     if not scored:
         return []
     top = max(s for s, _ in scored)
     return [f for s, f in scored if s == top]
 
 
-def extract_claims(block, facts):
+_INDEX_CACHE = {}
+
+
+def facts_index(facts, bypass_cache=False):
+    """按事实描述符构造（并可复用）反向索引。
+
+    索引只依赖事实 ID 与描述符，改数值不影响它，因此在一次导入或一次变更
+    内复用是安全的；描述符集合变化时会自动重建。
+    """
+    if bypass_cache:
+        return build_index(facts)
+    fingerprint = hash(tuple(sorted(
+        (f['id'], f.get('metric', ''), f.get('subject', ''), f.get('period', '')) for f in facts)))
+    entry = _INDEX_CACHE.get(fingerprint)
+    if entry is None or entry['size'] != len(facts):
+        entry = build_index(facts)
+        entry['size'] = len(facts)
+        if len(_INDEX_CACHE) > 8:
+            _INDEX_CACHE.clear()
+        _INDEX_CACHE[fingerprint] = entry
+    return entry
+
+
+def extract_claims(block, facts, index=None):
     """Extract separate, non-overlapping assertions, retaining their exact text anchors."""
     result = []
     context = ''
+    # 每段只构造/复用一次索引，避免在循环里对每条事实重复扫描文本。
+    index = index or facts_index(facts)
     patterns = [
         ('growth', r'(?:较上期|环比)(增长|下降|持平)(?:(' + NUM + r')%)?'),
         ('ranking', r'(.+?)(销售额|销量|收入|支出|得分)(?:并列)?最高'),
@@ -126,12 +204,12 @@ def extract_claims(block, facts):
     compound_counter, legacy_assigned = 0, set()
     for sentence_index, start, end, text, marker_kind, match in candidate_matches:
         refs, spec, kind, issue = [], {}, None, ''
-        source_text = text if best_facts(text, facts) else context
+        source_text = text if best_facts(text, facts, index=index) else context
         if marker_kind == 'growth':
             growth = match
             kind = 'growth'
-            curr = best_facts(source_text, facts, period='本期')
-            prev = best_facts(source_text, facts, period='上期')
+            curr = best_facts(source_text, facts, period='本期', index=index)
+            prev = best_facts(source_text, facts, period='上期', index=index)
             if len(curr) == len(prev) == 1:
                 refs = [prev[0]['id'], curr[0]['id']]
             else:
@@ -149,7 +227,7 @@ def extract_claims(block, facts):
         elif marker_kind == 'threshold':
             threshold = match
             kind = 'threshold'
-            fs = best_facts(source_text, facts)
+            fs = best_facts(source_text, facts, index=index)
             refs = [fs[0]['id']] if len(fs) == 1 else []
             positive, negative, op = ('超过', '未超过', '>')
             if threshold[1] in ('不少于', '低于'):
@@ -161,7 +239,7 @@ def extract_claims(block, facts):
             kind = 'threshold'
             # Resolve each side from an explicit metric phrase; both period and
             # metric are required so similarly named facts stay ambiguous.
-            fs1, fs2 = best_facts('本期支出', facts), best_facts('本期预算', facts)
+            fs1, fs2 = best_facts('本期支出', facts, index=index), best_facts('本期预算', facts, index=index)
             refs = [fs1[0]['id'], fs2[0]['id']] if len(fs1) == len(fs2) == 1 else []
             m = match
             spec = {'positive': '超过', 'negative': '未超过', 'op': '>', 'reported_positive': m[1] == '超过', 'span': [m.start(), m.end()]}
@@ -169,7 +247,7 @@ def extract_claims(block, facts):
         elif marker_kind == 'quote':
             quote = match
             kind = 'quote'
-            fs = best_facts(source_text, facts)
+            fs = best_facts(source_text, facts, index=index)
             refs = [fs[0]['id']] if len(fs) == 1 else []
             spec = {'reported': float(quote[1]), 'unit': quote[2], 'span': [quote.start(1), quote.end(1)]}
         if kind:
@@ -186,7 +264,7 @@ def extract_claims(block, facts):
                            'original': text, 'start': start, 'end': end,
                            'kind': kind, 'refs': refs, 'spec': spec, 'confirmed': False,
                            'extraction': '规则识别', 'issue': issue})
-        context = text if best_facts(text, facts) else context
+        context = text if best_facts(text, facts, index=index) else context
     return result
 
 

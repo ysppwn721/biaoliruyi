@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import base64
 import hmac
-import json
 import os
 import re
 import tempfile
@@ -16,6 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
+from . import __version__
 from .demo import create_demo
 from .llm import config, suggest_links
 from .store import Store, now
@@ -75,7 +75,7 @@ class DerivationsRequest(BaseModel):
 def create_app(data_dir=None):
     load_environment()
     store = Store(data_dir or os.getenv('ZHILIAN_DATA_DIR', str(BASE / '.zhilian')))
-    app = FastAPI(title='知链', version='0.2.0', description='跨文档结论验证与增量修复')
+    app = FastAPI(title='知链', version=__version__, description='跨文档结论验证与增量修复')
     app.state.store = store
 
     @app.middleware('http')
@@ -114,7 +114,7 @@ def create_app(data_dir=None):
 
     @app.get('/api/health')
     def health():
-        return {'status': 'ok', 'version': '0.2.0', 'model': config(),
+        return {'status': 'ok', 'version': __version__, 'model': config(),
                 'password_protected': bool(os.getenv('ZHILIAN_ACCESS_PASSWORD'))}
 
     @app.get('/api/projects')

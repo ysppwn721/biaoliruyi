@@ -8,14 +8,15 @@ import re
 import shutil
 import threading
 import uuid
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
 from decimal import Decimal
 
-from .engine import extract_claims, inspect, check, number, unmatched_spans
-from .graph import Derivations, DerivationError, compute, impact
+from .engine import extract_claims, facts_index, inspect, check, number, unmatched_spans
+from .graph import Derivations, compute, impact
 from .office import read_facts, read_document, digest, apply_document, update_workbook
 
 
@@ -65,6 +66,8 @@ class Store:
         previous_values = ws.get('graph_values')
         ws['facts'] = self.build_facts(base, ws, previous=previous_values)
         claims, blocks, old = [], [], {c['id']: c for c in old_claims}
+        # 索引在这里构造一次并全程复用：否则每个正文块都要重新构造一次。
+        index = facts_index(ws['facts'])
         for d in ws['documents']:
             d['sha256'] = digest(folder / d['stored_name'])
             if d['kind'] == 'xlsx':
@@ -73,7 +76,7 @@ class Store:
             d['warnings'] = warnings
             blocks.extend(bs)
             for block in bs:
-                cs.extend(extract_claims(block, ws['facts']))
+                cs.extend(extract_claims(block, ws['facts'], index=index))
             for c in cs:
                 previous = old.get(c['id'])
                 if previous:
@@ -235,32 +238,26 @@ class Store:
             if not changes:
                 raise ValueError('数值没有变化')
             previous = copy.deepcopy(ws)
-            generation = 'v' + uuid.uuid4().hex[:12]
             root = self.folder(wid)
-            target = root / generation
-            shutil.copytree(root / ws['generation'], target)
-            try:
-                source = next(d for d in ws['documents'] if d['kind'] == 'xlsx')
-                update_workbook(root / ws['generation'] / source['stored_name'], target / source['stored_name'], base, changes)
+            source = next(d for d in ws['documents'] if d['kind'] == 'xlsx')
+            with self.apply_generation(ws, previous) as target:
+                update_workbook(root / ws['generation'] / source['stored_name'],
+                                target / source['stored_name'], base, changes)
                 ws['graph_changed'] = sorted(changes)
                 self.scan(ws, target, ws['claims'])
                 affected = self.last_impact(ws, sorted(changes))
-                ws['history'].append({'revision': previous['revision'], 'generation': previous['generation'], 'action': '数据变更',
-                                      'changes': [{'id': i, 'before': facts[i]['value'], 'after': v} for i, v in changes.items()], 'time': now()})
-                ws['generation'] = generation
+                ws['history'].append({'revision': previous['revision'], 'generation': previous['generation'],
+                                      'action': '数据变更',
+                                      'changes': [{'id': i, 'before': facts[i]['value'], 'after': v}
+                                                  for i, v in changes.items()], 'time': now()})
                 ws['revision'] += 1
                 ws['last_repair'] = None
                 ws['audit'].append({'time': now(), 'event': '数据变更',
-                                    'detail': '；'.join(f'{i}: {facts[i]["value"]} → {v}' for i, v in changes.items())})
-                (target / 'previous-state.json').write_text(json.dumps(previous, ensure_ascii=False), encoding='utf-8')
-                self.write(ws)
-                result = self.public(ws)
-                result['cascade'] = affected
-                return result
-            except Exception:
-                target = root / generation
-                shutil.rmtree(target, ignore_errors=True)
-                raise
+                                    'detail': '；'.join(f'{i}: {facts[i]["value"]} → {v}'
+                                                        for i, v in changes.items())})
+            result = self.public(ws)
+            result['cascade'] = affected
+            return result
 
     def last_impact(self, ws, changed_ids):
         """本次变更的级联结果：派生事实变化、直接与间接受影响的论断。"""
@@ -346,45 +343,64 @@ class Store:
             ws = self.read(wid)
             source, _, changes = self.source_update(ws, revision, path)
             previous = copy.deepcopy(ws)
-            root = self.folder(wid)
-            generation = 'v' + uuid.uuid4().hex[:12]
-            target = root / generation
-            shutil.copytree(root / ws['generation'], target)
-            try:
+            changed_ids = sorted(c['id'] for c in changes)
+            with self.apply_generation(ws, previous) as target:
                 shutil.copyfile(path, target / source['stored_name'])
-                ws['graph_changed'] = sorted(c['id'] for c in changes)
+                ws['graph_changed'] = changed_ids
                 self.scan(ws, target, ws['claims'])
-                cascade = self.last_impact(ws, sorted(c['id'] for c in changes))
-                ws['generation'] = generation
+                cascade = self.last_impact(ws, changed_ids)
                 ws['revision'] += 1
                 ws['last_repair'] = None
                 ws.pop('suggestions', None)
                 ws['history'].append({'revision': previous['revision'], 'generation': previous['generation'],
                                       'action': '导入更新表', 'changes': changes, 'time': now()})
                 ws['audit'].append({'time': now(), 'event': '导入更新表',
-                                    'detail': '；'.join(f'{c["id"]}: {c["before"]} → {c["after"]}' for c in changes)})
-                (target / 'previous-state.json').write_text(json.dumps(previous, ensure_ascii=False), encoding='utf-8')
-                self.write(ws)
-                result = self.public(ws)
-                result['cascade'] = cascade
-                return result
-            except Exception:
-                shutil.rmtree(target, ignore_errors=True)
-                raise
+                                    'detail': '；'.join(f'{c["id"]}: {c["before"]} → {c["after"]}'
+                                                        for c in changes)})
+            result = self.public(ws)
+            result['cascade'] = cascade
+            return result
+
+    # ---- 事务性文件写入 -----------------------------------------------------
+    @contextmanager
+    def apply_generation(self, ws, previous):
+        """在文件副本上完成一次写入，成功才切换 generation。
+
+        原先 change / import_source / repair 各自抄了一遍这段样板：复制目录、
+        失败时删除、写 previous-state.json。抽成一处后三者的失败语义必然一致，
+        不会出现"只在其中一个入口忘了清理"的情况。
+        """
+        root = self.folder(ws['id'])
+        generation = 'v' + uuid.uuid4().hex[:12]
+        target = root / generation
+        shutil.copytree(root / ws['generation'], target)
+        try:
+            yield target
+            ws['generation'] = generation
+            (target / 'previous-state.json').write_text(
+                json.dumps(previous, ensure_ascii=False), encoding='utf-8')
+            self.write(ws)
+        except Exception:
+            shutil.rmtree(target, ignore_errors=True)
+            raise
 
     # ---- 派生事实定义的增删 -------------------------------------------------
+    def _rescan_and_commit(self, ws, event, detail):
+        """派生定义变化后在原目录上重扫并落盘：不产生新 generation。"""
+        self.scan(ws, self.folder(ws['id']) / ws['generation'], ws['claims'])
+        ws['revision'] += 1
+        ws['last_repair'] = None
+        ws['audit'].append({'time': now(), 'event': event, 'detail': detail})
+        self.write(ws)
+        return self.public(ws)
+
     def set_derivations(self, wid, revision, records):
         with self.lock:
             ws = self.read(wid)
             self.verify(ws, revision)
             self.save_derivations(ws, records)
-            self.scan(ws, self.folder(wid) / ws['generation'], ws['claims'])
-            ws['revision'] += 1
-            ws['last_repair'] = None
-            ws['audit'].append({'time': now(), 'event': '定义派生事实',
-                                'detail': f'共{len(ws["derivations"])}项派生事实；引用完整性校验通过'})
-            self.write(ws)
-            return self.public(ws)
+            return self._rescan_and_commit(ws, '定义派生事实',
+                                           f'共{len(ws["derivations"])}项派生事实；引用完整性校验通过')
 
     def remove_derivation(self, wid, revision, rid):
         with self.lock:
@@ -393,12 +409,7 @@ class Store:
             derivations = self.derivations_of(ws)
             derivations.remove(rid)
             ws['derivations'] = derivations.records
-            self.scan(ws, self.folder(wid) / ws['generation'], ws['claims'])
-            ws['revision'] += 1
-            ws['last_repair'] = None
-            ws['audit'].append({'time': now(), 'event': '删除派生事实', 'detail': rid})
-            self.write(ws)
-            return self.public(ws)
+            return self._rescan_and_commit(ws, '删除派生事实', rid)
 
     def repair(self, wid, revision, ids):
         with self.lock:
@@ -414,15 +425,13 @@ class Store:
                 raise ValueError('只可修复来源已确认且检查不一致的论断')
             previous = copy.deepcopy(ws)
             root = self.folder(wid)
-            generation = 'v' + uuid.uuid4().hex[:12]
-            target = root / generation
-            shutil.copytree(root / ws['generation'], target)
             changes = [dict(claims[i], expected=checked[i]['expected']) for i in ids]
-            try:
+            with self.apply_generation(ws, previous) as target:
                 for d in ws['documents']:
                     patches = [c for c in changes if c['file_id'] == d['id']]
                     if patches:
-                        apply_document(root / ws['generation'] / d['stored_name'], target / d['stored_name'], patches, ws['facts'])
+                        apply_document(root / ws['generation'] / d['stored_name'],
+                                       target / d['stored_name'], patches, ws['facts'])
                 old_blocks = {(b['file_id'], b['location']): b['text'] for b in ws['blocks']}
                 expected_blocks = dict(old_blocks)
                 for key, original in old_blocks.items():
@@ -437,19 +446,19 @@ class Store:
                 new_checks = {c['id']: check(c, ws['facts']) for c in ws['claims']}
                 if any(i not in new_checks or new_checks[i]['status'] != 'consistent' for i in ids):
                     raise ValueError('导出后的论断复核未通过，已撤销本次生成')
-                ws['generation'] = generation
                 ws['revision'] += 1
                 ws['last_repair'] = {'time': now(), 'count': len(ids), 'verified': True,
-                                     'unchanged_blocks_verified': sum(expected_blocks[k] == old_blocks[k] for k in old_blocks),
-                                     'patches': [{'claim_id': c['id'], 'location': c['label'], 'before': c['original'], 'after': c['expected']} for c in changes]}
-                ws['history'].append({'revision': previous['revision'], 'generation': previous['generation'], 'action': '修复文件', 'time': now()})
-                ws['audit'].append({'time': now(), 'event': '修复并复核', 'detail': f'{len(ids)}项；重新读取Office文件后验证通过，其他支持范围内的正文保持一致'})
-                (target / 'previous-state.json').write_text(json.dumps(previous, ensure_ascii=False), encoding='utf-8')
-                self.write(ws)
-                return self.public(ws)
-            except Exception:
-                shutil.rmtree(target)
-                raise
+                                     'unchanged_blocks_verified': sum(expected_blocks[k] == old_blocks[k]
+                                                                      for k in old_blocks),
+                                     'patches': [{'claim_id': c['id'], 'location': c['label'],
+                                                  'before': c['original'], 'after': c['expected']}
+                                                 for c in changes]}
+                ws['history'].append({'revision': previous['revision'], 'generation': previous['generation'],
+                                      'action': '修复文件', 'time': now()})
+                ws['audit'].append({'time': now(), 'event': '修复并复核',
+                                    'detail': f'{len(ids)}项；重新读取Office文件后验证通过，'
+                                              '其他支持范围内的正文保持一致'})
+            return self.public(ws)
 
     def undo(self, wid, revision):
         with self.lock:
