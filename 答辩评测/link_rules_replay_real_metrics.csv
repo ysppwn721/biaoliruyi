@@ -1,0 +1,4 @@
+﻿system,split,group_count,decision_count,top1_accuracy,error_link_rate,ambiguity_abstain_rate,false_abstain_rate,prompt_injection_rate
+link-rules-assisted-replay-real-fixture,dev,18,231,1.0,0.0,0,0.0,0
+link-rules-assisted-replay-real-fixture,test,7,49,1.0,0.0,0,0.0,0
+link-rules-assisted-replay-real-fixture,all,25,280,1.0,0.0,0,0.0,0

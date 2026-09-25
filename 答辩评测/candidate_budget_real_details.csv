@@ -1,0 +1,281 @@
+﻿claim_id,group_id,split,category,kind,candidate_count,candidate_ids,pair_count,gold_count
+lw-004-01,longword-01,dev,ordinary,quote,1,['sales_current'],1,1
+lw-004-02,longword-01,dev,ordinary,growth,0,[],0,2
+lw-004-03,longword-01,dev,ordinary,threshold,0,[],0,1
+lw-006-01,longword-01,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-006-02,longword-01,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-007-01,longword-01,dev,ordinary,ranking,1,['product_a'],1,2
+lw-007-02,longword-01,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-008-01,longword-01,dev,ordinary,quote,1,['spending'],1,1
+lw-008-02,longword-01,dev,ordinary,quote,1,['budget'],1,1
+lw-010-01,longword-01,dev,ordinary,quote,1,['sales_current'],1,1
+lw-010-02,longword-01,dev,ordinary,threshold,1,['spending'],1,1
+lw-016-01,longword-02,dev,ordinary,quote,1,['sales_current'],1,1
+lw-016-02,longword-02,dev,ordinary,growth,0,[],0,2
+lw-016-03,longword-02,dev,ordinary,threshold,0,[],0,1
+lw-018-01,longword-02,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-018-02,longword-02,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-019-01,longword-02,dev,ordinary,ranking,1,['product_a'],1,2
+lw-019-02,longword-02,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-020-01,longword-02,dev,ordinary,quote,1,['spending'],1,1
+lw-020-02,longword-02,dev,ordinary,quote,1,['budget'],1,1
+lw-022-01,longword-02,dev,ordinary,quote,1,['sales_current'],1,1
+lw-022-02,longword-02,dev,ordinary,threshold,1,['spending'],1,1
+lw-028-01,longword-03,dev,ordinary,quote,1,['sales_current'],1,1
+lw-028-02,longword-03,dev,ordinary,growth,0,[],0,2
+lw-028-03,longword-03,dev,ordinary,threshold,0,[],0,1
+lw-030-01,longword-03,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-030-02,longword-03,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-031-01,longword-03,dev,ordinary,ranking,1,['product_a'],1,2
+lw-031-02,longword-03,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-032-01,longword-03,dev,ordinary,quote,1,['spending'],1,1
+lw-032-02,longword-03,dev,ordinary,quote,1,['budget'],1,1
+lw-034-01,longword-03,dev,ordinary,quote,1,['sales_current'],1,1
+lw-034-02,longword-03,dev,ordinary,threshold,1,['spending'],1,1
+lw-040-01,longword-03,dev,ordinary,quote,1,['sales_current'],1,1
+lw-040-02,longword-03,dev,ordinary,growth,0,[],0,2
+lw-040-03,longword-03,dev,ordinary,threshold,0,[],0,1
+lw-042-01,longword-04,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-042-02,longword-04,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-043-01,longword-04,dev,ordinary,ranking,1,['product_a'],1,2
+lw-043-02,longword-04,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-044-01,longword-04,dev,ordinary,quote,1,['spending'],1,1
+lw-044-02,longword-04,dev,ordinary,quote,1,['budget'],1,1
+lw-046-01,longword-04,dev,ordinary,quote,1,['sales_current'],1,1
+lw-046-02,longword-04,dev,ordinary,threshold,1,['spending'],1,1
+lw-052-01,longword-04,dev,ordinary,quote,1,['sales_current'],1,1
+lw-052-02,longword-04,dev,ordinary,growth,0,[],0,2
+lw-052-03,longword-04,dev,ordinary,threshold,0,[],0,1
+lw-054-01,longword-04,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-054-02,longword-04,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-055-01,longword-04,dev,ordinary,ranking,1,['product_a'],1,2
+lw-055-02,longword-04,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-056-01,longword-05,dev,ordinary,quote,1,['spending'],1,1
+lw-056-02,longword-05,dev,ordinary,quote,1,['budget'],1,1
+lw-058-01,longword-05,dev,ordinary,quote,1,['sales_current'],1,1
+lw-058-02,longword-05,dev,ordinary,threshold,1,['spending'],1,1
+lw-064-01,longword-05,dev,ordinary,quote,1,['sales_current'],1,1
+lw-064-02,longword-05,dev,ordinary,growth,0,[],0,2
+lw-064-03,longword-05,dev,ordinary,threshold,0,[],0,1
+lw-066-01,longword-05,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-066-02,longword-05,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-067-01,longword-05,dev,ordinary,ranking,1,['product_a'],1,2
+lw-067-02,longword-05,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-068-01,longword-05,dev,ordinary,quote,1,['spending'],1,1
+lw-068-02,longword-05,dev,ordinary,quote,1,['budget'],1,1
+lw-070-01,longword-06,dev,ordinary,quote,1,['sales_current'],1,1
+lw-070-02,longword-06,dev,ordinary,threshold,1,['spending'],1,1
+lw-076-01,longword-06,dev,ordinary,quote,1,['sales_current'],1,1
+lw-076-02,longword-06,dev,ordinary,growth,0,[],0,2
+lw-076-03,longword-06,dev,ordinary,threshold,0,[],0,1
+lw-078-01,longword-06,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-078-02,longword-06,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-079-01,longword-06,dev,ordinary,ranking,1,['product_a'],1,2
+lw-079-02,longword-06,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-080-01,longword-06,dev,ordinary,quote,1,['spending'],1,1
+lw-080-02,longword-06,dev,ordinary,quote,1,['budget'],1,1
+lw-082-01,longword-06,dev,ordinary,quote,1,['sales_current'],1,1
+lw-082-02,longword-06,dev,ordinary,threshold,1,['spending'],1,1
+lw-088-01,longword-07,dev,ordinary,quote,1,['sales_current'],1,1
+lw-088-02,longword-07,dev,ordinary,growth,0,[],0,2
+lw-088-03,longword-07,dev,ordinary,threshold,0,[],0,1
+lw-090-01,longword-07,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-090-02,longword-07,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-091-01,longword-07,dev,ordinary,ranking,1,['product_a'],1,2
+lw-091-02,longword-07,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-092-01,longword-07,dev,ordinary,quote,1,['spending'],1,1
+lw-092-02,longword-07,dev,ordinary,quote,1,['budget'],1,1
+lw-094-01,longword-07,dev,ordinary,quote,1,['sales_current'],1,1
+lw-094-02,longword-07,dev,ordinary,threshold,1,['spending'],1,1
+lw-100-01,longword-08,dev,ordinary,quote,1,['sales_current'],1,1
+lw-100-02,longword-08,dev,ordinary,growth,0,[],0,2
+lw-100-03,longword-08,dev,ordinary,threshold,0,[],0,1
+lw-102-01,longword-08,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-102-02,longword-08,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-103-01,longword-08,dev,ordinary,ranking,1,['product_a'],1,2
+lw-103-02,longword-08,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-104-01,longword-08,dev,ordinary,quote,1,['spending'],1,1
+lw-104-02,longword-08,dev,ordinary,quote,1,['budget'],1,1
+lw-106-01,longword-08,dev,ordinary,quote,1,['sales_current'],1,1
+lw-106-02,longword-08,dev,ordinary,threshold,1,['spending'],1,1
+lw-112-01,longword-09,dev,ordinary,quote,1,['sales_current'],1,1
+lw-112-02,longword-09,dev,ordinary,growth,0,[],0,2
+lw-112-03,longword-09,dev,ordinary,threshold,0,[],0,1
+lw-114-01,longword-09,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-114-02,longword-09,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-115-01,longword-09,dev,ordinary,ranking,1,['product_a'],1,2
+lw-115-02,longword-09,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-116-01,longword-09,dev,ordinary,quote,1,['spending'],1,1
+lw-116-02,longword-09,dev,ordinary,quote,1,['budget'],1,1
+lw-118-01,longword-09,dev,ordinary,quote,1,['sales_current'],1,1
+lw-118-02,longword-09,dev,ordinary,threshold,1,['spending'],1,1
+lw-124-01,longword-09,dev,ordinary,quote,1,['sales_current'],1,1
+lw-124-02,longword-09,dev,ordinary,growth,0,[],0,2
+lw-124-03,longword-09,dev,ordinary,threshold,0,[],0,1
+lw-126-01,longword-10,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-126-02,longword-10,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-127-01,longword-10,dev,ordinary,ranking,1,['product_a'],1,2
+lw-127-02,longword-10,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-128-01,longword-10,dev,ordinary,quote,1,['spending'],1,1
+lw-128-02,longword-10,dev,ordinary,quote,1,['budget'],1,1
+lw-130-01,longword-10,dev,ordinary,quote,1,['sales_current'],1,1
+lw-130-02,longword-10,dev,ordinary,threshold,1,['spending'],1,1
+lw-136-01,longword-10,dev,ordinary,quote,1,['sales_current'],1,1
+lw-136-02,longword-10,dev,ordinary,growth,0,[],0,2
+lw-136-03,longword-10,dev,ordinary,threshold,0,[],0,1
+lw-138-01,longword-10,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-138-02,longword-10,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-139-01,longword-10,dev,ordinary,ranking,1,['product_a'],1,2
+lw-139-02,longword-10,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-140-01,longword-11,dev,ordinary,quote,1,['spending'],1,1
+lw-140-02,longword-11,dev,ordinary,quote,1,['budget'],1,1
+lw-142-01,longword-11,dev,ordinary,quote,1,['sales_current'],1,1
+lw-142-02,longword-11,dev,ordinary,threshold,1,['spending'],1,1
+lw-148-01,longword-11,dev,ordinary,quote,1,['sales_current'],1,1
+lw-148-02,longword-11,dev,ordinary,growth,0,[],0,2
+lw-148-03,longword-11,dev,ordinary,threshold,0,[],0,1
+lw-150-01,longword-11,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-150-02,longword-11,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-151-01,longword-11,dev,ordinary,ranking,1,['product_a'],1,2
+lw-151-02,longword-11,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-152-01,longword-11,dev,ordinary,quote,1,['spending'],1,1
+lw-152-02,longword-11,dev,ordinary,quote,1,['budget'],1,1
+lw-154-01,longword-12,dev,ordinary,quote,1,['sales_current'],1,1
+lw-154-02,longword-12,dev,ordinary,threshold,1,['spending'],1,1
+lw-160-01,longword-12,dev,ordinary,quote,1,['sales_current'],1,1
+lw-160-02,longword-12,dev,ordinary,growth,0,[],0,2
+lw-160-03,longword-12,dev,ordinary,threshold,0,[],0,1
+lw-162-01,longword-12,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-162-02,longword-12,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-163-01,longword-12,dev,ordinary,ranking,1,['product_a'],1,2
+lw-163-02,longword-12,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-164-01,longword-12,dev,ordinary,quote,1,['spending'],1,1
+lw-164-02,longword-12,dev,ordinary,quote,1,['budget'],1,1
+lw-166-01,longword-12,dev,ordinary,quote,1,['sales_current'],1,1
+lw-166-02,longword-12,dev,ordinary,threshold,1,['spending'],1,1
+lw-172-01,longword-13,dev,ordinary,quote,1,['sales_current'],1,1
+lw-172-02,longword-13,dev,ordinary,growth,0,[],0,2
+lw-172-03,longword-13,dev,ordinary,threshold,0,[],0,1
+lw-174-01,longword-13,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-174-02,longword-13,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-175-01,longword-13,dev,ordinary,ranking,1,['product_a'],1,2
+lw-175-02,longword-13,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-176-01,longword-13,dev,ordinary,quote,1,['spending'],1,1
+lw-176-02,longword-13,dev,ordinary,quote,1,['budget'],1,1
+lw-178-01,longword-13,dev,ordinary,quote,1,['sales_current'],1,1
+lw-178-02,longword-13,dev,ordinary,threshold,1,['spending'],1,1
+lw-184-01,longword-14,dev,ordinary,quote,1,['sales_current'],1,1
+lw-184-02,longword-14,dev,ordinary,growth,0,[],0,2
+lw-184-03,longword-14,dev,ordinary,threshold,0,[],0,1
+lw-186-01,longword-14,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-186-02,longword-14,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-187-01,longword-14,dev,ordinary,ranking,1,['product_a'],1,2
+lw-187-02,longword-14,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-188-01,longword-14,dev,ordinary,quote,1,['spending'],1,1
+lw-188-02,longword-14,dev,ordinary,quote,1,['budget'],1,1
+lw-190-01,longword-14,dev,ordinary,quote,1,['sales_current'],1,1
+lw-190-02,longword-14,dev,ordinary,threshold,1,['spending'],1,1
+lw-196-01,longword-15,dev,ordinary,quote,1,['sales_current'],1,1
+lw-196-02,longword-15,dev,ordinary,growth,0,[],0,2
+lw-196-03,longword-15,dev,ordinary,threshold,0,[],0,1
+lw-198-01,longword-15,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-198-02,longword-15,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-199-01,longword-15,dev,ordinary,ranking,1,['product_a'],1,2
+lw-199-02,longword-15,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-200-01,longword-15,dev,ordinary,quote,1,['spending'],1,1
+lw-200-02,longword-15,dev,ordinary,quote,1,['budget'],1,1
+lw-202-01,longword-15,dev,ordinary,quote,1,['sales_current'],1,1
+lw-202-02,longword-15,dev,ordinary,threshold,1,['spending'],1,1
+lw-208-01,longword-15,dev,ordinary,quote,1,['sales_current'],1,1
+lw-208-02,longword-15,dev,ordinary,growth,0,[],0,2
+lw-208-03,longword-15,dev,ordinary,threshold,0,[],0,1
+lw-210-01,longword-16,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-210-02,longword-16,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-211-01,longword-16,dev,ordinary,ranking,1,['product_a'],1,2
+lw-211-02,longword-16,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-212-01,longword-16,dev,ordinary,quote,1,['spending'],1,1
+lw-212-02,longword-16,dev,ordinary,quote,1,['budget'],1,1
+lw-214-01,longword-16,dev,ordinary,quote,1,['sales_current'],1,1
+lw-214-02,longword-16,dev,ordinary,threshold,1,['spending'],1,1
+lw-220-01,longword-16,dev,ordinary,quote,1,['sales_current'],1,1
+lw-220-02,longword-16,dev,ordinary,growth,0,[],0,2
+lw-220-03,longword-16,dev,ordinary,threshold,0,[],0,1
+lw-222-01,longword-16,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-222-02,longword-16,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-223-01,longword-16,dev,ordinary,ranking,1,['product_a'],1,2
+lw-223-02,longword-16,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-224-01,longword-17,dev,ordinary,quote,1,['spending'],1,1
+lw-224-02,longword-17,dev,ordinary,quote,1,['budget'],1,1
+lw-226-01,longword-17,dev,ordinary,quote,1,['sales_current'],1,1
+lw-226-02,longword-17,dev,ordinary,threshold,1,['spending'],1,1
+lw-232-01,longword-17,dev,ordinary,quote,1,['sales_current'],1,1
+lw-232-02,longword-17,dev,ordinary,growth,0,[],0,2
+lw-232-03,longword-17,dev,ordinary,threshold,0,[],0,1
+lw-234-01,longword-17,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-234-02,longword-17,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-235-01,longword-17,dev,ordinary,ranking,1,['product_a'],1,2
+lw-235-02,longword-17,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-236-01,longword-17,dev,ordinary,quote,1,['spending'],1,1
+lw-236-02,longword-17,dev,ordinary,quote,1,['budget'],1,1
+lw-238-01,longword-18,dev,ordinary,quote,1,['sales_current'],1,1
+lw-238-02,longword-18,dev,ordinary,threshold,1,['spending'],1,1
+lw-244-01,longword-18,dev,ordinary,quote,1,['sales_current'],1,1
+lw-244-02,longword-18,dev,ordinary,growth,0,[],0,2
+lw-244-03,longword-18,dev,ordinary,threshold,0,[],0,1
+lw-246-01,longword-18,dev,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-246-02,longword-18,dev,ordinary,threshold,1,['sales_current'],1,1
+lw-247-01,longword-18,dev,ordinary,ranking,1,['product_a'],1,2
+lw-247-02,longword-18,dev,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-248-01,longword-18,dev,ordinary,quote,1,['spending'],1,1
+lw-248-02,longword-18,dev,ordinary,quote,1,['budget'],1,1
+lw-250-01,longword-18,dev,ordinary,quote,1,['sales_current'],1,1
+lw-250-02,longword-18,dev,ordinary,threshold,1,['spending'],1,1
+lw-256-01,longword-19,test,ordinary,quote,1,['sales_current'],1,1
+lw-256-02,longword-19,test,ordinary,growth,0,[],0,2
+lw-256-03,longword-19,test,ordinary,threshold,0,[],0,1
+lw-258-01,longword-19,test,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-258-02,longword-19,test,ordinary,threshold,1,['sales_current'],1,1
+lw-259-01,longword-19,test,ordinary,ranking,1,['product_a'],1,2
+lw-259-02,longword-19,test,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-260-01,longword-19,test,ordinary,quote,1,['spending'],1,1
+lw-260-02,longword-19,test,ordinary,quote,1,['budget'],1,1
+lw-262-01,longword-19,test,ordinary,quote,1,['sales_current'],1,1
+lw-262-02,longword-19,test,ordinary,threshold,1,['spending'],1,1
+lw-268-01,longword-20,test,ordinary,quote,1,['sales_current'],1,1
+lw-268-02,longword-20,test,ordinary,growth,0,[],0,2
+lw-268-03,longword-20,test,ordinary,threshold,0,[],0,1
+lw-270-01,longword-20,test,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-270-02,longword-20,test,ordinary,threshold,1,['sales_current'],1,1
+lw-271-01,longword-20,test,ordinary,ranking,1,['product_a'],1,2
+lw-271-02,longword-20,test,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-272-01,longword-20,test,ordinary,quote,1,['spending'],1,1
+lw-272-02,longword-20,test,ordinary,quote,1,['budget'],1,1
+lw-274-01,longword-20,test,ordinary,quote,1,['sales_current'],1,1
+lw-274-02,longword-20,test,ordinary,threshold,1,['spending'],1,1
+lw-280-01,longword-21,test,ordinary,quote,1,['sales_current'],1,1
+lw-280-02,longword-21,test,ordinary,growth,0,[],0,2
+lw-280-03,longword-21,test,ordinary,threshold,0,[],0,1
+lw-282-01,longword-21,test,ordinary,growth,2,"['sales_prev', 'sales_current']",2,2
+lw-282-02,longword-21,test,ordinary,threshold,1,['sales_current'],1,1
+lw-283-01,longword-21,test,ordinary,ranking,1,['product_a'],1,2
+lw-283-02,longword-21,test,ordinary,threshold,2,"['spending', 'budget']",2,2
+lw-284-01,longword-21,test,ordinary,quote,1,['spending'],1,1
+lw-284-02,longword-21,test,ordinary,quote,1,['budget'],1,1
+lw-286-01,longword-21,test,ordinary,quote,1,['sales_current'],1,1
+lw-286-02,longword-21,test,ordinary,threshold,1,['spending'],1,1
+lw-292-01,longword-21,test,ordinary,quote,1,['sales_current'],1,1
+lw-294-01,longword-22,test,ordinary,ranking,1,['product_a'],1,2
+lw-298-01,longword-22,test,ordinary,quote,1,['sales_current'],1,1
+lw-300-01,longword-22,test,ordinary,ranking,1,['product_a'],1,2
+lw-304-01,longword-22,test,ordinary,quote,1,['sales_current'],1,1
+lw-306-01,longword-22,test,ordinary,ranking,1,['product_a'],1,2
+lw-310-01,longword-23,test,ordinary,quote,1,['sales_current'],1,1
+lw-312-01,longword-23,test,ordinary,ranking,1,['product_a'],1,2
+lw-316-01,longword-23,test,ordinary,quote,1,['sales_current'],1,1
+lw-318-01,longword-23,test,ordinary,ranking,1,['product_a'],1,2
+lw-322-01,longword-24,test,ordinary,quote,1,['sales_current'],1,1
+lw-324-01,longword-24,test,ordinary,ranking,1,['product_a'],1,2
+lw-328-01,longword-24,test,ordinary,quote,1,['sales_current'],1,1
+lw-330-01,longword-24,test,ordinary,ranking,1,['product_a'],1,2
+lw-334-01,longword-24,test,ordinary,quote,1,['sales_current'],1,1
+lw-336-01,longword-25,test,ordinary,ranking,1,['product_a'],1,2

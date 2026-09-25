@@ -1,0 +1,18 @@
+{
+  "decision_count": 280,
+  "zero_candidate_count": 48,
+  "zero_candidate_rate": 0.171429,
+  "multi_candidate_count": 48,
+  "multi_candidate_rate": 0.171429,
+  "one_candidate_count": 184,
+  "candidate_count_distribution": {
+    "0": 48,
+    "1": 184,
+    "2": 48
+  },
+  "total_pairs": 280,
+  "mean_pairs": 1.0,
+  "p95_pairs": 2,
+  "pairs_if_capped_at_5": 280,
+  "single_candidate_link_rules_ceiling": 0.657143
+}

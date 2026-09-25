@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>表里如一 · 跨文档结论一致性治理系统</title>
+<meta name="description" content="表里如一：面向数据分析报告的数据—结论一致性治理系统。确定性核验、增量修复、证据链可追溯。华北五省及港澳台大学生计算机应用大赛参赛作品。">
+<meta name="theme-color" content="#155D50">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23155D50'/><text y='72' x='50' font-size='62' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'>一</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark">一</span>
+      <div>
+        <h1>表里如一</h1>
+        <p class="sub">跨文档结论一致性治理系统</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#try">在线体验</a>
+      <a href="#download">下载</a>
+      <a href="#how">工作原理</a>
+      <a href="#docs">文档</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">华北五省（市、自治区）及港澳台大学生计算机应用大赛 · 大模型与智能体应用赛道</p>
+    <h2>让每一句结论，都能追溯到它的数据来源</h2>
+    <p class="lead">
+      导入一份 Excel 事实表与若干 Word 报告、PPT 汇报，系统识别其中的数值论断并请人工确认来源。
+      当数据被修改后，逐项重算，区分「仍然成立 / 已经失效 / 无法判断」，
+      <strong>只修改失效的部分</strong>，重新读取文件复核后导出可追溯的新版本。
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="#try">立即在线体验</a>
+      <a class="btn" href="#download">下载软件</a>
+    </div>
+    <p class="note">无需注册 · 无模型依赖 · 纯规则模式即可完整运行</p>
+  </div>
+</section>
+
+<section class="facts">
+  <div class="wrap grid4">
+    <div class="card"><b>198</b><span>自动化回归测试全部通过</span></div>
+    <div class="card"><b>5 类</b><span>可核验论断：数值·增长率·排名·阈值·图表</span></div>
+    <div class="card"><b>0</b><span>依赖大模型即可完整运行</span></div>
+    <div class="card"><b>0.12s</b><span>1999 行事实表解析（原 173s）</span></div>
+  </div>
+</section>
+
+<section id="try" class="band">
+  <div class="wrap">
+    <h3>在线体验</h3>
+    <p class="sec-lead">
+      在线演示环境运行的是与安装包完全相同的系统，可直接点开试用，无需安装任何软件。
+      系统会创建一个只属于本次访问的演示项目，可自由操作，不影响其他访问者。
+    </p>
+    <div class="trybox">
+      <div class="tryitem">
+        <h4>演示环境</h4>
+        <p id="demo-state" class="muted">正在检测演示环境状态…</p>
+        <p id="demo-link-wrap" hidden>
+          <a class="btn primary big" id="demo-link" href="#" target="_blank" rel="noopener">打开在线演示 →</a>
+        </p>
+        <p class="demo-account">
+          测试账号（大赛要求公开）：用户名 <code>zhilian</code>　密码 <code>biaoliruyi2026</code>
+        </p>
+      </div>
+      <div class="tryitem">
+        <h4>体验建议（约 3 分钟）</h4>
+        <ol class="steps">
+          <li>点击「体验演示项目」，系统生成示例 Excel / Word / PPT</li>
+          <li>点「批量确认候选关联」，审阅每条结论的数据来源</li>
+          <li>载入演示变更：销售额 125 改为 90</li>
+          <li>查看哪些结论失效，<strong>哪些即便数值变了却依然成立</strong></li>
+          <li>预览修复对照，确认后下载新版文件</li>
+        </ol>
+      </div>
+    </div>
+    <p class="note">
+      若演示环境暂时不可用（免费实例休眠或维护），请使用页面下方的 Windows 免安装包在本机运行，
+      两者功能完全一致。
+    </p>
+  </div>
+</section>
+
+<section id="download" class="band alt">
+  <div class="wrap">
+    <h3>下载</h3>
+    <div class="dl">
+      <div class="dlcard">
+        <h4>Windows 免安装包 <span class="tag">推荐</span></h4>
+        <p>解压后双击 <code>启动知链.bat</code>，首次运行自动准备运行环境，浏览器自动打开。</p>
+        <ul class="meta">
+          <li>版本 v0.2.1 ｜ 约 0.2 MB</li>
+          <li>需要 Python 3.11+（安装时请勾选 Add Python to PATH）</li>
+          <li>纯规则模式无需联网、无需密钥</li>
+        </ul>
+        <a class="btn primary" href="downloads/知链_v0.2.1_Windows免安装.zip" download>下载免安装包</a>
+      </div>
+      <div class="dlcard">
+        <h4>完整源代码</h4>
+        <p>含后端、前端、自动化测试与第三方许可声明，可自行构建与复现。</p>
+        <ul class="meta">
+          <li>版本 v0.2.1 ｜ 约 0.45 MB</li>
+          <li>运行 <code>pytest -q</code> 可复现全部 198 项测试</li>
+        </ul>
+        <a class="btn" href="downloads/知链_源代码_v0.2.1.zip" download>下载源代码</a>
+      </div>
+      <div class="dlcard">
+        <h4>事实表模板</h4>
+        <p>导入前请按模板整理数据，首行需包含 7 个固定列，列顺序可任意调整。</p>
+        <ul class="meta">
+          <li>事实ID · 主体 · 指标 · 期间 · 数值 · 单位 · 统计口径</li>
+        </ul>
+        <a class="btn" href="downloads/知链事实表模板.xlsx" download>下载模板</a>
+      </div>
+    </div>
+    <div class="docker">
+      <h4>使用 Docker 运行</h4>
+      <pre><code>docker build -t biaoliruyi .
+docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi</code></pre>
+      <p class="muted">启动后访问 http://127.0.0.1:8765 ，用户名 <code>zhilian</code>，密码为上面设置的值。</p>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="band">
+  <div class="wrap">
+    <h3>工作原理</h3>
+    <p class="sec-lead">
+      核心不是「让模型改文档」，而是把「哪句该改、改成什么、改动是否可靠」变成可验证的确定性过程。
+    </p>
+    <div class="flow">
+      <div class="fstep"><b>1</b><h5>识别论断</h5><p>从 Word/PPT 中定位数值引用、增长率、排名、阈值与原生图表，保留精确字符锚点。</p></div>
+      <div class="fstep"><b>2</b><h5>确认来源</h5><p>每条结论关联到 Excel 事实 ID，<strong>由人确认</strong>。系统给出候选，不代替判断。</p></div>
+      <div class="fstep"><b>3</b><h5>依赖传播</h5><p>事实之间可定义派生关系（差额、比率、增长率、合计），改一个数，下游按拓扑序自动重算。</p></div>
+      <div class="fstep"><b>4</b><h5>确定性核验</h5><p>用 Decimal 精确计算与单位、口径约束判定状态，<strong>不由模型计算</strong>。</p></div>
+      <div class="fstep"><b>5</b><h5>增量修复</h5><p>按字符区间逆序打补丁，保留未修改内容的格式；PPT 重建原生图表数据系列。</p></div>
+      <div class="fstep"><b>6</b><h5>独立复核</h5><p>重新读取生成的文件，验证选中论断已一致、其余正文未变，失败则废弃本次版本。</p></div>
+    </div>
+
+    <div class="modes">
+      <h4>三种运行模式</h4>
+      <table>
+        <thead><tr><th>模式</th><th>组成</th><th>适用场景</th></tr></thead>
+        <tbody>
+          <tr><td><b>无模型</b></td><td>规则引擎</td><td>零依赖、零成本、完全离线，默认模式</td></tr>
+          <tr><td><b>离线</b></td><td>规则 + 本地重排模型</td><td>内网或断网环境，模型随包分发</td></tr>
+          <tr><td><b>在线</b></td><td>规则 + API 大模型</td><td>复杂表述兜底，并提供可读的解释</td></tr>
+        </tbody>
+      </table>
+      <p class="note">
+        无论哪种模式，<strong>模型只提建议，不计算、不裁决、不写文件</strong>；
+        所有来源最终仍由使用者确认，计算与写入始终由确定性引擎完成。
+      </p>
+    </div>
+
+    <div class="highlights">
+      <h4>工程要点</h4>
+      <ul class="hl">
+        <li><b>证据链</b>：每条建议绑定原文片段与事实来源，无依据不下结论</li>
+        <li><b>事务性版本</b>：先复制、再写入、复核后原子切换；支持撤销与完整审计记录</li>
+        <li><b>格式保真</b>：Word 按 run 级打补丁，未修改文字保持原格式</li>
+        <li><b>防篡改</b>：源文件 SHA-256 校验，分析后被外部修改则拒绝操作</li>
+        <li><b>提示注入防护</b>：文档内容始终被视为数据，越权指令不影响事实白名单</li>
+        <li><b>依赖图</b>：环依赖直接报错，不会静默算出错误结果</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="docs" class="band alt">
+  <div class="wrap">
+    <h3>参赛信息与文档</h3>
+    <div class="docs">
+      <div>
+        <h4>参赛信息</h4>
+        <ul class="meta">
+          <li>赛道：大模型与智能体应用赛道</li>
+          <li>作品名称：表里如一（内部代号 zhilian）</li>
+          <li>平台：Python 3.11+ / FastAPI ｜ 运行平台不限，本机即可运行</li>
+          <li>公网联通：本站 + 在线演示环境均已公网可访问</li>
+        </ul>
+      </div>
+      <div>
+        <h4>技术声明</h4>
+        <ul class="meta">
+          <li>计算全部由确定性引擎完成，使用 Decimal，不使用模型算数</li>
+          <li>第三方依赖通过 pip 安装，未修改其源码，许可声明随源码提供</li>
+          <li>使用 AI 辅助编程，具体模型、版本与代码比例见《软件设计文档》</li>
+          <li>团队自有部分：业务规则、依赖图、评测方法、交互设计与测试用例</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>表里如一 · 跨文档结论一致性治理系统 ｜ 华北五省及港澳台大学生计算机应用大赛参赛作品</p>
+    <p class="muted small">本站为参赛作品公网入口，提供在线演示与软件下载。</p>
+  </div>
+</footer>
+
+<script>
+// 演示环境地址：部署后替换为自有域名，例如 https://demo.你的域名.com
+window.DEMO_URL = 'https://richards-owen-elephant-burn.trycloudflare.com';
+</script>
+<script>
+// 探测演示环境是否在线：离线时给出替代路径，避免评委点开是错误页
+(function () {
+  var DEMO_URL = window.DEMO_URL || '';
+  var state = document.getElementById('demo-state');
+  var wrap = document.getElementById('demo-link-wrap');
+  var link = document.getElementById('demo-link');
+
+  if (!DEMO_URL || DEMO_URL.indexOf('127.0.0.1') === 0) {
+    state.textContent = '演示环境地址尚未配置。请使用下方 Windows 免安装包在本机运行。';
+    return;
+  }
+  link.href = DEMO_URL;
+  state.textContent = '正在检测…';
+
+  var done = false;
+  var timer = setTimeout(function () { if (!done) report(false, '超时'); }, 8000);
+
+  function report(ok, why) {
+    if (done) return;
+    done = true;
+    clearTimeout(timer);
+    if (ok) {
+      state.textContent = '演示环境在线，可直接打开使用。';
+      wrap.hidden = false;
+    } else {
+      state.textContent = '演示环境暂时不可用' + (why ? '（' + why + '）' : '') +
+        '，可能是免费实例休眠。请使用下方免安装包在本机运行，功能完全一致。';
+      link.classList.add('disabled');
+      wrap.hidden = false;
+    }
+  }
+
+  // no-cors 探测：只判断可达性，不读响应内容
+  fetch(DEMO_URL + '/api/health', { mode: 'no-cors', cache: 'no-store' })
+    .then(function () { report(true); })
+    .catch(function () { report(false, '无法连接'); });
+})();
+</script>
+
+</body>
+</html>

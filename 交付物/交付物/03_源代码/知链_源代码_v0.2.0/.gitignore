@@ -1,0 +1,7 @@
+.venv/
+.zhilian/
+.codex_artifacts/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env

@@ -1,0 +1,251 @@
+{
+  "provider": "DeepSeek",
+  "model": "deepseek-flash",
+  "split": "all",
+  "groups": 30,
+  "decisions": 180,
+  "calls": [
+    {
+      "group_id": "g001",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2305.6,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g002",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2270.0,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g003",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2188.1,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g004",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 1845.8,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g005",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2055.2,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g006",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 1891.9,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g007",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2267.0,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g008",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2240.8,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g009",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2055.6,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g010",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2276.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g011",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2320.8,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g012",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2226.1,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g013",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2138.0,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g014",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2047.4,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g015",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2238.4,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g016",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 1949.2,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g017",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 1686.3,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g018",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2236.0,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g019",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2307.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g020",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2033.5,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g021",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 1716.1,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g022",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 1852.1,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g023",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 1969.9,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g024",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2240.3,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g025",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 1899.2,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g026",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2181.4,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g027",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2296.1,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g028",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2087.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g029",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2365.4,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "g030",
+      "decision_count": 6,
+      "suggestion_count": 6,
+      "latency_ms": 2154.0,
+      "status": "ok",
+      "error": null
+    }
+  ],
+  "failed_calls": 0,
+  "api_key_written": false
+}

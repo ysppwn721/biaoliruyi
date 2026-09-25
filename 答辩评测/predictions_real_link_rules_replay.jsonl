@@ -1,0 +1,280 @@
+{"action": "link", "claim_id": "lw-004-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-004-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-004-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-006-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-006-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-007-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-007-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-008-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-008-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-010-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-010-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-016-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-016-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-016-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-018-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-018-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-019-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-019-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-020-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-020-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-022-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-022-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-028-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-028-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-028-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-030-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-030-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-031-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-031-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-032-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-032-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-034-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-034-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-040-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-040-02", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-040-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-042-01", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-042-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-043-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-043-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-044-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-044-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-046-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-046-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-052-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-052-02", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-052-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-054-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-054-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-055-01", "refs": ["product_a", "product_b"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-055-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-056-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-056-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-058-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-058-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-064-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-064-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-064-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-066-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-066-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-067-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-067-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-068-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-068-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-070-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-070-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-076-01", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-076-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-076-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-078-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-078-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-079-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-079-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-080-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-080-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-082-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-082-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-088-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-088-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-088-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-090-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-090-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-091-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-091-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-092-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-092-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-094-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-094-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-100-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-100-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-100-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-102-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-102-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-103-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-103-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-104-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-104-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-106-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-106-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-112-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-112-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-112-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-114-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-114-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-115-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-115-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-116-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-116-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-118-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-118-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-124-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-124-02", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-124-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-126-01", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-126-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-127-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-127-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-128-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-128-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-130-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-130-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-136-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-136-02", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-136-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-138-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-138-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-139-01", "refs": ["product_a", "product_b"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-139-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-140-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-140-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-142-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-142-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-148-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-148-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-148-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-150-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-150-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-151-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-151-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-152-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-152-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-154-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-154-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-160-01", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-160-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-160-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-162-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-162-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-163-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-163-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-164-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-164-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-166-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-166-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-172-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-172-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-172-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-174-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-174-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-175-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-175-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-176-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-176-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-178-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-178-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-184-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-184-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-184-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-186-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-186-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-187-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-187-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-188-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-188-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-190-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-190-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-196-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-196-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-196-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-198-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-198-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-199-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-199-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-200-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-200-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-202-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-202-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-208-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-208-02", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-208-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-210-01", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-210-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-211-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-211-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-212-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-212-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-214-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-214-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-220-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-220-02", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-220-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-222-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-222-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-223-01", "refs": ["product_a", "product_b"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-223-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-224-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-224-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-226-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-226-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-232-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-232-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-232-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-234-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-234-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-235-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-235-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-236-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-236-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-238-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-238-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-244-01", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-244-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-244-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-246-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-246-02", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-247-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-247-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-248-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-248-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-250-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-250-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-256-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-256-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-256-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-258-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-258-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-259-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-259-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-260-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-260-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-262-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-262-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-268-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-268-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-268-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-270-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-270-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-271-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-271-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-272-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-272-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-274-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-274-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-280-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-280-02", "refs": ["sales_prev", "sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-280-03", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-282-01", "refs": ["sales_prev", "sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-282-02", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-283-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-283-02", "refs": ["spending", "budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-284-01", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-284-02", "refs": ["budget"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-286-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-286-02", "refs": ["spending"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-292-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-294-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-298-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-300-01", "refs": ["product_a", "product_b"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-304-01", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-306-01", "refs": ["product_a", "product_b"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-310-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-312-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-316-01", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-318-01", "refs": ["product_a", "product_b"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-322-01", "refs": ["sales_current"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-324-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}
+{"action": "link", "claim_id": "lw-328-01", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-330-01", "refs": ["product_a", "product_b"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-334-01", "refs": ["sales_current"], "remembered": true, "source": "link_rules"}
+{"action": "link", "claim_id": "lw-336-01", "refs": ["product_a", "product_b"], "remembered": false, "source": "rule_fallback"}

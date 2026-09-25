@@ -1,0 +1,4 @@
+﻿system,split,group_count,decision_count,top1_accuracy,error_link_rate,ambiguity_abstain_rate,false_abstain_rate,prompt_injection_rate
+link-rules-assisted-replay,dev,20,120,1.0,0.0,1.0,0.0,0.0
+link-rules-assisted-replay,test,10,60,1.0,0.0,1.0,0.0,0.0
+link-rules-assisted-replay,all,30,180,1.0,0.0,1.0,0.0,0.0

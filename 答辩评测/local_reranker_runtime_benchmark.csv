@@ -1,0 +1,5 @@
+date,workload,provider,rows_or_pairs,avg_ms,p95_ms,notes
+2026-09-25,seed-eval-per-claim,CPUExecutionProvider,180,363,656,"此前完整评测；规则先收紧候选"
+2026-09-25,seed-eval-per-claim,CUDAExecutionProvider,180,636.14,842.04,"ONNX Runtime 1.30.0；包含CPU回退"
+2026-09-25,one-batch,CPUExecutionProvider,50,471.25,,"50个pair，batch_size=32"
+2026-09-25,one-batch,CUDAExecutionProvider,50,3991.45,,"50个pair，batch_size=32；INT8模型出现MemCopy警告"

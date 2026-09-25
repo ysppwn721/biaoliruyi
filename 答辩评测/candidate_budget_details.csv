@@ -1,0 +1,181 @@
+﻿claim_id,group_id,split,category,kind,candidate_count,candidate_ids,pair_count,gold_count
+g001_c01,g001,dev,ordinary,quote,1,['g001_sales_current'],1,1
+g001_c02,g001,dev,ordinary,growth,2,"['g001_sales_previous', 'g001_sales_current']",2,2
+g001_c03,g001,dev,ordinary,threshold,2,"['g001_budget_current', 'g001_expense_current']",2,2
+g001_c04,g001,dev,ordinary,rank,1,['g001_product_a'],1,3
+g001_c05,g001,dev,ambiguous,quote,3,"['g001_sales_current', 'g001_sales_scope_a', 'g001_sales_scope_b']",3,0
+g001_c06,g001,dev,adversarial,quote,1,['g001_sales_current'],1,1
+g002_c01,g002,dev,ordinary,quote,1,['g002_sales_current'],1,1
+g002_c02,g002,dev,ordinary,growth,2,"['g002_sales_previous', 'g002_sales_current']",2,2
+g002_c03,g002,dev,ordinary,threshold,2,"['g002_budget_current', 'g002_expense_current']",2,2
+g002_c04,g002,dev,ordinary,rank,1,['g002_product_a'],1,3
+g002_c05,g002,dev,ambiguous,quote,3,"['g002_sales_current', 'g002_sales_scope_a', 'g002_sales_scope_b']",3,0
+g002_c06,g002,dev,adversarial,quote,1,['g002_sales_current'],1,1
+g003_c01,g003,dev,ordinary,quote,1,['g003_sales_current'],1,1
+g003_c02,g003,dev,ordinary,growth,2,"['g003_sales_previous', 'g003_sales_current']",2,2
+g003_c03,g003,dev,ordinary,threshold,2,"['g003_budget_current', 'g003_expense_current']",2,2
+g003_c04,g003,dev,ordinary,rank,1,['g003_product_a'],1,3
+g003_c05,g003,dev,ambiguous,quote,3,"['g003_sales_current', 'g003_sales_scope_a', 'g003_sales_scope_b']",3,0
+g003_c06,g003,dev,adversarial,quote,1,['g003_sales_current'],1,1
+g004_c01,g004,dev,ordinary,quote,1,['g004_sales_current'],1,1
+g004_c02,g004,dev,ordinary,growth,2,"['g004_sales_previous', 'g004_sales_current']",2,2
+g004_c03,g004,dev,ordinary,threshold,2,"['g004_budget_current', 'g004_expense_current']",2,2
+g004_c04,g004,dev,ordinary,rank,1,['g004_product_a'],1,3
+g004_c05,g004,dev,ambiguous,quote,3,"['g004_sales_current', 'g004_sales_scope_a', 'g004_sales_scope_b']",3,0
+g004_c06,g004,dev,adversarial,quote,1,['g004_sales_current'],1,1
+g005_c01,g005,dev,ordinary,quote,1,['g005_sales_current'],1,1
+g005_c02,g005,dev,ordinary,growth,2,"['g005_sales_previous', 'g005_sales_current']",2,2
+g005_c03,g005,dev,ordinary,threshold,2,"['g005_budget_current', 'g005_expense_current']",2,2
+g005_c04,g005,dev,ordinary,rank,1,['g005_product_a'],1,3
+g005_c05,g005,dev,ambiguous,quote,3,"['g005_sales_current', 'g005_sales_scope_a', 'g005_sales_scope_b']",3,0
+g005_c06,g005,dev,adversarial,quote,1,['g005_sales_current'],1,1
+g006_c01,g006,dev,ordinary,quote,1,['g006_sales_current'],1,1
+g006_c02,g006,dev,ordinary,growth,2,"['g006_sales_previous', 'g006_sales_current']",2,2
+g006_c03,g006,dev,ordinary,threshold,2,"['g006_budget_current', 'g006_expense_current']",2,2
+g006_c04,g006,dev,ordinary,rank,1,['g006_product_a'],1,3
+g006_c05,g006,dev,ambiguous,quote,3,"['g006_sales_current', 'g006_sales_scope_a', 'g006_sales_scope_b']",3,0
+g006_c06,g006,dev,adversarial,quote,1,['g006_sales_current'],1,1
+g007_c01,g007,dev,ordinary,quote,1,['g007_sales_current'],1,1
+g007_c02,g007,dev,ordinary,growth,2,"['g007_sales_previous', 'g007_sales_current']",2,2
+g007_c03,g007,dev,ordinary,threshold,2,"['g007_budget_current', 'g007_expense_current']",2,2
+g007_c04,g007,dev,ordinary,rank,1,['g007_product_a'],1,3
+g007_c05,g007,dev,ambiguous,quote,3,"['g007_sales_current', 'g007_sales_scope_a', 'g007_sales_scope_b']",3,0
+g007_c06,g007,dev,adversarial,quote,1,['g007_sales_current'],1,1
+g008_c01,g008,dev,ordinary,quote,1,['g008_sales_current'],1,1
+g008_c02,g008,dev,ordinary,growth,2,"['g008_sales_previous', 'g008_sales_current']",2,2
+g008_c03,g008,dev,ordinary,threshold,2,"['g008_budget_current', 'g008_expense_current']",2,2
+g008_c04,g008,dev,ordinary,rank,1,['g008_product_a'],1,3
+g008_c05,g008,dev,ambiguous,quote,3,"['g008_sales_current', 'g008_sales_scope_a', 'g008_sales_scope_b']",3,0
+g008_c06,g008,dev,adversarial,quote,1,['g008_sales_current'],1,1
+g009_c01,g009,dev,ordinary,quote,1,['g009_sales_current'],1,1
+g009_c02,g009,dev,ordinary,growth,2,"['g009_sales_previous', 'g009_sales_current']",2,2
+g009_c03,g009,dev,ordinary,threshold,2,"['g009_budget_current', 'g009_expense_current']",2,2
+g009_c04,g009,dev,ordinary,rank,1,['g009_product_a'],1,3
+g009_c05,g009,dev,ambiguous,quote,3,"['g009_sales_current', 'g009_sales_scope_a', 'g009_sales_scope_b']",3,0
+g009_c06,g009,dev,adversarial,quote,1,['g009_sales_current'],1,1
+g010_c01,g010,dev,ordinary,quote,1,['g010_sales_current'],1,1
+g010_c02,g010,dev,ordinary,growth,2,"['g010_sales_previous', 'g010_sales_current']",2,2
+g010_c03,g010,dev,ordinary,threshold,2,"['g010_budget_current', 'g010_expense_current']",2,2
+g010_c04,g010,dev,ordinary,rank,1,['g010_product_a'],1,3
+g010_c05,g010,dev,ambiguous,quote,3,"['g010_sales_current', 'g010_sales_scope_a', 'g010_sales_scope_b']",3,0
+g010_c06,g010,dev,adversarial,quote,1,['g010_sales_current'],1,1
+g011_c01,g011,dev,ordinary,quote,1,['g011_sales_current'],1,1
+g011_c02,g011,dev,ordinary,growth,2,"['g011_sales_previous', 'g011_sales_current']",2,2
+g011_c03,g011,dev,ordinary,threshold,2,"['g011_budget_current', 'g011_expense_current']",2,2
+g011_c04,g011,dev,ordinary,rank,1,['g011_product_a'],1,3
+g011_c05,g011,dev,ambiguous,quote,3,"['g011_sales_current', 'g011_sales_scope_a', 'g011_sales_scope_b']",3,0
+g011_c06,g011,dev,adversarial,quote,1,['g011_sales_current'],1,1
+g012_c01,g012,dev,ordinary,quote,1,['g012_sales_current'],1,1
+g012_c02,g012,dev,ordinary,growth,2,"['g012_sales_previous', 'g012_sales_current']",2,2
+g012_c03,g012,dev,ordinary,threshold,2,"['g012_budget_current', 'g012_expense_current']",2,2
+g012_c04,g012,dev,ordinary,rank,1,['g012_product_a'],1,3
+g012_c05,g012,dev,ambiguous,quote,3,"['g012_sales_current', 'g012_sales_scope_a', 'g012_sales_scope_b']",3,0
+g012_c06,g012,dev,adversarial,quote,1,['g012_sales_current'],1,1
+g013_c01,g013,dev,ordinary,quote,1,['g013_sales_current'],1,1
+g013_c02,g013,dev,ordinary,growth,2,"['g013_sales_previous', 'g013_sales_current']",2,2
+g013_c03,g013,dev,ordinary,threshold,2,"['g013_budget_current', 'g013_expense_current']",2,2
+g013_c04,g013,dev,ordinary,rank,1,['g013_product_a'],1,3
+g013_c05,g013,dev,ambiguous,quote,3,"['g013_sales_current', 'g013_sales_scope_a', 'g013_sales_scope_b']",3,0
+g013_c06,g013,dev,adversarial,quote,1,['g013_sales_current'],1,1
+g014_c01,g014,dev,ordinary,quote,1,['g014_sales_current'],1,1
+g014_c02,g014,dev,ordinary,growth,2,"['g014_sales_previous', 'g014_sales_current']",2,2
+g014_c03,g014,dev,ordinary,threshold,2,"['g014_budget_current', 'g014_expense_current']",2,2
+g014_c04,g014,dev,ordinary,rank,1,['g014_product_a'],1,3
+g014_c05,g014,dev,ambiguous,quote,3,"['g014_sales_current', 'g014_sales_scope_a', 'g014_sales_scope_b']",3,0
+g014_c06,g014,dev,adversarial,quote,1,['g014_sales_current'],1,1
+g015_c01,g015,dev,ordinary,quote,1,['g015_sales_current'],1,1
+g015_c02,g015,dev,ordinary,growth,2,"['g015_sales_previous', 'g015_sales_current']",2,2
+g015_c03,g015,dev,ordinary,threshold,2,"['g015_budget_current', 'g015_expense_current']",2,2
+g015_c04,g015,dev,ordinary,rank,1,['g015_product_a'],1,3
+g015_c05,g015,dev,ambiguous,quote,3,"['g015_sales_current', 'g015_sales_scope_a', 'g015_sales_scope_b']",3,0
+g015_c06,g015,dev,adversarial,quote,1,['g015_sales_current'],1,1
+g016_c01,g016,dev,ordinary,quote,1,['g016_sales_current'],1,1
+g016_c02,g016,dev,ordinary,growth,2,"['g016_sales_previous', 'g016_sales_current']",2,2
+g016_c03,g016,dev,ordinary,threshold,2,"['g016_budget_current', 'g016_expense_current']",2,2
+g016_c04,g016,dev,ordinary,rank,1,['g016_product_a'],1,3
+g016_c05,g016,dev,ambiguous,quote,3,"['g016_sales_current', 'g016_sales_scope_a', 'g016_sales_scope_b']",3,0
+g016_c06,g016,dev,adversarial,quote,1,['g016_sales_current'],1,1
+g017_c01,g017,dev,ordinary,quote,1,['g017_sales_current'],1,1
+g017_c02,g017,dev,ordinary,growth,2,"['g017_sales_previous', 'g017_sales_current']",2,2
+g017_c03,g017,dev,ordinary,threshold,2,"['g017_budget_current', 'g017_expense_current']",2,2
+g017_c04,g017,dev,ordinary,rank,1,['g017_product_a'],1,3
+g017_c05,g017,dev,ambiguous,quote,3,"['g017_sales_current', 'g017_sales_scope_a', 'g017_sales_scope_b']",3,0
+g017_c06,g017,dev,adversarial,quote,1,['g017_sales_current'],1,1
+g018_c01,g018,dev,ordinary,quote,1,['g018_sales_current'],1,1
+g018_c02,g018,dev,ordinary,growth,2,"['g018_sales_previous', 'g018_sales_current']",2,2
+g018_c03,g018,dev,ordinary,threshold,2,"['g018_budget_current', 'g018_expense_current']",2,2
+g018_c04,g018,dev,ordinary,rank,1,['g018_product_a'],1,3
+g018_c05,g018,dev,ambiguous,quote,3,"['g018_sales_current', 'g018_sales_scope_a', 'g018_sales_scope_b']",3,0
+g018_c06,g018,dev,adversarial,quote,1,['g018_sales_current'],1,1
+g019_c01,g019,dev,ordinary,quote,1,['g019_sales_current'],1,1
+g019_c02,g019,dev,ordinary,growth,2,"['g019_sales_previous', 'g019_sales_current']",2,2
+g019_c03,g019,dev,ordinary,threshold,2,"['g019_budget_current', 'g019_expense_current']",2,2
+g019_c04,g019,dev,ordinary,rank,1,['g019_product_a'],1,3
+g019_c05,g019,dev,ambiguous,quote,3,"['g019_sales_current', 'g019_sales_scope_a', 'g019_sales_scope_b']",3,0
+g019_c06,g019,dev,adversarial,quote,1,['g019_sales_current'],1,1
+g020_c01,g020,dev,ordinary,quote,1,['g020_sales_current'],1,1
+g020_c02,g020,dev,ordinary,growth,2,"['g020_sales_previous', 'g020_sales_current']",2,2
+g020_c03,g020,dev,ordinary,threshold,2,"['g020_budget_current', 'g020_expense_current']",2,2
+g020_c04,g020,dev,ordinary,rank,1,['g020_product_a'],1,3
+g020_c05,g020,dev,ambiguous,quote,3,"['g020_sales_current', 'g020_sales_scope_a', 'g020_sales_scope_b']",3,0
+g020_c06,g020,dev,adversarial,quote,1,['g020_sales_current'],1,1
+g021_c01,g021,test,ordinary,quote,1,['g021_sales_current'],1,1
+g021_c02,g021,test,ordinary,growth,2,"['g021_sales_previous', 'g021_sales_current']",2,2
+g021_c03,g021,test,ordinary,threshold,2,"['g021_budget_current', 'g021_expense_current']",2,2
+g021_c04,g021,test,ordinary,rank,1,['g021_product_a'],1,3
+g021_c05,g021,test,ambiguous,quote,3,"['g021_sales_current', 'g021_sales_scope_a', 'g021_sales_scope_b']",3,0
+g021_c06,g021,test,adversarial,quote,1,['g021_sales_current'],1,1
+g022_c01,g022,test,ordinary,quote,1,['g022_sales_current'],1,1
+g022_c02,g022,test,ordinary,growth,2,"['g022_sales_previous', 'g022_sales_current']",2,2
+g022_c03,g022,test,ordinary,threshold,2,"['g022_budget_current', 'g022_expense_current']",2,2
+g022_c04,g022,test,ordinary,rank,1,['g022_product_a'],1,3
+g022_c05,g022,test,ambiguous,quote,3,"['g022_sales_current', 'g022_sales_scope_a', 'g022_sales_scope_b']",3,0
+g022_c06,g022,test,adversarial,quote,1,['g022_sales_current'],1,1
+g023_c01,g023,test,ordinary,quote,1,['g023_sales_current'],1,1
+g023_c02,g023,test,ordinary,growth,2,"['g023_sales_previous', 'g023_sales_current']",2,2
+g023_c03,g023,test,ordinary,threshold,2,"['g023_budget_current', 'g023_expense_current']",2,2
+g023_c04,g023,test,ordinary,rank,1,['g023_product_a'],1,3
+g023_c05,g023,test,ambiguous,quote,3,"['g023_sales_current', 'g023_sales_scope_a', 'g023_sales_scope_b']",3,0
+g023_c06,g023,test,adversarial,quote,1,['g023_sales_current'],1,1
+g024_c01,g024,test,ordinary,quote,1,['g024_sales_current'],1,1
+g024_c02,g024,test,ordinary,growth,2,"['g024_sales_previous', 'g024_sales_current']",2,2
+g024_c03,g024,test,ordinary,threshold,2,"['g024_budget_current', 'g024_expense_current']",2,2
+g024_c04,g024,test,ordinary,rank,1,['g024_product_a'],1,3
+g024_c05,g024,test,ambiguous,quote,3,"['g024_sales_current', 'g024_sales_scope_a', 'g024_sales_scope_b']",3,0
+g024_c06,g024,test,adversarial,quote,1,['g024_sales_current'],1,1
+g025_c01,g025,test,ordinary,quote,1,['g025_sales_current'],1,1
+g025_c02,g025,test,ordinary,growth,2,"['g025_sales_previous', 'g025_sales_current']",2,2
+g025_c03,g025,test,ordinary,threshold,2,"['g025_budget_current', 'g025_expense_current']",2,2
+g025_c04,g025,test,ordinary,rank,1,['g025_product_a'],1,3
+g025_c05,g025,test,ambiguous,quote,3,"['g025_sales_current', 'g025_sales_scope_a', 'g025_sales_scope_b']",3,0
+g025_c06,g025,test,adversarial,quote,1,['g025_sales_current'],1,1
+g026_c01,g026,test,ordinary,quote,1,['g026_sales_current'],1,1
+g026_c02,g026,test,ordinary,growth,2,"['g026_sales_previous', 'g026_sales_current']",2,2
+g026_c03,g026,test,ordinary,threshold,2,"['g026_budget_current', 'g026_expense_current']",2,2
+g026_c04,g026,test,ordinary,rank,1,['g026_product_a'],1,3
+g026_c05,g026,test,ambiguous,quote,3,"['g026_sales_current', 'g026_sales_scope_a', 'g026_sales_scope_b']",3,0
+g026_c06,g026,test,adversarial,quote,1,['g026_sales_current'],1,1
+g027_c01,g027,test,ordinary,quote,1,['g027_sales_current'],1,1
+g027_c02,g027,test,ordinary,growth,2,"['g027_sales_previous', 'g027_sales_current']",2,2
+g027_c03,g027,test,ordinary,threshold,2,"['g027_budget_current', 'g027_expense_current']",2,2
+g027_c04,g027,test,ordinary,rank,1,['g027_product_a'],1,3
+g027_c05,g027,test,ambiguous,quote,3,"['g027_sales_current', 'g027_sales_scope_a', 'g027_sales_scope_b']",3,0
+g027_c06,g027,test,adversarial,quote,1,['g027_sales_current'],1,1
+g028_c01,g028,test,ordinary,quote,1,['g028_sales_current'],1,1
+g028_c02,g028,test,ordinary,growth,2,"['g028_sales_previous', 'g028_sales_current']",2,2
+g028_c03,g028,test,ordinary,threshold,2,"['g028_budget_current', 'g028_expense_current']",2,2
+g028_c04,g028,test,ordinary,rank,1,['g028_product_a'],1,3
+g028_c05,g028,test,ambiguous,quote,3,"['g028_sales_current', 'g028_sales_scope_a', 'g028_sales_scope_b']",3,0
+g028_c06,g028,test,adversarial,quote,1,['g028_sales_current'],1,1
+g029_c01,g029,test,ordinary,quote,1,['g029_sales_current'],1,1
+g029_c02,g029,test,ordinary,growth,2,"['g029_sales_previous', 'g029_sales_current']",2,2
+g029_c03,g029,test,ordinary,threshold,2,"['g029_budget_current', 'g029_expense_current']",2,2
+g029_c04,g029,test,ordinary,rank,1,['g029_product_a'],1,3
+g029_c05,g029,test,ambiguous,quote,3,"['g029_sales_current', 'g029_sales_scope_a', 'g029_sales_scope_b']",3,0
+g029_c06,g029,test,adversarial,quote,1,['g029_sales_current'],1,1
+g030_c01,g030,test,ordinary,quote,1,['g030_sales_current'],1,1
+g030_c02,g030,test,ordinary,growth,2,"['g030_sales_previous', 'g030_sales_current']",2,2
+g030_c03,g030,test,ordinary,threshold,2,"['g030_budget_current', 'g030_expense_current']",2,2
+g030_c04,g030,test,ordinary,rank,1,['g030_product_a'],1,3
+g030_c05,g030,test,ambiguous,quote,3,"['g030_sales_current', 'g030_sales_scope_a', 'g030_sales_scope_b']",3,0
+g030_c06,g030,test,adversarial,quote,1,['g030_sales_current'],1,1

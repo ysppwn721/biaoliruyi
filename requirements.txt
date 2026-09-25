@@ -5,3 +5,9 @@ openpyxl>=3.1.5,<4
 python-docx>=1.1.2,<2
 python-pptx>=1.0.2,<2
 httpx==0.28.1
+# MCP 只读工具服务。1.x 提供 mcp.server.fastmcp，2.x 改名为 mcp.server.mcpserver；
+# zhilian/mcp_server.py 对两者都做了兼容，此处给出经过验证的版本。
+mcp>=1.30,<3
+numpy>=1.26,<3
+onnxruntime>=1.18,<2
+tokenizers>=0.19,<1

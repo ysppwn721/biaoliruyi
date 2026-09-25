@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import base64
 import hmac
+import json
 import os
 import re
 import tempfile
@@ -15,10 +16,12 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
-from . import __version__
 from .demo import create_demo
-from .llm import config, suggest_links
+from .llm import config, suggest_links, explain_diagnosis
+from . import ocr, reranker
 from .store import Store, now
+from .report import build_report
+from .agent import run_agent, decide, agent_status
 
 BASE = Path(__file__).resolve().parent.parent
 
@@ -60,9 +63,27 @@ class RevisionRequest(BaseModel):
     revision: int
 
 
+class OcrRunRequest(RevisionRequest):
+    image_ids: list[str] | None = Field(default=None, max_length=500)
+
+
+class OcrItem(BaseModel):
+    image_id: str
+    text: str = Field(min_length=1, max_length=20000)
+
+
+class OcrConfirmRequest(RevisionRequest):
+    items: list[OcrItem] = Field(min_length=1, max_length=500)
+
+
+class AgentDecisionRequest(BaseModel):
+    revision: int
+    decisions: list[dict] = Field(min_length=1, max_length=1)
+
+
 class Derivation(BaseModel):
-    id: str = Field(max_length=80)
-    expr: str = Field(max_length=500)
+    id: str = Field(min_length=1, max_length=80)
+    expr: str = Field(min_length=1, max_length=500)
     unit: str = Field('', max_length=16)
     label: str = Field('', max_length=80)
 
@@ -75,7 +96,7 @@ class DerivationsRequest(BaseModel):
 def create_app(data_dir=None):
     load_environment()
     store = Store(data_dir or os.getenv('ZHILIAN_DATA_DIR', str(BASE / '.zhilian')))
-    app = FastAPI(title='知链', version=__version__, description='跨文档结论验证与增量修复')
+    app = FastAPI(title='知链', version='0.2.1', description='跨文档结论验证与增量修复')
     app.state.store = store
 
     @app.middleware('http')
@@ -114,7 +135,10 @@ def create_app(data_dir=None):
 
     @app.get('/api/health')
     def health():
-        return {'status': 'ok', 'version': __version__, 'model': config(),
+        return {'status': 'ok', 'version': '0.2.1', 'model': config(),
+                'ocr': ocr.config(),
+                'local_reranker': reranker.status(),
+                'auto_export': os.getenv('ZHILIAN_AUTO_EXPORT', '').strip().lower() in ('1', 'true'),
                 'password_protected': bool(os.getenv('ZHILIAN_ACCESS_PASSWORD'))}
 
     @app.get('/api/projects')
@@ -142,8 +166,8 @@ def create_app(data_dir=None):
             try:
                 for f in files:
                     filename = (f.filename or '').replace('\\', '/').split('/')[-1]
-                    if not filename or filename in names or Path(filename).suffix.lower() not in ('.xlsx', '.docx', '.pptx'):
-                        raise ValueError('文件名重复或类型不受支持，仅接受xlsx、docx、pptx')
+                    if not filename or filename in names or Path(filename).suffix.lower() not in ('.xlsx', '.docx', '.pptx', *ocr.IMAGE_EXTENSIONS):
+                        raise ValueError('文件名重复或类型不受支持，仅接受xlsx、docx、pptx或图片文件(png/jpg/gif/webp/bmp/tiff)')
                     if len(filename) > 150 or any(c in filename for c in '<>:"|?*'):
                         raise ValueError('文件名无效或过长')
                     names.add(filename)
@@ -164,6 +188,13 @@ def create_app(data_dir=None):
     def get_project(wid: str):
         with store.lock:
             return store.public(store.read(wid))
+
+    @app.get('/api/projects/{wid}/report')
+    def report(wid: str):
+        with store.lock:
+            ws = store.read(wid)
+            store.verify(ws, ws['revision'])
+            return {'revision': ws['revision'], 'report': build_report(ws)}
 
     @app.post('/api/projects/{wid}/links')
     def confirm(wid: str, body: LinksRequest):
@@ -238,6 +269,46 @@ def create_app(data_dir=None):
             store.write(ws)
             return store.public(ws)
 
+    @app.post('/api/projects/{wid}/diagnosis/explain')
+    def diagnosis_explain(wid: str, body: RevisionRequest):
+        with store.lock:
+            ws = store.read(wid)
+            store.verify(ws, body.revision)
+            records = store.public(ws)['diagnosis']
+        explanations = explain_diagnosis(records)
+        with store.lock:
+            ws = store.read(wid)
+            store.verify(ws, body.revision)
+            ws['diagnosis_explanations'] = explanations
+            ws['revision'] += 1
+            ws['audit'].append({'time': now(), 'event': '诊断解释',
+                                'revision': ws['revision'],
+                                'detail': (f'模型 {config()["model"]} 返回{len(explanations)}项解释；未返回的项使用确定性模板'
+                                           if config()['enabled'] else '未配置 DeepSeek，使用确定性模板，未调用模型')})
+            store.write(ws)
+            return store.public(ws)
+
+    @app.post('/api/projects/{wid}/ocr/run')
+    def ocr_run(wid: str, body: OcrRunRequest):
+        return store.ocr_run(wid, body.revision, body.image_ids)
+
+    @app.post('/api/projects/{wid}/ocr/confirm')
+    def ocr_confirm(wid: str, body: OcrConfirmRequest):
+        return store.ocr_confirm(wid, body.revision, [i.model_dump() for i in body.items])
+
+    @app.get('/api/projects/{wid}/images/{iid}')
+    def image_download(wid: str, iid: str):
+        with store.lock:
+            ws = store.read(wid)
+            store.verify(ws, ws['revision'])
+            image = next((i for i in ws.get('images', []) if i['id'] == iid), None)
+            if not image:
+                raise HTTPException(404, '图片不存在')
+            path = store.image_path(ws, image)
+            media_type = image['mime'] if image['mime'] in ocr.MIME_EXT else 'application/octet-stream'
+            return FileResponse(path, media_type=media_type,
+                                headers={'Content-Security-Policy': "default-src 'none'; sandbox"})
+
     @app.get('/api/projects/{wid}/files/{fid}')
     def download(wid: str, fid: str):
         ws = store.read(wid)
@@ -247,9 +318,28 @@ def create_app(data_dir=None):
             raise HTTPException(404, '文件不存在')
         return FileResponse(store.folder(wid) / ws['generation'] / d['stored_name'], filename=d['name'])
 
+    @app.post('/api/projects/{wid}/agent/run')
+    def agent_run(wid: str, body: RevisionRequest):
+        return run_agent(store, wid, body.revision)
+
+    @app.post('/api/projects/{wid}/agent/decide')
+    def agent_decide(wid: str, body: AgentDecisionRequest):
+        return decide(store, wid, body.revision, body.decisions)
+
+    @app.get('/api/projects/{wid}/agent/status')
+    def get_agent_status(wid: str):
+        return agent_status(store, wid)
+
     @app.get('/api/projects/{wid}/export')
     def export(wid: str):
         return FileResponse(store.archive(wid), filename='知链成果与核验记录.zip', media_type='application/zip')
+
+    @app.post('/api/projects/{wid}/export-local')
+    def export_local(wid: str, body: RevisionRequest):
+        with store.lock:
+            ws = store.read(wid)
+            store.verify(ws, body.revision)
+        return store.export_local(wid)
 
     @app.get('/')
     def index():

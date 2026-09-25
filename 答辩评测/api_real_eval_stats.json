@@ -1,0 +1,211 @@
+{
+  "provider": "DeepSeek",
+  "model": "deepseek-flash",
+  "split": "all",
+  "groups": 25,
+  "decisions": 280,
+  "calls": [
+    {
+      "group_id": "longword-01",
+      "decision_count": 11,
+      "suggestion_count": 11,
+      "latency_ms": 2520.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-02",
+      "decision_count": 11,
+      "suggestion_count": 11,
+      "latency_ms": 2754.2,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-03",
+      "decision_count": 14,
+      "suggestion_count": 14,
+      "latency_ms": 4019.8,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-04",
+      "decision_count": 15,
+      "suggestion_count": 15,
+      "latency_ms": 3400.9,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-05",
+      "decision_count": 13,
+      "suggestion_count": 13,
+      "latency_ms": 4906.6,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-06",
+      "decision_count": 13,
+      "suggestion_count": 13,
+      "latency_ms": 2903.8,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-07",
+      "decision_count": 11,
+      "suggestion_count": 11,
+      "latency_ms": 3244.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-08",
+      "decision_count": 11,
+      "suggestion_count": 11,
+      "latency_ms": 3247.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-09",
+      "decision_count": 14,
+      "suggestion_count": 14,
+      "latency_ms": 3722.6,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-10",
+      "decision_count": 15,
+      "suggestion_count": 15,
+      "latency_ms": 3248.4,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-11",
+      "decision_count": 13,
+      "suggestion_count": 13,
+      "latency_ms": 2617.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-12",
+      "decision_count": 13,
+      "suggestion_count": 13,
+      "latency_ms": 2890.0,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-13",
+      "decision_count": 11,
+      "suggestion_count": 11,
+      "latency_ms": 2677.2,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-14",
+      "decision_count": 11,
+      "suggestion_count": 11,
+      "latency_ms": 2374.1,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-15",
+      "decision_count": 14,
+      "suggestion_count": 14,
+      "latency_ms": 2403.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-16",
+      "decision_count": 15,
+      "suggestion_count": 15,
+      "latency_ms": 2440.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-17",
+      "decision_count": 13,
+      "suggestion_count": 13,
+      "latency_ms": 2373.9,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-18",
+      "decision_count": 13,
+      "suggestion_count": 13,
+      "latency_ms": 2770.7,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-19",
+      "decision_count": 11,
+      "suggestion_count": 11,
+      "latency_ms": 2256.4,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-20",
+      "decision_count": 11,
+      "suggestion_count": 11,
+      "latency_ms": 2788.3,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-21",
+      "decision_count": 12,
+      "suggestion_count": 12,
+      "latency_ms": 2590.3,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-22",
+      "decision_count": 5,
+      "suggestion_count": 5,
+      "latency_ms": 1590.3,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-23",
+      "decision_count": 4,
+      "suggestion_count": 4,
+      "latency_ms": 1185.2,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-24",
+      "decision_count": 5,
+      "suggestion_count": 5,
+      "latency_ms": 1423.8,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "group_id": "longword-25",
+      "decision_count": 1,
+      "suggestion_count": 1,
+      "latency_ms": 845.0,
+      "status": "ok",
+      "error": null
+    }
+  ],
+  "failed_calls": 0,
+  "api_key_written": false
+}

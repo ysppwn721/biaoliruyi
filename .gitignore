@@ -1,28 +1,25 @@
-# 运行环境与本地数据
 .venv/
 .zhilian/
-.env
-
-# 工具与测试产物
+.codex_artifacts/
+models/
 __pycache__/
 .pytest_cache/
 *.pyc
-.codex_artifacts/
+.env
+
+# 演示与测试生成物：可由 zhilian/demo.py 与 tests/ 重复生成
+测试文件_20260918/
+测试结果_20260918/
+业务数据.xlsx
+分析报告.docx
+业务汇报.pptx
+长文Word测试_整包.zip
+导出成果/
 
 # 临时文件
 _tmp_plan.pdf
 *.log
 
-# 渲染产物（WPS/Office 导出的 PDF 与页面图，体积大且可重新生成）
-长文Word测试/*.pdf
-长文Word测试_整包.zip
+# 站点预览截图（本地校验用）
+site/_preview.png
 
-# 演示/测试生成物：由 zhilian/demo.py 与 tests/ 可重复生成，不进源码提交
-业务数据.xlsx
-分析报告.docx
-业务汇报.pptx
-测试文件_20260918/
-测试结果_20260918/
-
-# 打包好的交付物：内含源码副本与上百 MB 二进制包，且其 tests/ 会干扰本仓库测试
-交付物/

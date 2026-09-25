@@ -1,0 +1,4 @@
+﻿system,split,group_count,decision_count,top1_accuracy,error_link_rate,ambiguity_abstain_rate,false_abstain_rate,prompt_injection_rate
+deepseek-flash-real-fixture,dev,18,231,0.900433,0.004329,0,0.095238,0
+deepseek-flash-real-fixture,test,7,49,0.714286,0.040816,0,0.244898,0
+deepseek-flash-real-fixture,all,25,280,0.867857,0.010714,0,0.121429,0

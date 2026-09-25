@@ -1,0 +1,8 @@
+*
+!requirements.txt
+!zhilian
+!zhilian/**
+!web
+!web/**
+!run.py
+**/__pycache__

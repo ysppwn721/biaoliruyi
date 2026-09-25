@@ -1,0 +1,10 @@
+fastapi==0.141.1
+uvicorn==0.53.0
+python-multipart==0.0.32
+openpyxl>=3.1.5,<4
+python-docx>=1.1.2,<2
+python-pptx>=1.0.2,<2
+httpx==0.28.1
+# MCP 只读工具服务。1.x 提供 mcp.server.fastmcp，2.x 改名为 mcp.server.mcpserver；
+# zhilian/mcp_server.py 对两者都做了兼容，此处给出经过验证的版本。
+mcp>=1.30,<3

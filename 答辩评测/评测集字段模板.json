@@ -1,0 +1,22 @@
+{
+  "group_id": "g-001",
+  "split": "dev",
+  "claim_id": "c-001",
+  "claim_text": "本期销售额为125万元",
+  "facts": [
+    {
+      "id": "sales_current",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "unit": "万元",
+      "scope": "演示业务"
+    }
+  ],
+  "gold_refs": ["sales_current"],
+  "gold_action": "link",
+  "category": "ordinary",
+  "annotators": ["A", "B"],
+  "adjudicated": false,
+  "notes": "模板示例；正式评测前替换为脱敏样本"
+}
