@@ -24,6 +24,8 @@ def main() -> None:
         ("long-word-fixture", "rule", ROOT / "real_eval_metrics.csv"),
         ("long-word-fixture", "link-rules-assisted-replay", ROOT / "link_rules_replay_real_metrics.csv"),
         ("long-word-fixture", "deepseek-flash", ROOT / "api_real_eval_metrics.csv"),
+        ("human-adjudicated-fixture", "human-rule", ROOT / "human_rule_metrics.csv"),
+        ("human-adjudicated-fixture", "human-local-reranker", ROOT / "human_local_reranker_metrics.csv"),
     ]
     combined = []
     for dataset, expected_system, path in sources:

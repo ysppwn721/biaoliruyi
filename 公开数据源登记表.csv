@@ -1,0 +1,12 @@
+source,category,url,language,planned_use,license_status,download_date,redistribution_status,notes
+国家数据,官方统计,https://data.stats.gov.cn/,zh,主体指标期间匹配,待核对,,不放入交付包,先做本地实验
+国家统计局,统计公报与年鉴,https://www.stats.gov.cn/,zh,长文表格关联,待核对,,不放入交付包,保留原始URL和发布日期
+上海证券交易所,上市公司公告,https://www.sse.com.cn/,zh,财务来源匹配,待核对,,不放入交付包,检查公告下载条款
+深圳证券交易所,上市公司公告,https://www.szse.cn/,zh,财务来源匹配,待核对,,不放入交付包,检查公告下载条款
+中国政府网,政府报告,https://www.gov.cn/,zh,阈值比例论断,待核对,,不放入交付包,保留来源和哈希
+ToTTo,公开数据集,https://github.com/google-research-datasets/ToTTo,en,表格文本配对,需阅读LICENSE,,仅按许可证使用,非中文最终测试
+FinQA,公开数据集,https://github.com/czyssrs/FinQA,en,财务难负样本,需阅读LICENSE,,仅按许可证使用,不作为项目行业泛化
+TAT-QA,公开数据集,https://github.com/NExTplusplus/TAT-QA,en,财务表格推理,需阅读LICENSE,,仅按许可证使用,不直接替代来源ID标注
+ChartQA,公开数据集,https://github.com/vis-nlp/ChartQA,en,图表扩展,需阅读LICENSE,,仅按许可证使用,适合后续多模态
+PubTables-1M,公开数据集,https://github.com/microsoft/table-transformer,en,表格结构解析,需阅读LICENSE,,仅按许可证使用,不直接训练语义关联
+DocBank,公开数据集,https://github.com/doc-analysis/DocBank,en,文档布局解析,需阅读LICENSE,,仅按许可证使用,不直接训练语义关联

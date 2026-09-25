@@ -1,0 +1,16 @@
+{
+  "train": {
+    "split": "train",
+    "decisions": 7016,
+    "top1_accuracy": 0.700542,
+    "wrong_link_rate": 0.284778,
+    "abstain_rate": 0.014681
+  },
+  "dev": {
+    "split": "dev",
+    "decisions": 995,
+    "top1_accuracy": 0.697487,
+    "wrong_link_rate": 0.292462,
+    "abstain_rate": 0.01005
+  }
+}

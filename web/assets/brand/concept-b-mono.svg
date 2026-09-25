@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">知链 B 版单色图标</title>
+  <path d="M148 92h171l54 54v274H148z" fill="none" stroke="currentColor" stroke-width="26" stroke-linejoin="round"/>
+  <path d="M319 92v54h54M193 207h112M193 248h82" fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round"/>
+  <path d="M190 321l48 48 94-108" fill="none" stroke="currentColor" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

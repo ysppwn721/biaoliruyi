@@ -20,3 +20,9 @@ long-word-fixture,link-rules-assisted-replay,all,25,280,1.0,0.0,0,0.0,0
 long-word-fixture,deepseek-flash,dev,18,231,0.900433,0.004329,0,0.095238,0
 long-word-fixture,deepseek-flash,test,7,49,0.714286,0.040816,0,0.244898,0
 long-word-fixture,deepseek-flash,all,25,280,0.867857,0.010714,0,0.121429,0
+human-adjudicated-fixture,human-rule,dev,18,231,0.636364,0.363636,0,0.0,0
+human-adjudicated-fixture,human-rule,test,7,49,0.755102,0.244898,0,0.0,0
+human-adjudicated-fixture,human-rule,all,25,280,0.657143,0.342857,0,0.0,0
+human-adjudicated-fixture,human-local-reranker,dev,18,231,0.545455,0.0,0,0.454545,0
+human-adjudicated-fixture,human-local-reranker,test,7,49,0.530612,0.0,0,0.469388,0
+human-adjudicated-fixture,human-local-reranker,all,25,280,0.542857,0.0,0,0.457143,0

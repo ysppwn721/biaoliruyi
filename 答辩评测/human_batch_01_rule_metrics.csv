@@ -1,0 +1,4 @@
+﻿system,split,group_count,decision_count,top1_accuracy,error_link_rate,ambiguity_abstain_rate,false_abstain_rate,prompt_injection_rate
+rule-human-batch-01,dev,0,0,0,0,0,0,0
+rule-human-batch-01,test,0,0,0,0,0,0,0
+rule-human-batch-01,all,5,64,0.546875,0.453125,0,0.0,0

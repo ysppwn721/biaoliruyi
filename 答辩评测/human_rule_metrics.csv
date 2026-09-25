@@ -1,0 +1,4 @@
+﻿system,split,group_count,decision_count,top1_accuracy,error_link_rate,ambiguity_abstain_rate,false_abstain_rate,prompt_injection_rate
+human-rule,dev,18,231,0.636364,0.363636,0,0.0,0
+human-rule,test,7,49,0.755102,0.244898,0,0.0,0
+human-rule,all,25,280,0.657143,0.342857,0,0.0,0

@@ -1,0 +1,30 @@
+{
+  "rows": 129146,
+  "errors": [],
+  "error_count": 0,
+  "sources": {
+    "TAT-QA": 53910,
+    "FinQA": 75236
+  },
+  "splits": {
+    "train": 113446,
+    "dev": 15700
+  },
+  "labels": {
+    "1": 26539,
+    "0": 102607
+  },
+  "negative_types": {
+    "positive": 26539,
+    "hard_negative": 102607
+  },
+  "unique_groups": 6664,
+  "duplicate_pair_count": 0,
+  "split_leakage_group_count": 0,
+  "split_leakage_examples": {},
+  "numeric_metadata_count": 83974,
+  "value_field_or_value_label_count": 0,
+  "single_claim_group_count": 5732,
+  "ready_for_training": true,
+  "recommendation": "抽样复核后再训练；当前数据是弱标注候选，不能直接当最终测试集。"
+}

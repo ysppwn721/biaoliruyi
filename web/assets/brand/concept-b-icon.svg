@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">知链 B 版图标</title>
+  <desc id="desc">一页被打开的文档与其中的证据校验路径</desc>
+  <rect width="512" height="512" rx="116" fill="#2c6255"/>
+  <path d="M148 92h171l54 54v274H148z" fill="#f8fbf6"/>
+  <path d="M319 92v54h54" fill="#d5e9d9"/>
+  <path d="M193 207h112M193 248h82" fill="none" stroke="#83a89a" stroke-width="18" stroke-linecap="round"/>
+  <path d="M190 321l48 48 94-108" fill="none" stroke="#c9823d" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="369" cy="366" r="25" fill="#176852"/>
+  <path d="M359 366l8 8 15-18" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

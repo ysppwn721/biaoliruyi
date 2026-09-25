@@ -65,7 +65,14 @@ def main() -> None:
                               right.get("annotator_id", "annotator_B")]
         if left_decision == right_decision:
             row["gold_action"], refs, row["category"] = left_decision
-            row["gold_refs"] = list(refs)
+            # Keep a stable semantic order when both annotators selected the
+            # same set. The extractor uses previous→current for growth and
+            # source-table order for other multi-fact claims; list order is
+            # representation, not a substantive disagreement.
+            candidate_order = list(left.get("candidate_refs") or [])
+            row["gold_refs"] = (candidate_order
+                                 if set(candidate_order) == set(refs)
+                                 else list(refs))
             row["adjudicated"] = True
             row["adjudication_note"] = "双人独立标注一致。A：{}；B：{}".format(
                 left.get("annotation_note", ""), right.get("annotation_note", ""))

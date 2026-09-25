@@ -1,0 +1,24 @@
+{
+  "rows": 280,
+  "groups": 25,
+  "dev": 231,
+  "test": 49,
+  "actions": {
+    "link": 280
+  },
+  "categories": {
+    "ordinary": 280
+  },
+  "kinds": {
+    "quote": 104,
+    "growth": 48,
+    "threshold": 96,
+    "ranking": 32
+  },
+  "all_adjudicated": true,
+  "annotators": [
+    "annotator_A",
+    "annotator_B"
+  ],
+  "numeric_conflict_notes": 24
+}

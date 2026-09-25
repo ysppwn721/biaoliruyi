@@ -1,0 +1,43 @@
+{
+  "policy": "training-only; do not include raw public data in delivery package",
+  "sources": [
+    {
+      "name": "FinQA",
+      "url": "https://github.com/czyssrs/FinQA",
+      "license": "MIT",
+      "commit": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "status": "approved_for_first_batch"
+    },
+    {
+      "name": "TAT-QA",
+      "url": "https://github.com/NExTplusplus/TAT-QA",
+      "license": "MIT",
+      "commit": "870accc41953dcde885aabeb963d94aabdc0fbc3",
+      "status": "approved_for_first_batch"
+    },
+    {
+      "name": "PubTables-1M",
+      "url": "https://github.com/microsoft/table-transformer",
+      "license": "MIT",
+      "status": "parser_only"
+    },
+    {
+      "name": "DocBank",
+      "url": "https://github.com/doc-analysis/DocBank",
+      "license": "Apache-2.0",
+      "status": "layout_parser_only"
+    },
+    {
+      "name": "ChartQA",
+      "url": "https://github.com/vis-nlp/ChartQA",
+      "license": "GPL-3.0",
+      "status": "hold_for_separate_experiment"
+    },
+    {
+      "name": "ToTTo",
+      "url": "https://github.com/google-research-datasets/ToTTo",
+      "license": "unverified",
+      "status": "hold_until_license_checked"
+    }
+  ]
+}

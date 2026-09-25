@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 920" role="img" aria-labelledby="title desc">
+  <title id="title">知链 Logo 方向对比稿</title>
+  <desc id="desc">知链三个 Logo 方向的横版组合标、图标和使用场景建议</desc>
+  <rect width="1440" height="920" fill="#f7f9f6"/>
+  <text x="86" y="74" fill="#243530" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="30" font-weight="700">知链 Logo 方向探索</text>
+  <text x="86" y="112" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="16">网页主标、软件快捷图标、托盘小尺寸均可延展</text>
+
+  <g transform="translate(70 158)">
+    <rect width="1300" height="205" rx="18" fill="#fff" stroke="#e1e9e2"/>
+    <circle cx="52" cy="48" r="17" fill="#176852"/>
+    <text x="85" y="55" fill="#176852" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="17" font-weight="700">A / 链证</text>
+    <text x="85" y="82" fill="#8b9990" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="12">可信校验 · 连接 · 修复闭环</text>
+    <g transform="translate(52 105)">
+      <path d="M0 52l39-39c22-22 57-22 79 0s22 57 0 79l-17 17" fill="none" stroke="#176852" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M158 76l-39 39c-22 22-57 22-79 0s-22-57 0-79l17-17" fill="none" stroke="#75ad91" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M24 77l33 33 76-76" fill="none" stroke="#c9823d" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="330" y="135" fill="#243530" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="42" font-weight="700">知链</text>
+    <text x="333" y="165" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="12" letter-spacing="5">ZHILIAN</text>
+    <rect x="1030" y="71" width="92" height="92" rx="23" fill="#176852"/>
+    <g transform="translate(1046 87) scale(.37)">
+      <path d="M143 238l56-56c31-31 81-31 112 0s31 81 0 112l-24 24" fill="none" stroke="#fff" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M369 274l-56 56c-31 31-81 31-112 0s-31-81 0-112l24-24" fill="none" stroke="#9ed0b3" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M177 289l47 47 108-108" fill="none" stroke="#e4a261" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="1146" y="122" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="12">推荐网页 / 托盘</text>
+    <text x="1146" y="144" fill="#a0aaa3" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="11">识别度最高</text>
+  </g>
+
+  <g transform="translate(70 385)">
+    <rect width="1300" height="205" rx="18" fill="#fff" stroke="#e1e9e2"/>
+    <circle cx="52" cy="48" r="17" fill="#2c6255"/>
+    <text x="85" y="55" fill="#2c6255" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="17" font-weight="700">B / 证页</text>
+    <text x="85" y="82" fill="#8b9990" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="12">文档 · 证据 · 审阅确认</text>
+    <g transform="translate(52 105)">
+      <path d="M30 5h120l38 38v160H30z" fill="#2c6255"/>
+      <path d="M150 5v38h38" fill="#94c3a4"/>
+      <path d="M62 83h78M62 109h56" fill="none" stroke="#dceee0" stroke-width="12" stroke-linecap="round"/>
+      <path d="M59 157l32 32 62-72" fill="none" stroke="#e4a261" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="330" y="135" fill="#243530" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="42" font-weight="700">知链</text>
+    <text x="333" y="165" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="12" letter-spacing="5">ZHILIAN</text>
+    <rect x="1030" y="71" width="92" height="92" rx="23" fill="#2c6255"/>
+    <g transform="translate(1057 87) scale(.37)">
+      <path d="M148 92h171l54 54v274H148z" fill="#f8fbf6"/>
+      <path d="M319 92v54h54" fill="#d5e9d9"/>
+      <path d="M193 207h112M193 248h82" fill="none" stroke="#83a89a" stroke-width="18" stroke-linecap="round"/>
+      <path d="M190 321l48 48 94-108" fill="none" stroke="#c9823d" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="1146" y="122" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="12">推荐文档 / 报告</text>
+    <text x="1146" y="144" fill="#a0aaa3" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="11">业务含义最直观</text>
+  </g>
+
+  <g transform="translate(70 612)">
+    <rect width="1300" height="205" rx="18" fill="#fff" stroke="#e1e9e2"/>
+    <circle cx="52" cy="48" r="17" fill="#203b53"/>
+    <text x="85" y="55" fill="#203b53" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="17" font-weight="700">C / 证据流</text>
+    <text x="85" y="82" fill="#8b9990" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="12">依赖图 · 追溯 · 智能体</text>
+    <g transform="translate(52 105)">
+      <path d="M30 32l88 61 88-74M30 32l13 126 75-65M206 19l-13 139-75-65" fill="none" stroke="#5f9f86" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="30" cy="32" r="23" fill="#f6fbf7"/>
+      <circle cx="118" cy="93" r="23" fill="#f6fbf7"/>
+      <circle cx="206" cy="19" r="23" fill="#f6fbf7"/>
+      <circle cx="43" cy="158" r="23" fill="#f6fbf7"/>
+      <circle cx="193" cy="158" r="23" fill="#f6fbf7"/>
+      <path d="M169 158l15 15 31-36" fill="none" stroke="#e4a261" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="330" y="135" fill="#243530" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="42" font-weight="700">知链</text>
+    <text x="333" y="165" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="12" letter-spacing="5">ZHILIAN</text>
+    <rect x="1030" y="71" width="92" height="92" rx="23" fill="#203b53"/>
+    <g transform="translate(1046 87) scale(.37)">
+      <path d="M128 168L256 256 384 148M128 168l18 181 110-93M384 148l-18 201-110-93" fill="none" stroke="#7fc0a1" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="128" cy="168" r="35" fill="#f6fbf7"/>
+      <circle cx="256" cy="256" r="35" fill="#f6fbf7"/>
+      <circle cx="384" cy="148" r="35" fill="#f6fbf7"/>
+      <circle cx="146" cy="349" r="35" fill="#f6fbf7"/>
+      <circle cx="366" cy="349" r="35" fill="#f6fbf7"/>
+      <path d="M330 350l23 23 48-54" fill="none" stroke="#e4a261" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="1146" y="122" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="12">推荐技术叙事 / 架构图</text>
+    <text x="1146" y="144" fill="#a0aaa3" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="11">扩展性最好</text>
+  </g>
+</svg>
