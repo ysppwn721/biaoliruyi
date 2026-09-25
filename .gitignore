@@ -1,5 +1,6 @@
 .venv/
 .zhilian/
+.zhilian-public/
 .codex_artifacts/
 models/
 __pycache__/
