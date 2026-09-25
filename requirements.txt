@@ -11,3 +11,7 @@ mcp>=1.30,<3
 numpy>=1.26,<3
 onnxruntime>=1.18,<2
 tokenizers>=0.19,<1
+# PDF 文本与表格抽取。用于导入 PDF 报告，以及从公开年报构建中文训练对。
+# 本机已实测可用；pypdfium2 与 pdfminer.six 由 pdfplumber 传递引入，无需单独声明。
+pdfplumber>=0.11,<1
+pandas>=2.0,<4

@@ -7,19 +7,24 @@ import re
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
 KINDS = {'quote': '数值引用', 'growth': '增长率', 'ranking': '排名', 'threshold': '阈值', 'chart': '图表'}
-EXTRACTION_VERSION = 2
+EXTRACTION_VERSION = 3
 UNITS = {'元': ('currency', Decimal(1)), '万元': ('currency', Decimal(10000)),
          '亿元': ('currency', Decimal(100000000)), '件': ('count', Decimal(1)),
          '人': ('people', Decimal(1)), '%': ('percentage', Decimal(1))}
-NUM = r'-?\d+(?:\.\d+)?'
+# 允许千分位逗号：真实年报普遍写作 3,379.37 万元，旧规则只认连续数字。
+NUM = r'-?\d{1,3}(?:,\d{3})+(?:\.\d+)?|-?\d+(?:\.\d+)?'
 UNIT = r'亿元|万元|元|件|人|%'
 
 
 def number(value) -> Decimal:
     if isinstance(value, bool):
         raise ValueError('布尔值不能作为数值')
+    text = str(value).strip()
+    # 去千分位。仅当逗号确实按三位分组时才剥离，避免误改 "1,23" 这类异常输入。
+    if re.fullmatch(r'-?\d{1,3}(?:,\d{3})+(?:\.\d+)?', text):
+        text = text.replace(',', '')
     try:
-        n = Decimal(str(value))
+        n = Decimal(text)
     except (InvalidOperation, ValueError):
         raise ValueError('请输入有效数字')
     if not n.is_finite() or abs(n) > Decimal('1e15'):
@@ -158,11 +163,13 @@ def extract_claims(block, facts, index=None):
     # 每段只构造/复用一次索引，避免对每条事实重复扫描文本。
     index = index or facts_index(facts)
     patterns = [
-        ('growth', r'(?:较上期|环比)(增长|下降|持平)(?:(' + NUM + r')%)?'),
+        # 真实年报用「较上年/同比/比上年」，且动词常用「增加/减少」而非「增长/下降」。
+        # 旧规则只认「较上期|环比」+「增长|下降|持平」，导致年报语料识别率为 0。
+        ('growth', r'(?:较上期|环比|较上年|比上年|同比)(增长|下降|持平|增加|减少|上升)(?:(' + NUM + r')%)?'),
         ('ranking', r'(.+?)(销售额|销量|收入|支出|得分)(?:并列)?最高'),
-        ('threshold', r'(未超过|不超过|超过|不少于|低于)\s*(' + NUM + r')\s*(' + UNIT + r')'),
+        ('threshold', r'(未超过|不超过|超过|不少于|低于|高于)\s*(' + NUM + r')\s*(' + UNIT + r')'),
         ('budget', r'支出(未超过|不超过|超过)预算'),
-        ('quote', r'(?:为|是|达到)\s*(' + NUM + r')\s*(' + UNIT + r')'),
+        ('quote', r'(?:为|是|达到|达)\s*(' + NUM + r')\s*(' + UNIT + r')'),
     ]
     candidate_matches = []
     sentence_meta = []
@@ -224,8 +231,15 @@ def extract_claims(block, facts, index=None):
                 refs = [prev[0]['id'], curr[0]['id']]
             else:
                 issue = '未唯一确定同口径的上期与本期数据，请确认关联'
-            spec = {'span': [growth.start(1), growth.end()], 'reported': float(growth[2] or 0) * (-1 if growth[1] == '下降' else 1),
-                    'qualitative': growth[2] is None, 'direction': {'增长': 1, '下降': -1, '持平': 0}[growth[1]]}
+            # 方向词扩展：年报用「增加/减少/上升」，旧字典只有「增长/下降/持平」。
+            # 同时用 number() 而非 float()，以支持千分位数值。
+            direction_word = {'增长': 1, '增加': 1, '上升': 1,
+                              '下降': -1, '减少': -1, '持平': 0}[growth[1]]
+            spec = {'span': [growth.start(1), growth.end()],
+                    'reported': float(number(growth[2])) if growth[2] else 0.0,
+                    'qualitative': growth[2] is None, 'direction': direction_word}
+            if direction_word < 0:
+                spec['reported'] = -abs(spec['reported'])
         elif marker_kind == 'ranking':
             rank = match
             kind = 'ranking'
@@ -242,7 +256,7 @@ def extract_claims(block, facts, index=None):
             positive, negative, op = ('超过', '未超过', '>')
             if threshold[1] in ('不少于', '低于'):
                 positive, negative, op = ('不少于', '低于', '>=')
-            spec = {'limit': float(threshold[2]), 'unit': threshold[3], 'positive': positive,
+            spec = {'limit': float(number(threshold[2])), 'unit': threshold[3], 'positive': positive,
                     'negative': negative, 'op': op, 'reported_positive': threshold[1] == positive,
                     'span': [threshold.start(1), threshold.end(1)]}
         elif marker_kind == 'budget':
@@ -259,7 +273,7 @@ def extract_claims(block, facts, index=None):
             kind = 'quote'
             fs = best_facts(source_text, facts, index=index)
             refs = [fs[0]['id']] if len(fs) == 1 else []
-            spec = {'reported': float(quote[1]), 'unit': quote[2], 'span': [quote.start(1), quote.end(1)]}
+            spec = {'reported': float(number(quote[1])), 'unit': quote[2], 'span': [quote.start(1), quote.end(1)]}
         if kind:
             if not refs:
                 issue = issue or '未找到唯一来源，需手动关联事实'
