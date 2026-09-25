@@ -186,6 +186,35 @@ td b { color: var(--brand); }
 }
 .hl b { color: var(--ink); }
 
+/* ---------- 平台下载卡 ---------- */
+.plat { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.platcard {
+  display: flex; flex-direction: column;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow);
+  transition: .18s ease;
+}
+.platcard.current { border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft), var(--shadow); }
+.platcard .phead { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
+.platcard h4 { margin: 0; font-size: 16px; }
+.pico { font-size: 19px; line-height: 1; }
+.platcard .btn { margin-top: auto; align-self: flex-start; }
+.platcard .meta { margin-bottom: 16px; }
+.pstate { margin: 0 0 12px; font-size: 12.5px; font-weight: 600; }
+.pstate.ready { color: var(--brand); }
+.pstate.prep { color: #8a6d1f; }
+.pstate.plan { color: var(--muted); }
+.badge-current {
+  margin-left: 6px; padding: 1px 7px; border-radius: 6px;
+  background: var(--brand); color: #fff; font-size: 11px; font-weight: 600;
+}
+.dl-note {
+  margin: 18px 0 30px; padding: 14px 18px;
+  background: var(--brand-soft); border-radius: var(--radius);
+  color: var(--ink-2); font-size: 13.5px; line-height: 1.7;
+}
+.dl-note strong { color: var(--brand); }
+
 /* ---------- 文档 ---------- */
 .docs { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
 .docs h4 { margin: 0 0 12px; font-size: 16px; }

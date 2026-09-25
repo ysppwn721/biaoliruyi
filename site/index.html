@@ -96,19 +96,67 @@
 <section id="download" class="band alt">
   <div class="wrap">
     <h3>下载</h3>
-    <div class="dl">
-      <div class="dlcard">
-        <h4>Windows 免安装包 <span class="tag">推荐</span></h4>
-        <p>解压后双击 <code>启动知链.bat</code>，首次运行自动准备运行环境，浏览器自动打开。</p>
+    <p class="sec-lead">
+      请按你的操作系统选择。若不确定，页面会自动高亮当前系统对应的版本。
+      未标「可下载」的平台表明安装包仍在制作中，可直接使用上方在线演示。
+    </p>
+
+    <div class="plat" id="plat">
+      <article class="platcard" data-os="windows">
+        <div class="phead"><span class="pico">⊞</span><h4>Windows</h4></div>
+        <p class="pstate ready">可下载 · v0.2.1</p>
         <ul class="meta">
-          <li>版本 v0.2.1 ｜ 约 0.2 MB</li>
-          <li>需要 Python 3.11+（安装时请勾选 Add Python to PATH）</li>
-          <li>纯规则模式无需联网、无需密钥</li>
+          <li>Windows 10 / 11（64 位）</li>
+          <li>免安装绿色包，约 0.2 MB</li>
+          <li>需 Python 3.11+，首次运行自动装依赖</li>
         </ul>
         <a class="btn primary" href="downloads/知链_v0.2.1_Windows免安装.zip" download>下载免安装包</a>
-      </div>
+      </article>
+
+      <article class="platcard" data-os="macos">
+        <div class="phead"><span class="pico"></span><h4>macOS</h4></div>
+        <p class="pstate prep">制作中 · 需实机验证</p>
+        <ul class="meta">
+          <li>计划支持 macOS 12 及以上（Intel / Apple 芯片）</li>
+          <li>运行依赖均已提供 macOS 版本</li>
+          <li>启动脚本与兼容性验证完成后发布</li>
+        </ul>
+        <span class="btn disabled" aria-disabled="true">暂未发布</span>
+      </article>
+
+      <article class="platcard" data-os="linux">
+        <div class="phead"><span class="pico">🐧</span><h4>Linux</h4></div>
+        <p class="pstate prep">制作中 · 需实机验证</p>
+        <ul class="meta">
+          <li>计划支持 Ubuntu 22.04+ / Debian 12+ 等主流发行版</li>
+          <li>也可用 Docker 运行，见下方命令</li>
+          <li>启动脚本与兼容性验证完成后发布</li>
+        </ul>
+        <span class="btn disabled" aria-disabled="true">暂未发布</span>
+      </article>
+
+      <article class="platcard" data-os="android">
+        <div class="phead"><span class="pico">🤖</span><h4>Android</h4></div>
+        <p class="pstate plan">规划中 · 走浏览器</p>
+        <ul class="meta">
+          <li>安卓端计划以浏览器方式接入，不单独发布 APK</li>
+          <li>原因：系统需按路径读写 Excel / Word / PPT，
+              而主流安卓文件管理器走 SAF 不暴露真实路径</li>
+          <li>打开上方在线演示即等同于安卓端可用</li>
+        </ul>
+        <a class="btn" href="#try">使用在线演示</a>
+      </article>
+    </div>
+
+    <div class="dl-note">
+      <strong>说明</strong>：macOS 与 Linux 版本所需依赖均已提供对应平台版本，
+      且源码中不含平台相关硬编码，因此这两个平台属于工程收尾工作而非功能缺失；
+      发布前需在真实机器上完成安装与文件读写的兼容性验证。
+    </div>
+
+    <div class="dl">
       <div class="dlcard">
-        <h4>完整源代码</h4>
+        <h4>完整源代码 <span class="tag">全平台通用</span></h4>
         <p>含后端、前端、自动化测试与第三方许可声明，可自行构建与复现。</p>
         <ul class="meta">
           <li>版本 v0.2.1 ｜ 约 0.45 MB</li>
@@ -124,12 +172,22 @@
         </ul>
         <a class="btn" href="downloads/知链事实表模板.xlsx" download>下载模板</a>
       </div>
+      <div class="dlcard">
+        <h4>Windows 免安装包</h4>
+        <p>解压后双击 <code>启动知链.bat</code>，浏览器会自动打开。</p>
+        <ul class="meta">
+          <li>最适合快速试用与现场演示</li>
+          <li>纯规则模式无需联网、无需密钥</li>
+        </ul>
+        <a class="btn" href="downloads/知链_v0.2.1_Windows免安装.zip" download>重新下载</a>
+      </div>
     </div>
+
     <div class="docker">
-      <h4>使用 Docker 运行</h4>
+      <h4>使用 Docker 运行（Windows / macOS / Linux 通用）</h4>
       <pre><code>docker build -t biaoliruyi .
 docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi</code></pre>
-      <p class="muted">启动后访问 http://127.0.0.1:8765 ，用户名 <code>zhilian</code>，密码为上面设置的值。</p>
+      <p class="muted">启动后访问 http://127.0.0.1:8765 ，用户名 <code>zhilian</code>，密码为上面设置的值。这是目前唯一在 macOS / Linux 上可直接运行的方式。</p>
     </div>
   </div>
 </section>
@@ -211,6 +269,28 @@ docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi<
     <p class="muted small">本站为参赛作品公网入口，提供在线演示与软件下载。</p>
   </div>
 </footer>
+
+<script>
+// 按访问者操作系统高亮对应下载卡，减少"该下哪个"的犹豫
+(function () {
+  var ua = (navigator.userAgent || '') + ' ' + (navigator.platform || '');
+  var os = /Android/i.test(ua) ? 'android'
+         : /iPhone|iPad|iPod/i.test(ua) ? 'macos'
+         : /Win/i.test(ua) ? 'windows'
+         : /Mac/i.test(ua) ? 'macos'
+         : /Linux|X11|Ubuntu/i.test(ua) ? 'linux'
+         : '';
+  if (!os) return;
+  var card = document.querySelector('.platcard[data-os="' + os + '"]');
+  if (!card) return;
+  card.classList.add('current');
+  var head = card.querySelector('h4');
+  var badge = document.createElement('span');
+  badge.className = 'badge-current';
+  badge.textContent = '当前系统';
+  head.appendChild(badge);
+})();
+</script>
 
 <script>
 // 演示环境地址：部署后替换为自有域名，例如 https://demo.你的域名.com
