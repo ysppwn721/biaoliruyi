@@ -70,7 +70,9 @@
           <a class="btn primary big" id="demo-link" href="#" target="_blank" rel="noopener">打开在线演示 →</a>
         </p>
         <p class="demo-account">
-          测试账号（大赛要求公开）：用户名 <code>zhilian</code>　密码 <code>biaoliruyi2026</code>
+          <strong>测试账号（大赛要求公开）</strong><br>
+          用户名 <code>zhilian</code>　密码 <code>zhilian2026</code>
+          <button type="button" id="copy-cred" class="copy-btn">一键复制</button>
         </p>
       </div>
       <div class="tryitem">
@@ -212,7 +214,28 @@ docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi<
 
 <script>
 // 演示环境地址：部署后替换为自有域名，例如 https://demo.你的域名.com
-window.DEMO_URL = 'https://richards-owen-elephant-burn.trycloudflare.com';
+window.DEMO_URL = 'https://activated-collectible-ran-higher.trycloudflare.com';
+</script>
+<script>
+// 一键复制测试账号：减轻评委手输账密的负担
+(function () {
+  var btn = document.getElementById('copy-cred');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var text = '用户名：zhilian\n密码：zhilian2026';
+    function ok() { btn.textContent = '已复制 ✓'; setTimeout(function () { btn.textContent = '一键复制'; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(ok, fallback);
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); ok(); } catch (e) { btn.textContent = '请手动选择'; }
+      document.body.removeChild(ta);
+    }
+  });
+})();
 </script>
 <script>
 // 探测演示环境是否在线：离线时给出替代路径，避免评委点开是错误页

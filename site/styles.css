@@ -110,6 +110,14 @@ body {
   color: var(--ink-2); font-size: 13.5px;
 }
 .demo-account code { background: #fff; }
+.copy-btn {
+  margin-left: 8px; padding: 3px 11px;
+  border: 1px solid var(--brand); border-radius: 7px;
+  background: #fff; color: var(--brand);
+  font-size: 12.5px; font-family: inherit; cursor: pointer;
+  transition: .16s ease;
+}
+.copy-btn:hover { background: var(--brand); color: #fff; }
 .steps { margin: 0; padding-left: 20px; color: var(--ink-2); font-size: 14.5px; }
 .steps li { margin-bottom: 9px; }
 .steps strong { color: var(--ink); }
