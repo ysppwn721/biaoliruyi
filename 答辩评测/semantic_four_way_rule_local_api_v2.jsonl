@@ -8,7 +8,7 @@
 {"claim_id": "rewrite_v2_sales_current_08", "action": "link", "refs": ["sales_current"]}
 {"claim_id": "rewrite_v2_sales_current_09", "action": "link", "refs": ["sales_current"]}
 {"claim_id": "rewrite_v2_sales_current_10", "action": "link", "refs": ["sales_current"]}
-{"claim_id": "rewrite_v2_sales_current_11", "action": "link", "refs": ["sales_current"]}
+{"claim_id": "rewrite_v2_sales_current_11", "action": "link", "refs": ["sales_prev"]}
 {"claim_id": "rewrite_v2_sales_current_12", "action": "link", "refs": ["sales_current"]}
 {"claim_id": "rewrite_v2_sales_prev_01", "action": "link", "refs": ["sales_prev"]}
 {"claim_id": "rewrite_v2_sales_prev_02", "action": "link", "refs": ["sales_prev"]}
@@ -40,11 +40,11 @@
 {"claim_id": "rewrite_v2_product_b_04", "action": "link", "refs": ["product_b"]}
 {"claim_id": "rewrite_v2_product_b_05", "action": "link", "refs": ["product_b"]}
 {"claim_id": "rewrite_v2_product_b_06", "action": "link", "refs": ["product_b"]}
-{"claim_id": "rewrite_v2_product_b_07", "action": "abstain", "refs": []}
-{"claim_id": "rewrite_v2_product_b_08", "action": "abstain", "refs": []}
+{"claim_id": "rewrite_v2_product_b_07", "action": "link", "refs": ["product_b"]}
+{"claim_id": "rewrite_v2_product_b_08", "action": "link", "refs": ["product_b"]}
 {"claim_id": "rewrite_v2_product_b_09", "action": "link", "refs": ["product_b"]}
-{"claim_id": "rewrite_v2_product_b_10", "action": "abstain", "refs": []}
-{"claim_id": "rewrite_v2_product_b_11", "action": "abstain", "refs": []}
+{"claim_id": "rewrite_v2_product_b_10", "action": "link", "refs": ["product_b"]}
+{"claim_id": "rewrite_v2_product_b_11", "action": "link", "refs": ["product_b"]}
 {"claim_id": "rewrite_v2_product_b_12", "action": "link", "refs": ["product_b"]}
 {"claim_id": "rewrite_v2_spending_01", "action": "link", "refs": ["spending"]}
 {"claim_id": "rewrite_v2_spending_02", "action": "link", "refs": ["spending"]}
@@ -64,9 +64,9 @@
 {"claim_id": "rewrite_v2_budget_04", "action": "link", "refs": ["spending"]}
 {"claim_id": "rewrite_v2_budget_05", "action": "link", "refs": ["budget"]}
 {"claim_id": "rewrite_v2_budget_06", "action": "link", "refs": ["budget"]}
-{"claim_id": "rewrite_v2_budget_07", "action": "abstain", "refs": []}
+{"claim_id": "rewrite_v2_budget_07", "action": "link", "refs": ["budget"]}
 {"claim_id": "rewrite_v2_budget_08", "action": "link", "refs": ["budget"]}
 {"claim_id": "rewrite_v2_budget_09", "action": "link", "refs": ["budget"]}
-{"claim_id": "rewrite_v2_budget_10", "action": "link", "refs": ["budget"]}
+{"claim_id": "rewrite_v2_budget_10", "action": "link", "refs": ["spending"]}
 {"claim_id": "rewrite_v2_budget_11", "action": "link", "refs": ["budget"]}
-{"claim_id": "rewrite_v2_budget_12", "action": "abstain", "refs": []}
+{"claim_id": "rewrite_v2_budget_12", "action": "link", "refs": ["budget"]}

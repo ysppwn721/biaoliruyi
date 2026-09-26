@@ -64,7 +64,11 @@ def main():
         candidates = engine.best_facts(claim, facts)
         rule_candidates[cid] = [f['id'] for f in candidates]
         scored = score_pairs(claim, facts, batch_size=16)
-        local_top[cid] = scored[0]['fact_id'] if scored else None
+        local_top[cid] = {
+            'fact_id': scored[0]['fact_id'] if scored else None,
+            'raw_score': scored[0]['raw_score'] if scored else -999.0,
+            'margin': (scored[0]['raw_score'] - scored[1]['raw_score']) if len(scored) > 1 else 999.0,
+        }
     outputs = {name: [] for name in ('rule-only', 'local-only', 'rule-local', 'rule-local-api')}
     for cid, items in grouped.items():
         rule = rule_candidates[cid]
@@ -72,16 +76,19 @@ def main():
         api_item = api.get(cid, {})
         api_refs = api_item.get('refs', []) if api_item.get('action') == 'link' else []
         rule_item = {'claim_id': cid, 'action': 'link' if len(rule) == 1 else 'abstain', 'refs': rule if len(rule) == 1 else []}
-        local_item = {'claim_id': cid, 'action': 'link' if local else 'abstain', 'refs': [local] if local else []}
+        local_item = {'claim_id': cid, 'action': 'link' if local['fact_id'] else 'abstain',
+                      'refs': [local['fact_id']] if local['fact_id'] else []}
         if len(rule) == 1:
             rl_item = rule_item
             rla_item = rule_item
-        elif len(rule) > 1 and local:
-            rl_item = {'claim_id': cid, 'action': 'link', 'refs': [local]}
-            rla_item = rl_item
         else:
-            rl_item = {'claim_id': cid, 'action': 'abstain', 'refs': []}
-            rla_item = {'claim_id': cid, 'action': 'link' if api_refs else 'abstain', 'refs': api_refs}
+            # Fair ablation: both hybrid variants allow local semantic recall
+            # when lexical rules cannot decide. The API variant adds a gate:
+            # only low-confidence local results are escalated to DeepSeek.
+            rl_item = local_item
+            confident = local['raw_score'] >= -3.0 and local['margin'] >= 0.10
+            rla_item = local_item if confident else {
+                'claim_id': cid, 'action': 'link' if api_refs else 'abstain', 'refs': api_refs}
         for name, item in (('rule-only', rule_item), ('local-only', local_item),
                            ('rule-local', rl_item), ('rule-local-api', rla_item)):
             outputs[name].append(item)

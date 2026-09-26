@@ -24,21 +24,21 @@
     {
       "system": "rule-local",
       "claims": 72,
-      "linked": 15,
-      "top1_accuracy": 0.194444,
-      "error_association_rate": 0.013889,
-      "coverage": 0.208333,
-      "abstain_rate": 0.791667,
+      "linked": 72,
+      "top1_accuracy": 0.875,
+      "error_association_rate": 0.125,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
       "label_basis": "programmatic semantic rewrite; evaluation-only"
     },
     {
       "system": "rule-local-api",
       "claims": 72,
-      "linked": 64,
-      "top1_accuracy": 0.875,
-      "error_association_rate": 0.013889,
-      "coverage": 0.888889,
-      "abstain_rate": 0.111111,
+      "linked": 70,
+      "top1_accuracy": 0.930556,
+      "error_association_rate": 0.041667,
+      "coverage": 0.972222,
+      "abstain_rate": 0.027778,
       "label_basis": "programmatic semantic rewrite; evaluation-only"
     }
   ],
