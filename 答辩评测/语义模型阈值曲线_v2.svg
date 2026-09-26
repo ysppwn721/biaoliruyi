@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="600" viewBox="0 0 980 600">
+<rect width="100%" height="100%" fill="#fbfcfe"/>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif}.grid{stroke:#d8e0e8;stroke-width:1}.axis{stroke:#8291a3;stroke-width:1.2}.muted{fill:#536174}.title{fill:#172033;font-size:24px;font-weight:700}.small{font-size:12px}.label{fill:#26364a;font-size:13px}</style>
+<text x="50" y="38" class="title">置信度阈值曲线：覆盖率与准确率的权衡</text>
+<text x="50" y="63" class="muted small">阈值扫描用于分流校准；低置信候选应转人工或 API，不能直接写回文件</text>
+<line x1="95" y1="485.0" x2="885" y2="485.0" class="grid"/>
+<text x="85" y="489.0" text-anchor="end" class="muted small">0%</text>
+<line x1="95" y1="411.0" x2="885" y2="411.0" class="grid"/>
+<text x="85" y="415.0" text-anchor="end" class="muted small">20%</text>
+<line x1="95" y1="337.0" x2="885" y2="337.0" class="grid"/>
+<text x="85" y="341.0" text-anchor="end" class="muted small">40%</text>
+<line x1="95" y1="263.0" x2="885" y2="263.0" class="grid"/>
+<text x="85" y="267.0" text-anchor="end" class="muted small">60%</text>
+<line x1="95" y1="189.0" x2="885" y2="189.0" class="grid"/>
+<text x="85" y="193.0" text-anchor="end" class="muted small">80%</text>
+<line x1="95" y1="115.0" x2="885" y2="115.0" class="grid"/>
+<text x="85" y="119.0" text-anchor="end" class="muted small">100%</text>
+<line x1="95.0" y1="115" x2="95.0" y2="485" class="grid"/>
+<text x="95.0" y="508" text-anchor="middle" class="muted small">0%</text>
+<line x1="253.0" y1="115" x2="253.0" y2="485" class="grid"/>
+<text x="253.0" y="508" text-anchor="middle" class="muted small">20%</text>
+<line x1="411.0" y1="115" x2="411.0" y2="485" class="grid"/>
+<text x="411.0" y="508" text-anchor="middle" class="muted small">40%</text>
+<line x1="569.0" y1="115" x2="569.0" y2="485" class="grid"/>
+<text x="569.0" y="508" text-anchor="middle" class="muted small">60%</text>
+<line x1="727.0" y1="115" x2="727.0" y2="485" class="grid"/>
+<text x="727.0" y="508" text-anchor="middle" class="muted small">80%</text>
+<line x1="885.0" y1="115" x2="885.0" y2="485" class="grid"/>
+<text x="885.0" y="508" text-anchor="middle" class="muted small">100%</text>
+<line x1="95" y1="485" x2="885" y2="485" class="axis"/>
+<text x="490.0" y="537" text-anchor="middle" class="label">接受覆盖率</text>
+<text x="25" y="300.0" text-anchor="middle" class="label" transform="rotate(-90 25 300.0)">接受样本 Top-1</text>
+<polyline points="106.0,115.0 116.9,115.0 138.9,115.0 149.9,115.0 292.5,115.0 435.1,115.0 599.7,131.1 709.4,141.4 830.1,159.2 852.1,157.9 885.0,161.2 885.0,161.2 885.0,161.2 885.0,161.2 885.0,161.2 885.0,161.2 885.0,161.2 885.0,161.2 885.0,161.2 885.0,161.2 885.0,161.2" fill="none" stroke="#0b6e99" stroke-width="3"/>
+<circle cx="106.0" cy="115.0" r="4" fill="#0b6e99"/>
+<circle cx="116.9" cy="115.0" r="4" fill="#0b6e99"/>
+<circle cx="138.9" cy="115.0" r="4" fill="#0b6e99"/>
+<circle cx="149.9" cy="115.0" r="4" fill="#0b6e99"/>
+<circle cx="292.5" cy="115.0" r="4" fill="#0b6e99"/>
+<circle cx="435.1" cy="115.0" r="4" fill="#0b6e99"/>
+<circle cx="599.7" cy="131.1" r="4" fill="#0b6e99"/>
+<circle cx="709.4" cy="141.4" r="4" fill="#0b6e99"/>
+<circle cx="830.1" cy="159.2" r="4" fill="#0b6e99"/>
+<circle cx="852.1" cy="157.9" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<circle cx="885.0" cy="161.2" r="4" fill="#0b6e99"/>
+<polyline points="95.0,485.0 511.9,241.6 566.8,244.1 588.8,238.3 610.7,233.1 632.6,235.8 632.6,235.8 643.6,233.4 643.6,233.4 643.6,233.4 643.6,233.4 654.6,238.3 665.6,243.1 665.6,243.1 720.4,257.8 742.4,259.2 775.3,264.2 841.1,272.8 885.0,284.6 885.0,284.6 885.0,284.6" fill="none" stroke="#f08c46" stroke-width="3"/>
+<circle cx="95.0" cy="485.0" r="4" fill="#f08c46"/>
+<circle cx="511.9" cy="241.6" r="4" fill="#f08c46"/>
+<circle cx="566.8" cy="244.1" r="4" fill="#f08c46"/>
+<circle cx="588.8" cy="238.3" r="4" fill="#f08c46"/>
+<circle cx="610.7" cy="233.1" r="4" fill="#f08c46"/>
+<circle cx="632.6" cy="235.8" r="4" fill="#f08c46"/>
+<circle cx="632.6" cy="235.8" r="4" fill="#f08c46"/>
+<circle cx="643.6" cy="233.4" r="4" fill="#f08c46"/>
+<circle cx="643.6" cy="233.4" r="4" fill="#f08c46"/>
+<circle cx="643.6" cy="233.4" r="4" fill="#f08c46"/>
+<circle cx="643.6" cy="233.4" r="4" fill="#f08c46"/>
+<circle cx="654.6" cy="238.3" r="4" fill="#f08c46"/>
+<circle cx="665.6" cy="243.1" r="4" fill="#f08c46"/>
+<circle cx="665.6" cy="243.1" r="4" fill="#f08c46"/>
+<circle cx="720.4" cy="257.8" r="4" fill="#f08c46"/>
+<circle cx="742.4" cy="259.2" r="4" fill="#f08c46"/>
+<circle cx="775.3" cy="264.2" r="4" fill="#f08c46"/>
+<circle cx="841.1" cy="272.8" r="4" fill="#f08c46"/>
+<circle cx="885.0" cy="284.6" r="4" fill="#f08c46"/>
+<circle cx="885.0" cy="284.6" r="4" fill="#f08c46"/>
+<circle cx="885.0" cy="284.6" r="4" fill="#f08c46"/>
+<line x1="650" y1="70" x2="680" y2="70" stroke="#0b6e99" stroke-width="3"/><text x="688" y="74" class="label">BGE ONNX</text>
+<line x1="790" y1="70" x2="820" y2="70" stroke="#f08c46" stroke-width="3"/><text x="828" y="74" class="label">中文 BERT v2</text>
+</svg>

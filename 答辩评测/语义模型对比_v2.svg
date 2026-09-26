@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+<rect width="100%" height="100%" fill="#fbfcfe"/>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif}.grid{stroke:#d8e0e8;stroke-width:1}.axis{stroke:#8291a3;stroke-width:1.2}.muted{fill:#536174}.title{fill:#172033;font-size:24px;font-weight:700}.small{font-size:12px}.label{fill:#26364a;font-size:13px}</style>
+<text x="50" y="38" class="title">知链语义来源关联：独立改写集多模型对比</text>
+<text x="50" y="63" class="muted small">72 条中文改写论断 · 432 个候选对 · 6 类场景 · 程序化 gold · 仅作评测，不进入训练集</text>
+<text x="70" y="96" class="label" font-weight="700">Top-1 正确率</text>
+<line x1="70" y1="480.0" x2="540" y2="480.0" class="grid"/>
+<text x="60" y="484.0" text-anchor="end" class="muted small">0%</text>
+<line x1="70" y1="407.0" x2="540" y2="407.0" class="grid"/>
+<text x="60" y="411.0" text-anchor="end" class="muted small">20%</text>
+<line x1="70" y1="334.0" x2="540" y2="334.0" class="grid"/>
+<text x="60" y="338.0" text-anchor="end" class="muted small">40%</text>
+<line x1="70" y1="261.0" x2="540" y2="261.0" class="grid"/>
+<text x="60" y="265.0" text-anchor="end" class="muted small">60%</text>
+<line x1="70" y1="188.0" x2="540" y2="188.0" class="grid"/>
+<text x="60" y="192.0" text-anchor="end" class="muted small">80%</text>
+<line x1="70" y1="115.0" x2="540" y2="115.0" class="grid"/>
+<text x="60" y="119.0" text-anchor="end" class="muted small">100%</text>
+<line x1="70" y1="480" x2="540" y2="480" class="axis"/>
+<rect x="92.3" y="409.0" width="72.8" height="71.0" rx="4" fill="#7a8796"/>
+<text x="128.8" y="401.0" text-anchor="middle" class="label">19.4%</text>
+<text x="128.8" y="504" text-anchor="middle" class="muted small" transform="rotate(18 128.8 504)">规则词面</text>
+<rect x="209.8" y="160.6" width="72.8" height="319.4" rx="4" fill="#0b6e99"/>
+<text x="246.2" y="152.6" text-anchor="middle" class="label">87.5%</text>
+<text x="246.2" y="504" text-anchor="middle" class="muted small" transform="rotate(18 246.2 504)">BGE ONNX</text>
+<rect x="327.3" y="282.3" width="72.8" height="197.7" rx="4" fill="#c85a54"/>
+<text x="363.8" y="274.3" text-anchor="middle" class="label">54.2%</text>
+<text x="363.8" y="504" text-anchor="middle" class="muted small" transform="rotate(18 363.8 504)">中文 BERT v1</text>
+<rect x="444.8" y="282.3" width="72.8" height="197.7" rx="4" fill="#f08c46"/>
+<text x="481.2" y="274.3" text-anchor="middle" class="label">54.2%</text>
+<text x="481.2" y="504" text-anchor="middle" class="muted small" transform="rotate(18 481.2 504)">中文 BERT v2</text>
+<text x="650" y="96" class="label" font-weight="700">错误关联率</text>
+<line x1="650" y1="480.0" x2="1120" y2="480.0" class="grid"/>
+<text x="640" y="484.0" text-anchor="end" class="muted small">0%</text>
+<line x1="650" y1="407.0" x2="1120" y2="407.0" class="grid"/>
+<text x="640" y="411.0" text-anchor="end" class="muted small">20%</text>
+<line x1="650" y1="334.0" x2="1120" y2="334.0" class="grid"/>
+<text x="640" y="338.0" text-anchor="end" class="muted small">40%</text>
+<line x1="650" y1="261.0" x2="1120" y2="261.0" class="grid"/>
+<text x="640" y="265.0" text-anchor="end" class="muted small">60%</text>
+<line x1="650" y1="188.0" x2="1120" y2="188.0" class="grid"/>
+<text x="640" y="192.0" text-anchor="end" class="muted small">80%</text>
+<line x1="650" y1="115.0" x2="1120" y2="115.0" class="grid"/>
+<text x="640" y="119.0" text-anchor="end" class="muted small">100%</text>
+<line x1="650" y1="480" x2="1120" y2="480" class="axis"/>
+<rect x="672.3" y="186.0" width="72.8" height="294.0" rx="4" fill="#7a8796"/>
+<text x="708.8" y="178.0" text-anchor="middle" class="label">80.6%</text>
+<text x="708.8" y="504" text-anchor="middle" class="muted small" transform="rotate(18 708.8 504)">规则词面</text>
+<rect x="789.8" y="434.4" width="72.8" height="45.6" rx="4" fill="#0b6e99"/>
+<text x="826.2" y="426.4" text-anchor="middle" class="label">12.5%</text>
+<text x="826.2" y="504" text-anchor="middle" class="muted small" transform="rotate(18 826.2 504)">BGE ONNX</text>
+<rect x="907.3" y="312.7" width="72.8" height="167.3" rx="4" fill="#c85a54"/>
+<text x="943.8" y="304.7" text-anchor="middle" class="label">45.8%</text>
+<text x="943.8" y="504" text-anchor="middle" class="muted small" transform="rotate(18 943.8 504)">中文 BERT v1</text>
+<rect x="1024.8" y="312.7" width="72.8" height="167.3" rx="4" fill="#f08c46"/>
+<text x="1061.2" y="304.7" text-anchor="middle" class="label">45.8%</text>
+<text x="1061.2" y="504" text-anchor="middle" class="muted small" transform="rotate(18 1061.2 504)">中文 BERT v2</text>
+<text x="650" y="565" class="muted small">BGE/BERT 覆盖率 100%；规则无候选时保留为人工待确认</text>
+</svg>
