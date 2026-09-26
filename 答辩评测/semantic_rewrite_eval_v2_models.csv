@@ -1,0 +1,5 @@
+﻿model,claims,rows,top1_accuracy,error_association_rate,coverage,abstain_rate,label_basis
+规则词面,72,432,0.194444,0.805556,0.208333,0.791667,programmatic semantic rewrite; evaluation-only
+BGE ONNX,72,432,0.875,0.125,1.0,0.0,programmatic semantic rewrite; evaluation-only
+中文 BERT v1,72,432,0.541667,0.458333,1.0,0.0,programmatic semantic rewrite; evaluation-only
+中文 BERT v2,72,432,0.541667,0.458333,1.0,0.0,programmatic semantic rewrite; evaluation-only

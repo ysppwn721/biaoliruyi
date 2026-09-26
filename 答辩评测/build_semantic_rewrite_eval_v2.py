@@ -7,8 +7,10 @@ training split or the frozen project test set.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from zhilian.office import read_facts
 
 ROOT = Path(__file__).resolve().parent

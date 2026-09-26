@@ -1,0 +1,697 @@
+{
+  "dataset": "C:\\Users\\Administrator\\Desktop\\华北五省设计\\答辩评测\\semantic_rewrite_eval_v2.jsonl",
+  "stats": {
+    "claims": 72,
+    "rows": 432,
+    "groups": 6,
+    "label_basis": "programmatic semantic rewrite; evaluation-only"
+  },
+  "models": [
+    {
+      "model": "规则词面",
+      "claims": 72,
+      "rows": 432,
+      "top1_accuracy": 0.194444,
+      "error_association_rate": 0.805556,
+      "coverage": 0.208333,
+      "abstain_rate": 0.791667,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "model": "BGE ONNX",
+      "claims": 72,
+      "rows": 432,
+      "top1_accuracy": 0.875,
+      "error_association_rate": 0.125,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "model": "中文 BERT v1",
+      "claims": 72,
+      "rows": 432,
+      "top1_accuracy": 0.541667,
+      "error_association_rate": 0.458333,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "model": "中文 BERT v2",
+      "claims": 72,
+      "rows": 432,
+      "top1_accuracy": 0.541667,
+      "error_association_rate": 0.458333,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    }
+  ],
+  "categories": [
+    {
+      "category": "sales_current",
+      "model": "规则词面",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.0,
+      "error_association_rate": 1.0,
+      "coverage": 0.0,
+      "abstain_rate": 1.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "sales_current",
+      "model": "BGE ONNX",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.583333,
+      "error_association_rate": 0.416667,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "sales_current",
+      "model": "中文 BERT v1",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 1.0,
+      "error_association_rate": 0.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "sales_current",
+      "model": "中文 BERT v2",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 1.0,
+      "error_association_rate": 0.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "sales_prev",
+      "model": "规则词面",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.0,
+      "error_association_rate": 1.0,
+      "coverage": 0.0,
+      "abstain_rate": 1.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "sales_prev",
+      "model": "BGE ONNX",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.833333,
+      "error_association_rate": 0.166667,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "sales_prev",
+      "model": "中文 BERT v1",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.083333,
+      "error_association_rate": 0.916667,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "sales_prev",
+      "model": "中文 BERT v2",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.166667,
+      "error_association_rate": 0.833333,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "product_a",
+      "model": "规则词面",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.083333,
+      "error_association_rate": 0.916667,
+      "coverage": 0.083333,
+      "abstain_rate": 0.916667,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "product_a",
+      "model": "BGE ONNX",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 1.0,
+      "error_association_rate": 0.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "product_a",
+      "model": "中文 BERT v1",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 1.0,
+      "error_association_rate": 0.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "product_a",
+      "model": "中文 BERT v2",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 1.0,
+      "error_association_rate": 0.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "product_b",
+      "model": "规则词面",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.083333,
+      "error_association_rate": 0.916667,
+      "coverage": 0.083333,
+      "abstain_rate": 0.916667,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "product_b",
+      "model": "BGE ONNX",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 1.0,
+      "error_association_rate": 0.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "product_b",
+      "model": "中文 BERT v1",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.0,
+      "error_association_rate": 1.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "product_b",
+      "model": "中文 BERT v2",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.0,
+      "error_association_rate": 1.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "spending",
+      "model": "规则词面",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.5,
+      "error_association_rate": 0.5,
+      "coverage": 0.5,
+      "abstain_rate": 0.5,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "spending",
+      "model": "BGE ONNX",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 1.0,
+      "error_association_rate": 0.0,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "spending",
+      "model": "中文 BERT v1",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.666667,
+      "error_association_rate": 0.333333,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "spending",
+      "model": "中文 BERT v2",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.583333,
+      "error_association_rate": 0.416667,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "budget",
+      "model": "规则词面",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.5,
+      "error_association_rate": 0.5,
+      "coverage": 0.583333,
+      "abstain_rate": 0.416667,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "budget",
+      "model": "BGE ONNX",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.833333,
+      "error_association_rate": 0.166667,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "budget",
+      "model": "中文 BERT v1",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.5,
+      "error_association_rate": 0.5,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "category": "budget",
+      "model": "中文 BERT v2",
+      "claims": 12,
+      "rows": 72,
+      "top1_accuracy": 0.5,
+      "error_association_rate": 0.5,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    }
+  ],
+  "thresholds": [
+    {
+      "model": "BGE ONNX",
+      "threshold": -10.507254,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -9.910511,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -9.313768,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -8.717025,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -8.120282,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -7.523539,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -6.926796,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -6.330053,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -5.73331,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -5.136567,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -4.539824,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.875,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -3.943081,
+      "accepted": 69,
+      "claims": 72,
+      "coverage": 0.958333,
+      "precision": 0.884058,
+      "abstain_rate": 0.041667
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -3.346338,
+      "accepted": 67,
+      "claims": 72,
+      "coverage": 0.930556,
+      "precision": 0.880597,
+      "abstain_rate": 0.069444
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -2.749596,
+      "accepted": 56,
+      "claims": 72,
+      "coverage": 0.777778,
+      "precision": 0.928571,
+      "abstain_rate": 0.222222
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -2.152853,
+      "accepted": 46,
+      "claims": 72,
+      "coverage": 0.638889,
+      "precision": 0.956522,
+      "abstain_rate": 0.361111
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -1.55611,
+      "accepted": 31,
+      "claims": 72,
+      "coverage": 0.430556,
+      "precision": 1.0,
+      "abstain_rate": 0.569444
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -0.959367,
+      "accepted": 18,
+      "claims": 72,
+      "coverage": 0.25,
+      "precision": 1.0,
+      "abstain_rate": 0.75
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": -0.362624,
+      "accepted": 5,
+      "claims": 72,
+      "coverage": 0.069444,
+      "precision": 1.0,
+      "abstain_rate": 0.930556
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": 0.234119,
+      "accepted": 4,
+      "claims": 72,
+      "coverage": 0.055556,
+      "precision": 1.0,
+      "abstain_rate": 0.944444
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": 0.830862,
+      "accepted": 2,
+      "claims": 72,
+      "coverage": 0.027778,
+      "precision": 1.0,
+      "abstain_rate": 0.972222
+    },
+    {
+      "model": "BGE ONNX",
+      "threshold": 1.427605,
+      "accepted": 1,
+      "claims": 72,
+      "coverage": 0.013889,
+      "precision": 1.0,
+      "abstain_rate": 0.986111
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -5.827428,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.541667,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -5.502133,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.541667,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -5.176838,
+      "accepted": 72,
+      "claims": 72,
+      "coverage": 1.0,
+      "precision": 0.541667,
+      "abstain_rate": 0.0
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -4.851543,
+      "accepted": 68,
+      "claims": 72,
+      "coverage": 0.944444,
+      "precision": 0.573529,
+      "abstain_rate": 0.055556
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -4.526248,
+      "accepted": 62,
+      "claims": 72,
+      "coverage": 0.861111,
+      "precision": 0.596774,
+      "abstain_rate": 0.138889
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -4.200953,
+      "accepted": 59,
+      "claims": 72,
+      "coverage": 0.819444,
+      "precision": 0.610169,
+      "abstain_rate": 0.180556
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -3.875658,
+      "accepted": 57,
+      "claims": 72,
+      "coverage": 0.791667,
+      "precision": 0.614035,
+      "abstain_rate": 0.208333
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -3.550363,
+      "accepted": 52,
+      "claims": 72,
+      "coverage": 0.722222,
+      "precision": 0.653846,
+      "abstain_rate": 0.277778
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -3.225068,
+      "accepted": 52,
+      "claims": 72,
+      "coverage": 0.722222,
+      "precision": 0.653846,
+      "abstain_rate": 0.277778
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -2.899774,
+      "accepted": 51,
+      "claims": 72,
+      "coverage": 0.708333,
+      "precision": 0.666667,
+      "abstain_rate": 0.291667
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -2.574479,
+      "accepted": 50,
+      "claims": 72,
+      "coverage": 0.694444,
+      "precision": 0.68,
+      "abstain_rate": 0.305556
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -2.249184,
+      "accepted": 50,
+      "claims": 72,
+      "coverage": 0.694444,
+      "precision": 0.68,
+      "abstain_rate": 0.305556
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -1.923889,
+      "accepted": 50,
+      "claims": 72,
+      "coverage": 0.694444,
+      "precision": 0.68,
+      "abstain_rate": 0.305556
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -1.598594,
+      "accepted": 50,
+      "claims": 72,
+      "coverage": 0.694444,
+      "precision": 0.68,
+      "abstain_rate": 0.305556
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -1.273299,
+      "accepted": 49,
+      "claims": 72,
+      "coverage": 0.680556,
+      "precision": 0.673469,
+      "abstain_rate": 0.319444
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -0.948004,
+      "accepted": 49,
+      "claims": 72,
+      "coverage": 0.680556,
+      "precision": 0.673469,
+      "abstain_rate": 0.319444
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -0.622709,
+      "accepted": 47,
+      "claims": 72,
+      "coverage": 0.652778,
+      "precision": 0.680851,
+      "abstain_rate": 0.347222
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": -0.297414,
+      "accepted": 45,
+      "claims": 72,
+      "coverage": 0.625,
+      "precision": 0.666667,
+      "abstain_rate": 0.375
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": 0.027881,
+      "accepted": 43,
+      "claims": 72,
+      "coverage": 0.597222,
+      "precision": 0.651163,
+      "abstain_rate": 0.402778
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": 0.353176,
+      "accepted": 38,
+      "claims": 72,
+      "coverage": 0.527778,
+      "precision": 0.657895,
+      "abstain_rate": 0.472222
+    },
+    {
+      "model": "中文 BERT v2",
+      "threshold": 0.678471,
+      "accepted": 0,
+      "claims": 72,
+      "coverage": 0.0,
+      "precision": 0.0,
+      "abstain_rate": 1.0
+    }
+  ]
+}

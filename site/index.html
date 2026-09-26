@@ -6,7 +6,8 @@
 <title>表里如一 · 跨文档结论一致性治理系统</title>
 <meta name="description" content="表里如一：面向数据分析报告的数据—结论一致性治理系统。确定性核验、增量修复、证据链可追溯。华北五省及港澳台大学生计算机应用大赛参赛作品。">
 <meta name="theme-color" content="#155D50">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23155D50'/><text y='72' x='50' font-size='62' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'>一</text></svg>">
+<link rel="icon" href="static/assets/brand/concept-a.ico" sizes="any">
+<link rel="apple-touch-icon" href="static/assets/brand/concept-a-512.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,6 +25,7 @@
       <a href="#try">在线体验</a>
       <a href="#download">下载</a>
       <a href="#how">工作原理</a>
+      <a href="#limits">能力边界</a>
       <a href="#docs">文档</a>
     </nav>
   </div>
@@ -34,9 +36,10 @@
     <p class="eyebrow">华北五省（市、自治区）及港澳台大学生计算机应用大赛 · 大模型与智能体应用赛道</p>
     <h2>让每一句结论，都能追溯到它的数据来源</h2>
     <p class="lead">
-      导入一份 Excel 事实表与若干 Word 报告、PPT 汇报，系统识别其中的数值论断并请人工确认来源。
-      当数据被修改后，逐项重算，区分「仍然成立 / 已经失效 / 无法判断」，
-      <strong>只修改失效的部分</strong>，重新读取文件复核后导出可追溯的新版本。
+      导入<strong>一份 Excel 事实表</strong>，再分批加入任意数量的 Word 报告、PPT 汇报与图片。
+      系统识别其中的数值论断并请人工确认来源。当数据被修改后，逐项重算，
+      区分「仍然成立 / 已经失效 / 无法判断」，<strong>只修改失效的部分</strong>，
+      重新读取文件复核后导出可追溯的新版本。
     </p>
     <div class="cta">
       <a class="btn primary" href="#try">立即在线体验</a>
@@ -48,10 +51,10 @@
 
 <section class="facts">
   <div class="wrap grid4">
-    <div class="card"><b>232</b><span>自动化回归测试全部通过</span></div>
+    <div class="card"><b>244</b><span>自动化回归测试全部通过</span></div>
     <div class="card"><b>5 类</b><span>可核验论断：数值·增长率·排名·阈值·图表</span></div>
+    <div class="card"><b>50 份/批</b><span>一份事实表对照多批 Word / PPT / 图片</span></div>
     <div class="card"><b>0</b><span>依赖大模型即可完整运行</span></div>
-    <div class="card"><b>0.12s</b><span>1999 行事实表解析（原 173s）</span></div>
   </div>
 </section>
 
@@ -80,6 +83,7 @@
         <ol class="steps">
           <li>点击「体验演示项目」，系统生成示例 Excel / Word / PPT</li>
           <li>点「批量确认候选关联」，审阅每条结论的数据来源</li>
+          <li>在「来源与文件」里点「追加成果文档」，一次加入多份 Word / PPT，看它们一起进入核验</li>
           <li>载入演示变更：销售额 125 改为 90</li>
           <li>查看哪些结论失效，<strong>哪些即便数值变了却依然成立</strong></li>
           <li>预览修复对照，确认后下载新版文件</li>
@@ -107,8 +111,9 @@
         <p class="pstate ready">可下载 · v0.2.1</p>
         <ul class="meta">
           <li>Windows 10 / 11（64 位）</li>
-          <li>原生便携包，约 26 MB</li>
+          <li>原生便携包，约 25 MB</li>
           <li>无需 Python，解压后双击启动脚本或 Zhilian.exe</li>
+          <li>支持一份 Excel 对照多批 Word / PPT</li>
         </ul>
         <a class="btn primary" href="downloads/知链_v0.2.1_Windows免安装.zip" download>下载免安装包</a>
       </article>
@@ -162,7 +167,7 @@
         <p>含后端、前端、自动化测试与第三方许可声明，可自行构建与复现。</p>
         <ul class="meta">
           <li>版本 v0.2.1 ｜ 约 0.45 MB</li>
-          <li>运行 <code>pytest -q</code> 可复现全部 232 项测试</li>
+          <li>运行 <code>pytest -q</code> 可复现全部 244 项测试</li>
         </ul>
         <a class="btn" href="downloads/知链_源代码_v0.2.1.zip" download>下载源代码</a>
       </div>
@@ -213,13 +218,18 @@ docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi<
       核心不是「让模型改文档」，而是把「哪句该改、改成什么、改动是否可靠」变成可验证的确定性过程。
     </p>
     <div class="flow">
-      <div class="fstep"><b>1</b><h5>识别论断</h5><p>从 Word/PPT 中定位数值引用、增长率、排名、阈值与原生图表，保留精确字符锚点。</p></div>
-      <div class="fstep"><b>2</b><h5>确认来源</h5><p>每条结论关联到 Excel 事实 ID，<strong>由人确认</strong>。系统给出候选，不代替判断。</p></div>
-      <div class="fstep"><b>3</b><h5>依赖传播</h5><p>事实之间可定义派生关系（差额、比率、增长率、合计），改一个数，下游按拓扑序自动重算。</p></div>
-      <div class="fstep"><b>4</b><h5>确定性核验</h5><p>用 Decimal 精确计算与单位、口径约束判定状态，<strong>不由模型计算</strong>。</p></div>
-      <div class="fstep"><b>5</b><h5>增量修复</h5><p>按字符区间逆序打补丁，保留未修改内容的格式；PPT 重建原生图表数据系列。</p></div>
-      <div class="fstep"><b>6</b><h5>独立复核</h5><p>重新读取生成的文件，验证选中论断已一致、其余正文未变，失败则废弃本次版本。</p></div>
+      <div class="fstep"><b>1</b><h5>批量导入</h5><p>创建项目时选一份 Excel 与首批文档；之后可反复「追加文档」，默认单批 50 份、100MB，项目上限 500 份。每批独立成一个 revision 与批次号。</p></div>
+      <div class="fstep"><b>2</b><h5>识别论断</h5><p>从 Word/PPT 中定位数值引用、增长率、排名、阈值与原生图表，保留精确字符锚点。</p></div>
+      <div class="fstep"><b>3</b><h5>确认来源</h5><p>每条结论关联到 Excel 事实 ID，<strong>由人确认</strong>。系统给出候选，不代替判断。</p></div>
+      <div class="fstep"><b>4</b><h5>依赖传播</h5><p>事实之间可定义派生关系（差额、比率、增长率、合计），改一个数，下游按拓扑序自动重算。</p></div>
+      <div class="fstep"><b>5</b><h5>确定性核验</h5><p>用 Decimal 精确计算与单位、口径约束判定状态，<strong>不由模型计算</strong>。</p></div>
+      <div class="fstep"><b>6</b><h5>增量修复</h5><p>按字符区间逆序打补丁，保留未修改内容的格式；PPT 重建原生图表数据系列。</p></div>
+      <div class="fstep"><b>7</b><h5>独立复核</h5><p>重新读取生成的文件，验证选中论断已一致、其余正文未变，失败则废弃本次版本。</p></div>
     </div>
+    <p class="note">
+      批量导入是<strong>事务性</strong>的：一整批文档要么全部解析成功并进入新版本，要么整批回滚，
+      不会在项目里留下半份文件；重复内容、同名文件与再次上传 Excel 都会被拒绝。
+    </p>
 
     <div class="modes">
       <h4>三种运行模式</h4>
@@ -228,9 +238,14 @@ docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi<
         <tbody>
           <tr><td><b>无模型</b></td><td>规则引擎</td><td>零依赖、零成本、完全离线，默认模式</td></tr>
           <tr><td><b>离线</b></td><td>规则 + 本地重排模型</td><td>内网或断网环境，模型随包分发</td></tr>
-          <tr><td><b>在线</b></td><td>规则 + API 大模型</td><td>复杂表述兜底，并提供可读的解释</td></tr>
+          <tr><td><b>在线</b></td><td>规则 + 本地重排 + API 兜底</td><td>复杂表述兜底，并提供可读的解释</td></tr>
         </tbody>
       </table>
+      <p class="note">
+        模型按<strong>分层路由</strong>出场，而不是整批送出去：规则已能唯一确定来源的论断不调用任何模型；
+        规则给不出唯一候选时先交本地重排；只有本地模型拒答或零候选才升级到 API，
+        且单次请求会把困难论断合并成一批（每批最多 40 条）。
+      </p>
       <p class="note">
         无论哪种模式，<strong>模型只提建议，不计算、不裁决、不写文件</strong>；
         所有来源最终仍由使用者确认，计算与写入始终由确定性引擎完成。
@@ -246,7 +261,47 @@ docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi<
         <li><b>防篡改</b>：源文件 SHA-256 校验，分析后被外部修改则拒绝操作</li>
         <li><b>提示注入防护</b>：文档内容始终被视为数据，越权指令不影响事实白名单</li>
         <li><b>依赖图</b>：环依赖直接报错，不会静默算出错误结果</li>
+        <li><b>大表性能</b>：1999 行事实表解析 0.12 秒（优化前 173 秒）</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<section id="limits" class="band">
+  <div class="wrap">
+    <h3>能力边界（主动公开）</h3>
+    <p class="sec-lead">
+      我们把测得的短板写在首页，而不是只放最好看的数字。下面每个数都可用仓库里的脚本复现。
+    </p>
+    <div class="docs">
+      <div>
+        <h4>规则擅长什么，不擅长什么</h4>
+        <ul class="meta">
+          <li>同一批语义<strong>只改措辞</strong>（销售额→销售收入 / 营收 / 营业总收入），规则 Top-1 由 100% 降到 <b>33.33%</b>，本地语义模型为 <b>94.44%</b></li>
+          <li>规则要求文档出现事实表里的<strong>那个词</strong>；词面对不上时召回为 0，只能转人工</li>
+          <li>数值计算、单位换算、增长率方向、排名比较集合、阈值口径这些，规则是 100% 且可审计，模型不参与</li>
+        </ul>
+      </div>
+      <div>
+        <h4>真实语料上的差距</h4>
+        <ul class="meta">
+          <li>169 页真实年报：580 个含数字的句子，规则识别出 <b>3 句（0.5%）</b></li>
+          <li>瓶颈不只是词表——存在被 PDF 截断的表格残片（如「生物基、淀粉基新材 增加187.44」），这类模型也判不了</li>
+          <li>下一步是把 PDF 财务表结构化，而不是继续堆正则</li>
+        </ul>
+      </div>
+      <div>
+        <h4>评测口径</h4>
+        <ul class="meta">
+          <li>280 条一致性集：产品真实路径 <b>280/280</b>，但这是<strong>封闭夹具自洽性</strong>（标签由确定性引擎在环产生），不是行业泛化准确率</li>
+          <li>该批标签来自<strong>双智能体交叉标注</strong>，不是真人双标，也不是人工真值</li>
+          <li>36 份公开年报程序化压力集：本地重排模型 Top-1 <b>96.18%</b>，标签为程序化生成，同样不是人工真值</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dl-note">
+      <strong>我们不宣称</strong>：不宣称"数据 100% 不出本机"（在线模式会把论断措辞与事实元数据发给模型，但<strong>不发送数值</strong>，也不发送文件本身）；
+      不宣称"没有竞品"；不宣称"比企业级产品更准"；不把封闭夹具上的 100% 当作行业准确率。
     </div>
   </div>
 </section>
@@ -343,11 +398,6 @@ window.DEMO_URL = '/demo/';
     return;
   }
   link.href = DEMO_URL;
-  if (DEMO_URL.indexOf('/') === 0) {
-    state.textContent = '同域演示页面在线，可直接打开体验。';
-    wrap.hidden = false;
-    return;
-  }
   state.textContent = '正在检测…';
 
   var done = false;
@@ -360,15 +410,40 @@ window.DEMO_URL = '/demo/';
     if (ok) {
       state.textContent = '演示环境在线，可直接打开使用。';
       wrap.hidden = false;
+      link.classList.remove('disabled');
     } else {
       state.textContent = '演示环境暂时不可用' + (why ? '（' + why + '）' : '') +
-        '，可能是免费实例休眠。请使用下方免安装包在本机运行，功能完全一致。';
+        '，请使用下方 Windows 免安装包在本机运行，功能完全一致。';
+      // 后端未就绪时 /demo/ 只是个空壳页面（界面能打开、每次请求都失败），
+      // 所以要把按钮真正改成"去下载"，而不是留一个看着能点、点进去是坏页面的链接。
       link.classList.add('disabled');
+      link.setAttribute('aria-disabled', 'true');
+      link.textContent = '改用免安装包（功能一致）→';
+      link.href = '#download';
       wrap.hidden = false;
     }
   }
 
-  // no-cors 探测：只判断可达性，不读响应内容
+  // 同域演示也必须真探测：/demo/ 只是前端页面，后端未部署时它会打得开却处处报错，
+  // 直接显示"在线"会把评委送进一个坏页面。因此同时检查 /api/health。
+  function probe(path) {
+    return fetch(path, { cache: 'no-store', credentials: 'omit' });
+  }
+
+  if (DEMO_URL.indexOf('/') === 0) {
+    // 后端固定挂在站点根路径（前端一律请求 /api/...），不在 /demo/ 之下
+    var health = '/api/health';
+    probe(health).then(function (response) {
+      if (response.ok) { report(true); return; }
+      // 后端未就绪时再看前端页面是否存在，给出更准确的原因
+      probe(DEMO_URL).then(function (page) {
+        report(false, page.ok ? '后端未就绪' : '页面未部署');
+      }).catch(function () { report(false, '后端未就绪'); });
+    }).catch(function () { report(false, '无法连接'); });
+    return;
+  }
+
+  // 跨域探测：只判断可达性，不读响应内容
   fetch(DEMO_URL + '/api/health', { mode: 'no-cors', cache: 'no-store' })
     .then(function () { report(true); })
     .catch(function () { report(false, '无法连接'); });
