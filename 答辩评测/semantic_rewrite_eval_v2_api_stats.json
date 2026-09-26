@@ -1,0 +1,24 @@
+{
+  "provider": "DeepSeek",
+  "model": "deepseek-flash",
+  "dataset": "C:\\Users\\Administrator\\Desktop\\华北五省设计\\答辩评测\\semantic_rewrite_eval_v2.jsonl",
+  "claims": 72,
+  "calls": [
+    {
+      "batch": 1,
+      "claims": 40,
+      "suggestions": 40,
+      "latency_ms": 5245.1,
+      "status": "ok"
+    },
+    {
+      "batch": 2,
+      "claims": 32,
+      "suggestions": 32,
+      "latency_ms": 4484.3,
+      "status": "ok"
+    }
+  ],
+  "failed_calls": 0,
+  "api_key_written": false
+}
