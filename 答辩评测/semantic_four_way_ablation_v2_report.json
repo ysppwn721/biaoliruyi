@@ -1,0 +1,47 @@
+{
+  "dataset": "C:\\Users\\Administrator\\Desktop\\华北五省设计\\答辩评测\\semantic_rewrite_eval_v2.jsonl",
+  "models": [
+    {
+      "system": "rule-only",
+      "claims": 72,
+      "linked": 15,
+      "top1_accuracy": 0.194444,
+      "error_association_rate": 0.013889,
+      "coverage": 0.208333,
+      "abstain_rate": 0.791667,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "system": "local-only",
+      "claims": 72,
+      "linked": 72,
+      "top1_accuracy": 0.875,
+      "error_association_rate": 0.125,
+      "coverage": 1.0,
+      "abstain_rate": 0.0,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "system": "rule-local",
+      "claims": 72,
+      "linked": 15,
+      "top1_accuracy": 0.194444,
+      "error_association_rate": 0.013889,
+      "coverage": 0.208333,
+      "abstain_rate": 0.791667,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    },
+    {
+      "system": "rule-local-api",
+      "claims": 72,
+      "linked": 64,
+      "top1_accuracy": 0.875,
+      "error_association_rate": 0.013889,
+      "coverage": 0.888889,
+      "abstain_rate": 0.111111,
+      "label_basis": "programmatic semantic rewrite; evaluation-only"
+    }
+  ],
+  "api_stats": "C:\\Users\\Administrator\\Desktop\\华北五省设计\\答辩评测\\semantic_rewrite_eval_v2_api_stats.json",
+  "caveat": "语义改写 gold 为程序化标签；API 使用真实调用结果，密钥未写入。"
+}
