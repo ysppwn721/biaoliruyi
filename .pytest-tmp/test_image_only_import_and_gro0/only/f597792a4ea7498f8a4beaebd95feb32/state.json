@@ -1,0 +1,215 @@
+{
+  "id": "f597792a4ea7498f8a4beaebd95feb32",
+  "name": "仅图片",
+  "created_at": "2026-09-26T03:00:01.346704+00:00",
+  "revision": 0,
+  "generation": "v0",
+  "demo": false,
+  "documents": [
+    {
+      "id": "44abd36ae5f54f93",
+      "name": "业务数据.xlsx",
+      "kind": "xlsx",
+      "stored_name": "44abd36ae5f54f93.xlsx",
+      "warnings": [],
+      "sha256": "1454d7ba7901f498a4ce4390542599064613f09c2ee2465addcb13895cf4cb49"
+    },
+    {
+      "id": "f1d818f0ce66435a",
+      "name": "分析报告.docx",
+      "kind": "docx",
+      "stored_name": "f1d818f0ce66435a.docx",
+      "warnings": [
+        "Word内的图片、嵌入图表与图片文字未纳入自动检查"
+      ],
+      "sha256": "3c08e968033837bad2fa9846c82256f9ecf48e4d7699316b6d47ada8ce8ec143"
+    }
+  ],
+  "history": [],
+  "audit": [
+    {
+      "time": "2026-09-26T03:00:01.375805+00:00",
+      "event": "导入文件",
+      "detail": "2份文件；关联尚待人工确认"
+    }
+  ],
+  "last_repair": null,
+  "link_rules": [],
+  "source_facts": [
+    {
+      "id": "sales_prev",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "上期",
+      "value": 100.0,
+      "unit": "万元",
+      "scope": "演示业务",
+      "sheet": "事实表",
+      "cell": "E2"
+    },
+    {
+      "id": "sales_current",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "value": 125.0,
+      "unit": "万元",
+      "scope": "演示业务",
+      "sheet": "事实表",
+      "cell": "E3"
+    },
+    {
+      "id": "product_a",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "A产品",
+      "metric": "销量",
+      "period": "本期",
+      "value": 80.0,
+      "unit": "件",
+      "scope": "演示产品",
+      "sheet": "事实表",
+      "cell": "E4"
+    },
+    {
+      "id": "product_b",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "B产品",
+      "metric": "销量",
+      "period": "本期",
+      "value": 65.0,
+      "unit": "件",
+      "scope": "演示产品",
+      "sheet": "事实表",
+      "cell": "E5"
+    },
+    {
+      "id": "spending",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "总计",
+      "metric": "支出",
+      "period": "本期",
+      "value": 80.0,
+      "unit": "万元",
+      "scope": "演示项目",
+      "sheet": "事实表",
+      "cell": "E6"
+    },
+    {
+      "id": "budget",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "总计",
+      "metric": "预算",
+      "period": "本期",
+      "value": 100.0,
+      "unit": "万元",
+      "scope": "演示项目",
+      "sheet": "事实表",
+      "cell": "E7"
+    }
+  ],
+  "graph": {
+    "derived": [],
+    "errors": {},
+    "details": {},
+    "affected": [],
+    "changed": [],
+    "radius": 0.0,
+    "cycles": []
+  },
+  "graph_values": {},
+  "facts": [
+    {
+      "id": "sales_prev",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "上期",
+      "value": 100.0,
+      "unit": "万元",
+      "scope": "演示业务",
+      "sheet": "事实表",
+      "cell": "E2"
+    },
+    {
+      "id": "sales_current",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "value": 125.0,
+      "unit": "万元",
+      "scope": "演示业务",
+      "sheet": "事实表",
+      "cell": "E3"
+    },
+    {
+      "id": "product_a",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "A产品",
+      "metric": "销量",
+      "period": "本期",
+      "value": 80.0,
+      "unit": "件",
+      "scope": "演示产品",
+      "sheet": "事实表",
+      "cell": "E4"
+    },
+    {
+      "id": "product_b",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "B产品",
+      "metric": "销量",
+      "period": "本期",
+      "value": 65.0,
+      "unit": "件",
+      "scope": "演示产品",
+      "sheet": "事实表",
+      "cell": "E5"
+    },
+    {
+      "id": "spending",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "总计",
+      "metric": "支出",
+      "period": "本期",
+      "value": 80.0,
+      "unit": "万元",
+      "scope": "演示项目",
+      "sheet": "事实表",
+      "cell": "E6"
+    },
+    {
+      "id": "budget",
+      "file_id": "44abd36ae5f54f93",
+      "subject": "总计",
+      "metric": "预算",
+      "period": "本期",
+      "value": 100.0,
+      "unit": "万元",
+      "scope": "演示项目",
+      "sheet": "事实表",
+      "cell": "E7"
+    }
+  ],
+  "claims": [],
+  "blocks": [],
+  "graph_changed": [],
+  "images": [
+    {
+      "id": "imgb538d050ecbb4224",
+      "file_id": "f1d818f0ce66435a",
+      "location": "[\"inline\", 1]",
+      "label": "正文 · 内嵌图片1",
+      "mime": "image/png",
+      "stored_name": "images/imgb538d050ecbb4224.png",
+      "sha256": "5924e595ceec586ba15f38204a7537141fa4f995ef95e59004abe1bf00e475cd",
+      "ocr_text": null,
+      "ocr_status": "pending",
+      "ocr_error": null
+    }
+  ],
+  "ocr_blocks": [],
+  "ocr_claims": []
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 260" role="img" aria-labelledby="title desc">
+  <title id="title">知链 B 版组合标</title>
+  <desc id="desc">文档证据图形，搭配知链中文和英文标准字</desc>
+  <g transform="translate(20 20)">
+    <path d="M55 28h120l38 38v160H55z" fill="#2c6255"/>
+    <path d="M175 28v38h38" fill="#94c3a4"/>
+    <path d="M87 106h78M87 132h56" fill="none" stroke="#dceee0" stroke-width="12" stroke-linecap="round"/>
+    <path d="M84 180l32 32 62-72" fill="none" stroke="#e4a261" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(300 63)" fill="#243530">
+    <text x="0" y="78" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif" font-size="74" font-weight="700">知链</text>
+    <text x="5" y="125" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="17" letter-spacing="7">ZHILIAN</text>
+    <text x="5" y="171" fill="#87968d" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="18">把数据、文件与结论串在一起</text>
+  </g>
+</svg>

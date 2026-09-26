@@ -1,0 +1,935 @@
+{
+  "id": "350288069a084b3784cbe84156333dfe",
+  "name": "本地导出测试",
+  "created_at": "2026-09-26T02:59:54.311813+00:00",
+  "revision": 4,
+  "generation": "v182e56a46367",
+  "demo": true,
+  "documents": [
+    {
+      "id": "caeee4b2ef4a48ff",
+      "name": "业务数据.xlsx",
+      "kind": "xlsx",
+      "stored_name": "caeee4b2ef4a48ff.xlsx",
+      "warnings": [],
+      "sha256": "4ccdc7e6a1de1700c5e2694390d2d70fadac2efd1423b34bfc9d503ad44ae22c"
+    },
+    {
+      "id": "245675d5b9524607",
+      "name": "分析报告.docx",
+      "kind": "docx",
+      "stored_name": "245675d5b9524607.docx",
+      "warnings": [],
+      "sha256": "01d9282b62e022e8420e422e96f4da24d675f8a1e73729db83b2d21c0272f614"
+    },
+    {
+      "id": "13a4efe30f4a48f4",
+      "name": "业务汇报.pptx",
+      "kind": "pptx",
+      "stored_name": "13a4efe30f4a48f4.pptx",
+      "warnings": [
+        "幻灯片备注及母版中的文字未纳入检查"
+      ],
+      "sha256": "c5b1e853bbdf15c3d2d95a9c94f36dc5444381aed002dc93526ac268eb6e2470"
+    }
+  ],
+  "history": [
+    {
+      "revision": 1,
+      "generation": "v0",
+      "action": "数据变更",
+      "changes": [
+        {
+          "id": "sales_current",
+          "before": 125.0,
+          "after": 90.0
+        },
+        {
+          "id": "product_a",
+          "before": 80.0,
+          "after": 60.0
+        },
+        {
+          "id": "spending",
+          "before": 80.0,
+          "after": 110.0
+        }
+      ],
+      "time": "2026-09-26T02:59:54.457788+00:00"
+    },
+    {
+      "revision": 2,
+      "generation": "vee5ca6b397d9",
+      "action": "修复文件",
+      "time": "2026-09-26T02:59:54.524339+00:00"
+    }
+  ],
+  "audit": [
+    {
+      "time": "2026-09-26T02:59:54.374372+00:00",
+      "event": "导入文件",
+      "detail": "3份文件；关联尚待人工确认"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 quote|总计|销售额|本期；事实 sales_current"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 growth|总计|销售额|上期；事实 sales_prev"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 growth|总计|销售额|本期；事实 sales_current"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 threshold|总计|销售额|本期；事实 sales_current"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 ranking|A产品|销量|本期；事实 product_a"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 ranking|B产品|销量|本期；事实 product_b"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 threshold|总计|支出|本期；事实 spending"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 threshold|总计|预算|本期；事实 budget"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 chart|总计|销售额|上期；事实 sales_prev"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 chart|总计|销售额|本期；事实 sales_current"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 quote|总计|销售额|本期；事实 sales_current"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 growth|总计|销售额|上期；事实 sales_prev"
+    },
+    {
+      "time": "2026-09-26T02:59:54.380400+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 growth|总计|销售额|本期；事实 sales_current"
+    },
+    {
+      "time": "2026-09-26T02:59:54.381402+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 threshold|总计|销售额|本期；事实 sales_current"
+    },
+    {
+      "time": "2026-09-26T02:59:54.381402+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 ranking|A产品|销量|本期；事实 product_a"
+    },
+    {
+      "time": "2026-09-26T02:59:54.381402+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 ranking|B产品|销量|本期；事实 product_b"
+    },
+    {
+      "time": "2026-09-26T02:59:54.381906+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 threshold|总计|支出|本期；事实 spending"
+    },
+    {
+      "time": "2026-09-26T02:59:54.381906+00:00",
+      "event": "记录关联规则",
+      "detail": "规则 threshold|总计|预算|本期；事实 budget"
+    },
+    {
+      "time": "2026-09-26T02:59:54.381906+00:00",
+      "event": "确认来源",
+      "detail": "确认11项关联；排名结论限于选定比较集合"
+    },
+    {
+      "time": "2026-09-26T02:59:54.457788+00:00",
+      "event": "数据变更",
+      "detail": "sales_current: 125.0 → 90.0；product_a: 80.0 → 60.0；spending: 80.0 → 110.0"
+    },
+    {
+      "time": "2026-09-26T02:59:54.524339+00:00",
+      "event": "修复并复核",
+      "detail": "11项；重新读取Office文件后验证通过，其他支持范围内的正文保持一致"
+    },
+    {
+      "time": "2026-09-26T02:59:54.593703+00:00",
+      "event": "导出到本地",
+      "detail": "C:\\Users\\Administrator\\Desktop\\华北五省设计\\.pytest-tmp\\test_local_export_copies_files0\\outputs\\本地导出测试_r3，4份文件"
+    }
+  ],
+  "last_repair": {
+    "time": "2026-09-26T02:59:54.524339+00:00",
+    "count": 11,
+    "verified": true,
+    "unchanged_blocks_verified": 10,
+    "patches": [
+      {
+        "claim_id": "8c5f93b1b71787eecc",
+        "location": "正文第4段",
+        "before": "本期销售额为125万元",
+        "after": "本期销售额为90万元"
+      },
+      {
+        "claim_id": "29469f1888382a9c9b",
+        "location": "正文第4段",
+        "before": "较上期增长25%",
+        "after": "较上期下降10%"
+      },
+      {
+        "claim_id": "b43ad81273221ed471",
+        "location": "正文第4段",
+        "before": "本期销售额超过120万元",
+        "after": "本期销售额未超过120万元"
+      },
+      {
+        "claim_id": "b800d0f5f2cea146ac",
+        "location": "正文第6段",
+        "before": "A产品销量最高",
+        "after": "B产品销量最高"
+      },
+      {
+        "claim_id": "805baea580f69d1893",
+        "location": "正文第6段",
+        "before": "支出未超过预算",
+        "after": "支出超过预算"
+      },
+      {
+        "claim_id": "508d9dc515e62721b9",
+        "location": "第3页 · 原生柱状图",
+        "before": "销售额（万元）：上期 100万元，本期 125万元",
+        "after": "销售额（万元）：上期 100万元，本期 90万元"
+      },
+      {
+        "claim_id": "aa8b79b66e86fce3fb",
+        "location": "第1页 · TextBox 2 · 第2段",
+        "before": "本期销售额为125万元",
+        "after": "本期销售额为90万元"
+      },
+      {
+        "claim_id": "1c5b0f852eff1f4a18",
+        "location": "第1页 · TextBox 2 · 第2段",
+        "before": "较上期增长25%",
+        "after": "较上期下降10%"
+      },
+      {
+        "claim_id": "d3a0873cd40bdfff11",
+        "location": "第1页 · TextBox 2 · 第3段",
+        "before": "本期销售额超过120万元",
+        "after": "本期销售额未超过120万元"
+      },
+      {
+        "claim_id": "d8fbc8aa400bfc6331",
+        "location": "第2页 · TextBox 2 · 第1段",
+        "before": "A产品销量最高",
+        "after": "B产品销量最高"
+      },
+      {
+        "claim_id": "b07f564236177d65fa",
+        "location": "第2页 · TextBox 2 · 第2段",
+        "before": "支出未超过预算",
+        "after": "支出超过预算"
+      }
+    ]
+  },
+  "link_rules": [
+    {
+      "key": "chart|总计|销售额|上期",
+      "kind": "chart",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "上期",
+      "scope": "演示业务",
+      "fact_id": "sales_prev",
+      "source_claim_id": "508d9dc515e62721b9",
+      "created_at": "2026-09-26T02:59:54.380400+00:00",
+      "hits": 1
+    },
+    {
+      "key": "chart|总计|销售额|本期",
+      "kind": "chart",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "scope": "演示业务",
+      "fact_id": "sales_current",
+      "source_claim_id": "508d9dc515e62721b9",
+      "created_at": "2026-09-26T02:59:54.380400+00:00",
+      "hits": 1
+    },
+    {
+      "key": "quote|总计|销售额|本期",
+      "kind": "quote",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "scope": "演示业务",
+      "fact_id": "sales_current",
+      "source_claim_id": "aa8b79b66e86fce3fb",
+      "created_at": "2026-09-26T02:59:54.380400+00:00",
+      "hits": 2
+    },
+    {
+      "key": "growth|总计|销售额|上期",
+      "kind": "growth",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "上期",
+      "scope": "演示业务",
+      "fact_id": "sales_prev",
+      "source_claim_id": "1c5b0f852eff1f4a18",
+      "created_at": "2026-09-26T02:59:54.380400+00:00",
+      "hits": 2
+    },
+    {
+      "key": "growth|总计|销售额|本期",
+      "kind": "growth",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "scope": "演示业务",
+      "fact_id": "sales_current",
+      "source_claim_id": "1c5b0f852eff1f4a18",
+      "created_at": "2026-09-26T02:59:54.380400+00:00",
+      "hits": 2
+    },
+    {
+      "key": "threshold|总计|销售额|本期",
+      "kind": "threshold",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "scope": "演示业务",
+      "fact_id": "sales_current",
+      "source_claim_id": "d3a0873cd40bdfff11",
+      "created_at": "2026-09-26T02:59:54.381402+00:00",
+      "hits": 2
+    },
+    {
+      "key": "ranking|A产品|销量|本期",
+      "kind": "ranking",
+      "subject": "A产品",
+      "metric": "销量",
+      "period": "本期",
+      "scope": "演示产品",
+      "fact_id": "product_a",
+      "source_claim_id": "d8fbc8aa400bfc6331",
+      "created_at": "2026-09-26T02:59:54.381402+00:00",
+      "hits": 2
+    },
+    {
+      "key": "ranking|B产品|销量|本期",
+      "kind": "ranking",
+      "subject": "B产品",
+      "metric": "销量",
+      "period": "本期",
+      "scope": "演示产品",
+      "fact_id": "product_b",
+      "source_claim_id": "d8fbc8aa400bfc6331",
+      "created_at": "2026-09-26T02:59:54.381402+00:00",
+      "hits": 2
+    },
+    {
+      "key": "threshold|总计|支出|本期",
+      "kind": "threshold",
+      "subject": "总计",
+      "metric": "支出",
+      "period": "本期",
+      "scope": "演示项目",
+      "fact_id": "spending",
+      "source_claim_id": "b07f564236177d65fa",
+      "created_at": "2026-09-26T02:59:54.381906+00:00",
+      "hits": 2
+    },
+    {
+      "key": "threshold|总计|预算|本期",
+      "kind": "threshold",
+      "subject": "总计",
+      "metric": "预算",
+      "period": "本期",
+      "scope": "演示项目",
+      "fact_id": "budget",
+      "source_claim_id": "b07f564236177d65fa",
+      "created_at": "2026-09-26T02:59:54.381906+00:00",
+      "hits": 2
+    }
+  ],
+  "source_facts": [
+    {
+      "id": "sales_prev",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "上期",
+      "value": 100.0,
+      "unit": "万元",
+      "scope": "演示业务",
+      "sheet": "事实表",
+      "cell": "E2"
+    },
+    {
+      "id": "sales_current",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "value": 90.0,
+      "unit": "万元",
+      "scope": "演示业务",
+      "sheet": "事实表",
+      "cell": "E3"
+    },
+    {
+      "id": "product_a",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "A产品",
+      "metric": "销量",
+      "period": "本期",
+      "value": 60.0,
+      "unit": "件",
+      "scope": "演示产品",
+      "sheet": "事实表",
+      "cell": "E4"
+    },
+    {
+      "id": "product_b",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "B产品",
+      "metric": "销量",
+      "period": "本期",
+      "value": 65.0,
+      "unit": "件",
+      "scope": "演示产品",
+      "sheet": "事实表",
+      "cell": "E5"
+    },
+    {
+      "id": "spending",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "总计",
+      "metric": "支出",
+      "period": "本期",
+      "value": 110.0,
+      "unit": "万元",
+      "scope": "演示项目",
+      "sheet": "事实表",
+      "cell": "E6"
+    },
+    {
+      "id": "budget",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "总计",
+      "metric": "预算",
+      "period": "本期",
+      "value": 100.0,
+      "unit": "万元",
+      "scope": "演示项目",
+      "sheet": "事实表",
+      "cell": "E7"
+    }
+  ],
+  "graph": {
+    "derived": [],
+    "errors": {},
+    "details": {},
+    "affected": [],
+    "changed": [],
+    "radius": 0.0,
+    "cycles": []
+  },
+  "graph_values": {},
+  "facts": [
+    {
+      "id": "sales_prev",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "上期",
+      "value": 100.0,
+      "unit": "万元",
+      "scope": "演示业务",
+      "sheet": "事实表",
+      "cell": "E2"
+    },
+    {
+      "id": "sales_current",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "总计",
+      "metric": "销售额",
+      "period": "本期",
+      "value": 90.0,
+      "unit": "万元",
+      "scope": "演示业务",
+      "sheet": "事实表",
+      "cell": "E3"
+    },
+    {
+      "id": "product_a",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "A产品",
+      "metric": "销量",
+      "period": "本期",
+      "value": 60.0,
+      "unit": "件",
+      "scope": "演示产品",
+      "sheet": "事实表",
+      "cell": "E4"
+    },
+    {
+      "id": "product_b",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "B产品",
+      "metric": "销量",
+      "period": "本期",
+      "value": 65.0,
+      "unit": "件",
+      "scope": "演示产品",
+      "sheet": "事实表",
+      "cell": "E5"
+    },
+    {
+      "id": "spending",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "总计",
+      "metric": "支出",
+      "period": "本期",
+      "value": 110.0,
+      "unit": "万元",
+      "scope": "演示项目",
+      "sheet": "事实表",
+      "cell": "E6"
+    },
+    {
+      "id": "budget",
+      "file_id": "caeee4b2ef4a48ff",
+      "subject": "总计",
+      "metric": "预算",
+      "period": "本期",
+      "value": 100.0,
+      "unit": "万元",
+      "scope": "演示项目",
+      "sheet": "事实表",
+      "cell": "E7"
+    }
+  ],
+  "claims": [
+    {
+      "id": "8c5f93b1b71787eecc",
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 3]",
+      "label": "正文第4段",
+      "original": "本期销售额为90万元",
+      "start": 0,
+      "end": 10,
+      "kind": "quote",
+      "refs": [
+        "sales_current"
+      ],
+      "spec": {
+        "reported": 90.0,
+        "unit": "万元",
+        "span": [
+          6,
+          8
+        ]
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "29469f1888382a9c9b",
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 3]",
+      "label": "正文第4段",
+      "original": "较上期下降10%",
+      "start": 11,
+      "end": 19,
+      "kind": "growth",
+      "refs": [
+        "sales_prev",
+        "sales_current"
+      ],
+      "spec": {
+        "span": [
+          3,
+          8
+        ],
+        "reported": -10.0,
+        "qualitative": false,
+        "direction": -1
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "b43ad81273221ed471",
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 3]",
+      "label": "正文第4段",
+      "original": "本期销售额未超过120万元",
+      "start": 20,
+      "end": 33,
+      "kind": "threshold",
+      "refs": [
+        "sales_current"
+      ],
+      "spec": {
+        "limit": 120.0,
+        "unit": "万元",
+        "positive": "超过",
+        "negative": "未超过",
+        "op": ">",
+        "reported_positive": false,
+        "span": [
+          5,
+          8
+        ]
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "b800d0f5f2cea146ac",
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 5]",
+      "label": "正文第6段",
+      "original": "B产品销量最高",
+      "start": 0,
+      "end": 7,
+      "kind": "ranking",
+      "refs": [
+        "product_a",
+        "product_b"
+      ],
+      "spec": {
+        "metric": "销量",
+        "winners": [
+          "B产品"
+        ],
+        "span": [
+          0,
+          7
+        ]
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "805baea580f69d1893",
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 5]",
+      "label": "正文第6段",
+      "original": "支出超过预算",
+      "start": 8,
+      "end": 14,
+      "kind": "threshold",
+      "refs": [
+        "spending",
+        "budget"
+      ],
+      "spec": {
+        "positive": "超过",
+        "negative": "未超过",
+        "op": ">",
+        "reported_positive": true,
+        "span": [
+          2,
+          4
+        ]
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "508d9dc515e62721b9",
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"chart\", 2, 3]",
+      "label": "第3页 · 原生柱状图",
+      "kind": "chart",
+      "refs": [
+        "sales_prev",
+        "sales_current"
+      ],
+      "original": "销售额（万元）：上期 100万元，本期 90万元",
+      "spec": {
+        "series": "销售额（万元）",
+        "categories": [
+          "上期",
+          "本期"
+        ],
+        "values": [
+          100.0,
+          90.0
+        ],
+        "unit": "万元"
+      },
+      "confirmed": true,
+      "extraction": "图表结构识别",
+      "issue": "",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "id": "aa8b79b66e86fce3fb",
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 0, 3, 1]",
+      "label": "第1页 · TextBox 2 · 第2段",
+      "original": "本期销售额为90万元",
+      "start": 0,
+      "end": 10,
+      "kind": "quote",
+      "refs": [
+        "sales_current"
+      ],
+      "spec": {
+        "reported": 90.0,
+        "unit": "万元",
+        "span": [
+          6,
+          8
+        ]
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "1c5b0f852eff1f4a18",
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 0, 3, 1]",
+      "label": "第1页 · TextBox 2 · 第2段",
+      "original": "较上期下降10%",
+      "start": 11,
+      "end": 19,
+      "kind": "growth",
+      "refs": [
+        "sales_prev",
+        "sales_current"
+      ],
+      "spec": {
+        "span": [
+          3,
+          8
+        ],
+        "reported": -10.0,
+        "qualitative": false,
+        "direction": -1
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "d3a0873cd40bdfff11",
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 0, 3, 2]",
+      "label": "第1页 · TextBox 2 · 第3段",
+      "original": "本期销售额未超过120万元",
+      "start": 0,
+      "end": 13,
+      "kind": "threshold",
+      "refs": [
+        "sales_current"
+      ],
+      "spec": {
+        "limit": 120.0,
+        "unit": "万元",
+        "positive": "超过",
+        "negative": "未超过",
+        "op": ">",
+        "reported_positive": false,
+        "span": [
+          5,
+          8
+        ]
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "d8fbc8aa400bfc6331",
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 1, 3, 0]",
+      "label": "第2页 · TextBox 2 · 第1段",
+      "original": "B产品销量最高",
+      "start": 0,
+      "end": 7,
+      "kind": "ranking",
+      "refs": [
+        "product_a",
+        "product_b"
+      ],
+      "spec": {
+        "metric": "销量",
+        "winners": [
+          "B产品"
+        ],
+        "span": [
+          0,
+          7
+        ]
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    },
+    {
+      "id": "b07f564236177d65fa",
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 1, 3, 1]",
+      "label": "第2页 · TextBox 2 · 第2段",
+      "original": "支出超过预算",
+      "start": 0,
+      "end": 6,
+      "kind": "threshold",
+      "refs": [
+        "spending",
+        "budget"
+      ],
+      "spec": {
+        "positive": "超过",
+        "negative": "未超过",
+        "op": ">",
+        "reported_positive": true,
+        "span": [
+          2,
+          4
+        ]
+      },
+      "confirmed": true,
+      "extraction": "规则识别",
+      "issue": ""
+    }
+  ],
+  "blocks": [
+    {
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 0]",
+      "label": "正文第1段",
+      "text": "业务分析报告"
+    },
+    {
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 1]",
+      "label": "正文第2段",
+      "text": "模拟数据 · 用于验证知链功能，不代表真实经营结果。"
+    },
+    {
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 2]",
+      "label": "正文第3段",
+      "text": "销售表现"
+    },
+    {
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 3]",
+      "label": "正文第4段",
+      "text": "本期销售额为90万元。较上期下降10%。本期销售额未超过120万元。"
+    },
+    {
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 4]",
+      "label": "正文第5段",
+      "text": "产品与预算"
+    },
+    {
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 5]",
+      "label": "正文第6段",
+      "text": "B产品销量最高。支出超过预算。"
+    },
+    {
+      "file_id": "245675d5b9524607",
+      "location": "[\"p\", 6]",
+      "label": "正文第7段",
+      "text": "本段是人工撰写的背景说明，修复时应保持原样。"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 0, 2, 0]",
+      "label": "第1页 · TextBox 1 · 第1段",
+      "text": "业务汇报"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 0, 3, 0]",
+      "label": "第1页 · TextBox 2 · 第1段",
+      "text": "模拟数据 · 结论来自业务数据.xlsx"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 0, 3, 1]",
+      "label": "第1页 · TextBox 2 · 第2段",
+      "text": "本期销售额为90万元。较上期下降10%。"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 0, 3, 2]",
+      "label": "第1页 · TextBox 2 · 第3段",
+      "text": "本期销售额未超过120万元。"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 1, 2, 0]",
+      "label": "第2页 · TextBox 1 · 第1段",
+      "text": "产品与预算"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 1, 3, 0]",
+      "label": "第2页 · TextBox 2 · 第1段",
+      "text": "B产品销量最高。"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 1, 3, 1]",
+      "label": "第2页 · TextBox 2 · 第2段",
+      "text": "支出超过预算。"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 1, 3, 2]",
+      "label": "第2页 · TextBox 2 · 第3段",
+      "text": "此处为人工补充的说明，保持不变。"
+    },
+    {
+      "file_id": "13a4efe30f4a48f4",
+      "location": "[\"p\", 2, 2, 0]",
+      "label": "第3页 · TextBox 1 · 第1段",
+      "text": "销售额对比  单位万元"
+    }
+  ],
+  "graph_changed": [],
+  "images": [],
+  "ocr_blocks": [],
+  "ocr_claims": []
+}

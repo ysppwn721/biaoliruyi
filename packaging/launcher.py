@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import sys
+import tempfile
 import threading
 import time
 import urllib.error
@@ -25,6 +26,16 @@ def user_root() -> Path:
 
 def configure() -> Path:
     root = user_root()
+    try:
+        root.mkdir(parents=True, exist_ok=True)
+        probe = root / '.write-test'
+        probe.write_text('', encoding='utf-8')
+        probe.unlink()
+    except OSError:
+        # Some managed Windows environments deny writes under LOCALAPPDATA.
+        # Keep the portable app usable and fall back to the user's temp area.
+        root = Path(tempfile.gettempdir()) / 'Zhilian'
+        root.mkdir(parents=True, exist_ok=True)
     config = Path(os.getenv('ZHILIAN_CONFIG_FILE', str(root / '.env'))).expanduser()
     config.parent.mkdir(parents=True, exist_ok=True)
     if not config.exists():

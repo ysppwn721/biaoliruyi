@@ -1,0 +1,37 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      ZHILIAN_HOST: 0.0.0.0
+      ZHILIAN_PORT: 8765
+      ZHILIAN_DATA_DIR: /data
+      ZHILIAN_ACCESS_PASSWORD: ${ZHILIAN_ACCESS_PASSWORD}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      ZHILIAN_LOCAL_RERANKER_ENABLED: ${ZHILIAN_LOCAL_RERANKER_ENABLED:-0}
+    volumes:
+      - zhilian_data:/data
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    environment:
+      ZHILIAN_DOMAIN: ${ZHILIAN_DOMAIN:-zhilian.space}
+      ACME_EMAIL: ${ACME_EMAIL:-}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../site:/srv/site:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  zhilian_data:
+  caddy_data:
+  caddy_config:

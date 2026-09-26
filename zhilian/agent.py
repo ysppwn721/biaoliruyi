@@ -33,6 +33,10 @@ def propose_links(store, ws, payload):
 
 def suggest_links_llm(store, ws, payload):
     eligible = [c for c in ws['claims'] if not c['confirmed'] and c['kind'] != 'chart']
+    claim_ids = payload.get('claim_ids') if isinstance(payload, dict) else None
+    if isinstance(claim_ids, list):
+        allowed = {cid for cid in claim_ids if isinstance(cid, str)}
+        eligible = [c for c in eligible if c['id'] in allowed]
     if not llm.config()['enabled'] or not eligible:
         return {'suggestions': []}
     return {'suggestions': llm.suggest_links(eligible, ws['facts'])}
@@ -55,6 +59,34 @@ def suggest_links_local(store, ws, payload):
             suggestions.append({'claim_id': claim['id'], 'refs': choice['refs'],
                                 'reason': '本地 reranker 在收紧后的候选中排序通过阈值'})
     return {'suggestions': suggestions}
+
+
+def _candidate_buckets(ws, rules):
+    """Separate deterministic, ambiguous and uncovered claims before models run.
+
+    The deterministic engine remains the authority.  A claim with an existing
+    rule candidate is never sent to a model merely because a model is enabled.
+    Local ranking is reserved for genuinely multi-candidate text; remote LLM
+    fallback is reserved for zero candidates or local abstentions.
+    """
+    byid = {r['claim_id']: r['refs'] for r in rules}
+    unique, multi, zero = [], [], []
+    for claim in ws['claims']:
+        if claim['confirmed'] or claim['kind'] == 'chart':
+            continue
+        rule_refs = byid.get(claim['id'], [])
+        lexical = engine.best_facts(claim['original'], ws['facts'])
+        # Compound assertions (growth/ranking/budget) are already resolved by
+        # typed deterministic rules and must not be split by a reranker.
+        if rule_refs and claim['kind'] in {'growth', 'ranking', 'chart'}:
+            unique.append(claim)
+        elif len(lexical) == 1:
+            unique.append(claim)
+        elif len(lexical) > 1:
+            multi.append(claim)
+        else:
+            zero.append(claim)
+    return unique, multi, zero
 
 
 def confirm_links(store, ws, payload):
@@ -211,21 +243,39 @@ def _advance(store, ws):
         _tool(store, ws, 'list_claims')
         rules = _tool(store, ws, 'propose_links')['links']
         suggestions = []
-        if reranker.status()['enabled']:
+        unique, multi, zero = _candidate_buckets(ws, rules)
+        local_ids = set()
+        local_enabled = reranker.status()['enabled']
+        if local_enabled and multi:
             try:
-                suggestions.extend(_tool(store, ws, 'suggest_links_local')['suggestions'])
+                local = _tool(store, ws, 'suggest_links_local')['suggestions']
+                suggestions.extend(local)
+                local_ids = {item['claim_id'] for item in local}
             except Exception:
                 ws['audit'].append({'time': now(), 'event': 'Agent 本地模型降级',
-                                    'detail': '本地 reranker 不可用，继续使用规则候选'})
-        eligible = any(not c['confirmed'] and c['kind'] != 'chart' for c in ws['claims'])
-        if llm.config()['enabled'] and eligible and len(ws['facts']) <= 150:
+                                    'detail': '本地 reranker 不可用，困难样本转远程模型或人工'})
+        # API is a semantic fallback.  It receives only zero-candidate claims,
+        # or multi-candidate claims that the local model abstained on.  It can
+        # never replace a rule or local suggestion already collected above.
+        api_claims = zero + [c for c in multi if c['id'] not in local_ids]
+        if llm.config()['enabled'] and api_claims and len(ws['facts']) <= 150:
             try:
-                suggestions = _tool(store, ws, 'suggest_links_llm')['suggestions']
+                remote = _tool(store, ws, 'suggest_links_llm',
+                               {'claim_ids': [c['id'] for c in api_claims]})['suggestions']
+                suggestions.extend(remote)
             except Exception:
                 ws['audit'].append({'time': now(), 'event': 'Agent 模型降级',
-                                    'detail': '模型工具不可用，继续使用规则候选，来源未自动确认'})
+                                    'detail': '困难样本模型不可用，继续使用规则候选，来源未自动确认'})
         else:
-            _trace(store, ws, 'model_skipped', '未配置模型、无待关联文本或事实数超限；未发起模型请求')
+            reason = ('未配置模型、没有困难样本或事实数超限；未发起模型请求'
+                      if not api_claims else '困难样本仅保留人工确认；未发起远程模型请求')
+            _trace(store, ws, 'model_skipped', reason)
+        ws['agent']['model_routing'] = {
+            'unique_rule_claims': len(unique), 'multi_candidate_claims': len(multi),
+            'zero_candidate_claims': len(zero), 'local_reranker_suggestions': len(local_ids),
+            'api_candidate_claims': len(api_claims), 'api_suggestions': sum(
+                1 for item in suggestions if item.get('claim_id') not in local_ids),
+        }
         byid = {r['claim_id']: r['refs'] for r in rules}
         candidates = {}
         for c in ws['claims']:

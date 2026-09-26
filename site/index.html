@@ -107,12 +107,10 @@
         <p class="pstate ready">可下载 · v0.2.1</p>
         <ul class="meta">
           <li>Windows 10 / 11（64 位）</li>
-          <li>原生便携包，合并后约 28 MB</li>
-          <li>无需 Python，合并分卷后解压运行 Zhilian.exe</li>
+          <li>原生便携包，约 26 MB</li>
+          <li>无需 Python，解压后双击启动脚本或 Zhilian.exe</li>
         </ul>
-        <a class="btn primary" href="downloads/知链_v0.2.1_Windows免安装.zip.000" download>下载分卷 1 / 2</a>
-        <a class="btn" href="downloads/知链_v0.2.1_Windows免安装.zip.001" download>下载分卷 2 / 2</a>
-        <a class="textlink" href="downloads/合并Windows分卷.ps1" download>下载合并脚本</a>
+        <a class="btn primary" href="downloads/知链_v0.2.1_Windows免安装.zip" download>下载免安装包</a>
       </article>
 
       <article class="platcard" data-os="macos">
@@ -153,7 +151,7 @@
     </div>
 
     <div class="dl-note">
-      <strong>说明</strong>：Windows 原生便携包已构建并验收。Windows 分卷下载后运行合并脚本即可得到完整 ZIP；macOS 与 Linux 采用 PyInstaller
+      <strong>说明</strong>：Windows 原生便携包已构建并验收。解压后可运行中文启动脚本或英文启动脚本；macOS 与 Linux 采用 PyInstaller
       在目标系统生成原生包，页面提供同一套构建包和脚本；跨平台二进制不能在 Windows 上交叉伪造，
       发布前需在真实机器上完成安装与文件读写验证。
     </div>
@@ -183,8 +181,7 @@
           <li>最适合快速试用与现场演示</li>
           <li>纯规则模式无需联网、无需密钥</li>
         </ul>
-        <a class="btn" href="downloads/知链_v0.2.1_Windows免安装.zip.000" download>下载分卷 1 / 2</a>
-        <a class="textlink" href="downloads/合并Windows分卷.ps1" download>下载合并脚本</a>
+        <a class="btn" href="downloads/知链_v0.2.1_Windows免安装.zip" download>重新下载 Windows 包</a>
       </div>
     </div>
 
@@ -309,8 +306,8 @@ docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi<
 </script>
 
 <script>
-// 演示环境地址：部署后替换为自有域名，例如 https://demo.你的域名.com
-window.DEMO_URL = 'https://activated-collectible-ran-higher.trycloudflare.com';
+// 同域演示入口；完整文件处理仍可通过 Windows 免安装包体验。
+window.DEMO_URL = '/demo/';
 </script>
 <script>
 // 一键复制测试账号：减轻评委手输账密的负担
@@ -346,6 +343,11 @@ window.DEMO_URL = 'https://activated-collectible-ran-higher.trycloudflare.com';
     return;
   }
   link.href = DEMO_URL;
+  if (DEMO_URL.indexOf('/') === 0) {
+    state.textContent = '同域演示页面在线，可直接打开体验。';
+    wrap.hidden = false;
+    return;
+  }
   state.textContent = '正在检测…';
 
   var done = false;

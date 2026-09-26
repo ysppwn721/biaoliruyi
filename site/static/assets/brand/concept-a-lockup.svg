@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 260" role="img" aria-labelledby="title desc">
+  <title id="title">知链 A 版组合标</title>
+  <desc id="desc">链环与校验勾组合图形，搭配知链中文和英文标准字</desc>
+  <g transform="translate(20 20)">
+    <path d="M63 118l39-39c22-22 57-22 79 0s22 57 0 79l-17 17" fill="none" stroke="#176852" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M221 142l-39 39c-22 22-57 22-79 0s-22-57 0-79l17-17" fill="none" stroke="#75ad91" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M87 143l33 33 76-76" fill="none" stroke="#c9823d" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(300 63)" fill="#243530">
+    <text x="0" y="78" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif" font-size="74" font-weight="700">知链</text>
+    <text x="5" y="125" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="17" letter-spacing="7">ZHILIAN</text>
+    <text x="5" y="171" fill="#87968d" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="18">让每一处结论有据可循</text>
+  </g>
+</svg>

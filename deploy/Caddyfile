@@ -1,0 +1,24 @@
+{
+    email {$ACME_EMAIL}
+}
+
+{$ZHILIAN_DOMAIN:zhilian.space} {
+    encode gzip
+
+    @demo path /demo /demo/*
+    handle @demo {
+        uri strip_prefix /demo
+        reverse_proxy app:8765
+    }
+
+    handle /api/* {
+        reverse_proxy app:8765
+    }
+
+    handle /static/* {
+        reverse_proxy app:8765
+    }
+
+    root * /srv/site
+    file_server
+}

@@ -10,12 +10,11 @@ if ($LASTEXITCODE -ne 0) { throw 'PyInstaller build failed.' }
 # 25 MiB per-file limit of static download hosts.
 Get-ChildItem -Path 'dist\Zhilian' -Recurse -File -Filter '*avif*' |
     Remove-Item -Force -ErrorAction SilentlyContinue
+Get-ChildItem -Path 'dist\Zhilian' -Recurse -File -Filter '*imagingft*' |
+    Remove-Item -Force -ErrorAction SilentlyContinue
 Copy-Item -LiteralPath 'packaging\start_portable.bat' -Destination 'dist\Zhilian\start_portable.bat' -Force
 
 $version = '0.2.1'
 $artifactDir = Join-Path (Get-Location) 'artifacts'
 New-Item -ItemType Directory -Force -Path $artifactDir | Out-Null
-$zip = Join-Path $artifactDir "Zhilian-$version-windows-x64.zip"
-if (Test-Path $zip) { Remove-Item -LiteralPath $zip -Force }
-Compress-Archive -Path 'dist\Zhilian' -DestinationPath $zip -CompressionLevel Optimal
-Write-Host "Created $zip"
+& $python packaging\make_zip.py

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">知链 C 版单色图标</title>
+  <path d="M128 168L256 256 384 148M128 168l18 181 110-93M384 148l-18 201-110-93" fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="128" cy="168" r="35" fill="none" stroke="currentColor" stroke-width="14"/>
+  <circle cx="256" cy="256" r="35" fill="none" stroke="currentColor" stroke-width="14"/>
+  <circle cx="384" cy="148" r="35" fill="none" stroke="currentColor" stroke-width="14"/>
+  <circle cx="146" cy="349" r="35" fill="none" stroke="currentColor" stroke-width="14"/>
+  <circle cx="366" cy="349" r="35" fill="none" stroke="currentColor" stroke-width="14"/>
+  <path d="M330 350l23 23 48-54" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

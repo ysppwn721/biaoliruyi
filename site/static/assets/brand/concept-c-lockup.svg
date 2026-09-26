@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 260" role="img" aria-labelledby="title desc">
+  <title id="title">知链 C 版组合标</title>
+  <desc id="desc">证据网络图形，搭配知链中文和英文标准字</desc>
+  <g transform="translate(20 20)">
+    <path d="M55 78l88 61 88-74M55 78l13 126 75-65M231 65l-13 139-75-65" fill="none" stroke="#5f9f86" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="55" cy="78" r="23" fill="#f6fbf7"/>
+    <circle cx="143" cy="139" r="23" fill="#f6fbf7"/>
+    <circle cx="231" cy="65" r="23" fill="#f6fbf7"/>
+    <circle cx="68" cy="204" r="23" fill="#f6fbf7"/>
+    <circle cx="218" cy="204" r="23" fill="#f6fbf7"/>
+    <path d="M194 204l15 15 31-36" fill="none" stroke="#e4a261" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(300 63)" fill="#243530">
+    <text x="0" y="78" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif" font-size="74" font-weight="700">知链</text>
+    <text x="5" y="125" fill="#7a8983" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="17" letter-spacing="7">ZHILIAN</text>
+    <text x="5" y="171" fill="#87968d" font-family="-apple-system,BlinkMacSystemFont,'Microsoft YaHei',sans-serif" font-size="18">让证据关系清晰可追溯</text>
+  </g>
+</svg>
