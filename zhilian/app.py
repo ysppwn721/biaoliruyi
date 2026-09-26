@@ -18,7 +18,7 @@ from starlette.concurrency import run_in_threadpool
 
 from .demo import create_demo
 from .llm import config, suggest_links, explain_diagnosis
-from . import ocr, reranker
+from . import ocr, quota, reranker
 from .store import Store, now
 from .report import build_report
 from .agent import run_agent, decide, agent_status
@@ -98,9 +98,20 @@ def create_app(data_dir=None):
     store = Store(data_dir or os.getenv('ZHILIAN_DATA_DIR', str(BASE / '.zhilian')))
     app = FastAPI(title='知链', version='0.2.1', description='跨文档结论验证与增量修复')
     app.state.store = store
+    quota.configure(store.root / 'quota.json')
 
     @app.middleware('http')
     async def boundary(request: Request, call_next):
+        # 访客标识必须在处理函数之前落到上下文里：限额按访客计数，
+        # 且演示环境位于 Cloudflare 之后，真实来源 IP 只在请求头上。
+        token = quota.identify(quota.client_key(
+            request.headers, request.client.host if request.client else '-'))
+        try:
+            return await _boundary(request, call_next)
+        finally:
+            quota.release(token)
+
+    async def _boundary(request: Request, call_next):
         password = os.getenv('ZHILIAN_ACCESS_PASSWORD', '')
         if password:
             valid = False
@@ -138,8 +149,14 @@ def create_app(data_dir=None):
         return {'status': 'ok', 'version': '0.2.1', 'model': config(),
                 'ocr': ocr.config(),
                 'local_reranker': reranker.status(),
+                'quota': quota.config(),
                 'auto_export': os.getenv('ZHILIAN_AUTO_EXPORT', '').strip().lower() in ('1', 'true'),
                 'password_protected': bool(os.getenv('ZHILIAN_ACCESS_PASSWORD'))}
+
+    @app.get('/api/quota')
+    def quota_state():
+        """只读额度查询：演示时可直接展示"还剩多少次模型调用"。"""
+        return {**quota.config(), **quota.snapshot()}
 
     @app.get('/api/projects')
     def projects():

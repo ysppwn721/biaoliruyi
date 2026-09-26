@@ -8,7 +8,7 @@ from copy import deepcopy
 from time import perf_counter
 from uuid import uuid4
 
-from . import engine, llm, reranker
+from . import engine, llm, quota, reranker
 from .store import now
 
 
@@ -266,29 +266,52 @@ def _advance(store, ws):
         # or multi-candidate claims that the local model abstained on.  It can
         # never replace a rule or local suggestion already collected above.
         api_claims = zero + [c for c in multi if c['id'] not in local_ids]
-        if llm.config()['enabled'] and api_claims and len(ws['facts']) <= 150:
+        gate = quota.check()
+        skip = ''
+        if not llm.config()['enabled']:
+            skip = '未配置模型密钥；未发起模型请求'
+        elif not api_claims:
+            skip = '规则与本地候选已覆盖全部论断；未发起模型请求'
+        elif len(ws['facts']) > 150:
+            skip = '事实数超过单次模型关联上限150；未发起模型请求'
+        elif not gate['allowed']:
+            skip = gate['reason']
+        quota_blocked = ''
+        if not skip:
             try:
                 # Keep each request within the provider contract while still
                 # batching the difficult claims. A normal project therefore
                 # needs one request for <=40 claims, two for 41-80, etc.
                 for start in range(0, len(api_claims), 40):
+                    # 额度可能在一批中途被用尽（同一访客并发或全局预算触顶），
+                    # 此时停止后续批次并降级，已拿到的候选保留。
+                    if not quota.check()['allowed']:
+                        quota_blocked = quota.check()['reason']
+                        break
                     batch = api_claims[start:start + 40]
                     api_batches += 1
+                    quota.consume()
                     remote = _tool(store, ws, 'suggest_links_llm',
                                    {'claim_ids': [c['id'] for c in batch]})['suggestions']
                     suggestions.extend(remote)
             except Exception:
                 ws['audit'].append({'time': now(), 'event': 'Agent 模型降级',
                                     'detail': '困难样本模型不可用，继续使用规则候选，来源未自动确认'})
+            if quota_blocked:
+                ws['audit'].append({'time': now(), 'event': '模型额度用尽',
+                                    'detail': quota_blocked})
         else:
-            reason = ('未配置模型、没有困难样本或事实数超限；未发起模型请求'
-                      if not api_claims else '困难样本仅保留人工确认；未发起远程模型请求')
-            _trace(store, ws, 'model_skipped', reason)
+            if gate['code'] in ('client_exhausted', 'global_exhausted'):
+                # 额度触顶单独记一条审计：运营与答辩都需要一眼看出"这次为什么没走模型"，
+                # 而不是混在通用的 Agent 执行记录里。
+                ws['audit'].append({'time': now(), 'event': '模型额度用尽', 'detail': skip})
+            _trace(store, ws, 'model_skipped', skip)
         ws['agent']['model_routing'] = {
             'unique_rule_claims': len(unique), 'multi_candidate_claims': len(multi),
             'zero_candidate_claims': len(zero), 'local_reranker_suggestions': len(local_ids),
             'api_candidate_claims': len(api_claims), 'api_batches': api_batches, 'api_suggestions': sum(
                 1 for item in suggestions if item.get('claim_id') not in local_ids),
+            'model_quota': quota.snapshot(), 'quota_blocked': quota_blocked or skip,
         }
         byid = {r['claim_id']: r['refs'] for r in rules}
         candidates = {}
