@@ -1,0 +1,7 @@
+{
+  "model": "bge-reranker-v2-m3-onnx-int8",
+  "synthetic": true,
+  "claims": 60,
+  "top1_accuracy": 0.566667,
+  "error_association_rate": 0.433333
+}

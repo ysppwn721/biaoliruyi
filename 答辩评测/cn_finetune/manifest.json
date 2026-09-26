@@ -1,0 +1,38 @@
+{
+  "source": "C:\\Users\\Administrator\\Desktop\\华北五省设计\\答辩评测\\reranker_training_pairs.jsonl",
+  "train_rows": 1216,
+  "dev_rows": 380,
+  "final_test_rows": 340,
+  "train_groups": [
+    "longword-01",
+    "longword-02",
+    "longword-03",
+    "longword-04",
+    "longword-05",
+    "longword-06",
+    "longword-07",
+    "longword-08",
+    "longword-09",
+    "longword-10",
+    "longword-11",
+    "longword-12",
+    "longword-13",
+    "longword-14"
+  ],
+  "dev_groups": [
+    "longword-15",
+    "longword-16",
+    "longword-17",
+    "longword-18"
+  ],
+  "final_test_groups": [
+    "longword-19",
+    "longword-20",
+    "longword-21",
+    "longword-22",
+    "longword-23",
+    "longword-24",
+    "longword-25"
+  ],
+  "note": "final_test copied from the original test partition and must remain frozen"
+}

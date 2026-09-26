@@ -1,0 +1,9 @@
+{
+  "synthetic": true,
+  "file": "答辩评测\\stress_eval.jsonl",
+  "groups": 8,
+  "claims": 40,
+  "rows": 240,
+  "top1_accuracy": 0.875,
+  "error_association_rate": 0.125
+}

@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "groups": 12,
+  "claims": 60,
+  "rows": 360,
+  "top1_accuracy": 1.0,
+  "error_association_rate": 0.0
+}

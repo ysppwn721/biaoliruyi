@@ -1,0 +1,8 @@
+{
+  "train_rows": 1728,
+  "dev_rows": 432,
+  "train_groups": 48,
+  "dev_groups": 12,
+  "synthetic": true,
+  "note": "not human labeled; never use as final industry evaluation"
+}

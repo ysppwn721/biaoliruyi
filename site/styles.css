@@ -79,6 +79,14 @@ body {
 .btn.big { padding: 14px 30px; font-size: 16.5px; }
 .btn.disabled { opacity: .5; pointer-events: none; }
 
+/* 次级文字链接：用于「查看安装命令」「下载合并脚本」等辅助入口 */
+.textlink {
+  display: inline-block; margin-top: 10px;
+  color: var(--brand); font-size: 13.5px;
+  text-decoration: none; border-bottom: 1px dashed currentColor;
+}
+.textlink:hover { color: var(--brand-2); border-bottom-style: solid; }
+
 /* ---------- 数据条 ---------- */
 .facts { padding: 8px 0 58px; }
 .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }

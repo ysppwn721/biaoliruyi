@@ -1,0 +1,8 @@
+{
+  "model": "bge-reranker-v2-m3-onnx-int8",
+  "programmatic": true,
+  "file": "答辩评测\\external_programmatic_holdout.jsonl",
+  "claims": 60,
+  "top1_accuracy": 0.966667,
+  "error_association_rate": 0.033333
+}

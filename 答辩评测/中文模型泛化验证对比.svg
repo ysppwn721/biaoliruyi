@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1050" height="580">
+<rect width="100%" height="100%" fill="#fbfcfe"/>
+<text x="70" y="42" font-family="Microsoft YaHei" font-size="26" font-weight="600" fill="#172033">独立文档组泛化验证</text>
+<text x="70" y="68" font-family="Microsoft YaHei" font-size="14" fill="#536174">12 个全新合成文档组 · 60 条论断 · 不参与训练和冻结测试</text>
+<line x1="150" y1="475.0" x2="990" y2="475.0" stroke="#dfe5ed"/>
+<text x="138" y="480.0" text-anchor="end" font-family="Arial" font-size="13" fill="#536174">0%</text>
+<line x1="150" y1="409.0" x2="990" y2="409.0" stroke="#dfe5ed"/>
+<text x="138" y="414.0" text-anchor="end" font-family="Arial" font-size="13" fill="#536174">20%</text>
+<line x1="150" y1="343.0" x2="990" y2="343.0" stroke="#dfe5ed"/>
+<text x="138" y="348.0" text-anchor="end" font-family="Arial" font-size="13" fill="#536174">40%</text>
+<line x1="150" y1="277.0" x2="990" y2="277.0" stroke="#dfe5ed"/>
+<text x="138" y="282.0" text-anchor="end" font-family="Arial" font-size="13" fill="#536174">60%</text>
+<line x1="150" y1="211.0" x2="990" y2="211.0" stroke="#dfe5ed"/>
+<text x="138" y="216.0" text-anchor="end" font-family="Arial" font-size="13" fill="#536174">80%</text>
+<line x1="150" y1="145.0" x2="990" y2="145.0" stroke="#dfe5ed"/>
+<text x="138" y="150.0" text-anchor="end" font-family="Arial" font-size="13" fill="#536174">100%</text>
+<rect x="250" y="475.0" width="240" height="0.0" rx="8" fill="#f08c46"/>
+<text x="370" y="461.0" text-anchor="middle" font-family="Arial" font-size="24" font-weight="600" fill="#172033">0.00%</text>
+<text x="370" y="505" text-anchor="middle" font-family="Microsoft YaHei" font-size="16" fill="#172033">BERT微调
+独立合成集</text>
+<rect x="630" y="288.0" width="240" height="187.0" rx="8" fill="#0b6e99"/>
+<text x="750" y="274.0" text-anchor="middle" font-family="Arial" font-size="24" font-weight="600" fill="#172033">56.67%</text>
+<text x="750" y="505" text-anchor="middle" font-family="Microsoft YaHei" font-size="16" fill="#172033">BGE ONNX
+独立合成集</text>
+<text x="70" y="535" font-family="Microsoft YaHei" font-size="13" fill="#b04a3a">结论：BERT 在当前训练分布内表现很好，但独立组合上的泛化为0%，说明需要扩大训练文档组并重新训练。</text>
+</svg>

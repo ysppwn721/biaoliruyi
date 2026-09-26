@@ -1,0 +1,10 @@
+{
+  "programmatic": true,
+  "synthetic": false,
+  "file": "答辩评测\\external_programmatic_holdout.jsonl",
+  "groups": 5,
+  "claims": 60,
+  "rows": 180,
+  "top1_accuracy": 0.25,
+  "error_association_rate": 0.75
+}

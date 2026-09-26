@@ -1,0 +1,13 @@
+{
+  "rows": {
+    "train": 2944,
+    "dev": 432,
+    "final_test": 340
+  },
+  "groups": {
+    "train": 62,
+    "dev": 12,
+    "final_test": 7
+  },
+  "note": "v2 adds controlled synthetic Chinese groups; final_test remains original frozen test"
+}

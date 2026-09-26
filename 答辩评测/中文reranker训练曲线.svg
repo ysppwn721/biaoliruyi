@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="680">
+<rect width="100%" height="100%" fill="#fbfcfe"/>
+<text x="100" y="38" font-family="Microsoft YaHei" font-size="26" font-weight="600" fill="#172033">中文轻量 reranker 训练曲线</text>
+<text x="100" y="62" font-family="Microsoft YaHei" font-size="14" fill="#536174">14个训练文档组 · 4个开发文档组 · 7个冻结测试文档组</text>
+<text x="100" y="72" font-family="Microsoft YaHei" font-size="18" fill="#172033">损失曲线</text>
+<line x1="100" y1="310.0" x2="1050" y2="310.0" stroke="#dfe5ed"/>
+<text x="88" y="315.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">0.00</text>
+<line x1="100" y1="266.0" x2="1050" y2="266.0" stroke="#dfe5ed"/>
+<text x="88" y="271.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">1.75</text>
+<line x1="100" y1="222.0" x2="1050" y2="222.0" stroke="#dfe5ed"/>
+<text x="88" y="227.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">3.50</text>
+<line x1="100" y1="178.0" x2="1050" y2="178.0" stroke="#dfe5ed"/>
+<text x="88" y="183.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">5.25</text>
+<line x1="100" y1="134.0" x2="1050" y2="134.0" stroke="#dfe5ed"/>
+<text x="88" y="139.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">7.00</text>
+<line x1="100" y1="90.0" x2="1050" y2="90.0" stroke="#dfe5ed"/>
+<text x="88" y="95.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">8.75</text>
+<text x="100.0" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">1</text>
+<text x="205.6" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">2</text>
+<text x="311.1" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">3</text>
+<text x="416.7" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">4</text>
+<text x="522.2" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">5</text>
+<text x="627.8" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">6</text>
+<text x="733.3" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">7</text>
+<text x="838.9" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">8</text>
+<text x="944.4" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">9</text>
+<text x="1050.0" y="334" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">10</text>
+<path d="M 100.0,136.3 L 205.6,252.5 L 311.1,275.0 L 416.7,274.6 L 522.2,290.3 L 627.8,276.8 L 733.3,287.1 L 838.9,291.7 L 944.4,283.6 L 1050.0,252.3" fill="none" stroke="#0b6e99" stroke-width="3"/>
+<text x="1045" y="108" text-anchor="end" font-family="Arial" font-size="13" fill="#0b6e99">train_loss</text>
+<path d="M 100.0,136.3 L 205.6,252.5 L 311.1,275.0 L 416.7,274.6 L 522.2,290.3 L 627.8,276.8 L 733.3,287.1 L 838.9,291.7 L 944.4,283.6 L 1050.0,252.3" fill="none" stroke="#f08c46" stroke-width="3"/>
+<text x="1045" y="126" text-anchor="end" font-family="Arial" font-size="13" fill="#f08c46">dev_loss</text>
+<path d="M 100.0,100.5 L 205.6,241.1 L 311.1,271.2 L 416.7,277.0 L 522.2,286.4 L 627.8,279.7 L 733.3,280.7 L 838.9,291.2 L 944.4,274.5 L 1050.0,246.3" fill="none" stroke="#7a5af8" stroke-width="3"/>
+<text x="1045" y="144" text-anchor="end" font-family="Arial" font-size="13" fill="#7a5af8">test_loss</text>
+<text x="100" y="372" font-family="Microsoft YaHei" font-size="18" fill="#172033">Top-1准确率</text>
+<line x1="100" y1="610.0" x2="1050" y2="610.0" stroke="#dfe5ed"/>
+<text x="88" y="615.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">0.00</text>
+<line x1="100" y1="566.0" x2="1050" y2="566.0" stroke="#dfe5ed"/>
+<text x="88" y="571.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">0.20</text>
+<line x1="100" y1="522.0" x2="1050" y2="522.0" stroke="#dfe5ed"/>
+<text x="88" y="527.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">0.40</text>
+<line x1="100" y1="478.0" x2="1050" y2="478.0" stroke="#dfe5ed"/>
+<text x="88" y="483.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">0.60</text>
+<line x1="100" y1="434.0" x2="1050" y2="434.0" stroke="#dfe5ed"/>
+<text x="88" y="439.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">0.80</text>
+<line x1="100" y1="390.0" x2="1050" y2="390.0" stroke="#dfe5ed"/>
+<text x="88" y="395.0" text-anchor="end" font-family="Arial" font-size="12" fill="#536174">1.00</text>
+<text x="100.0" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">1</text>
+<text x="205.6" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">2</text>
+<text x="311.1" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">3</text>
+<text x="416.7" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">4</text>
+<text x="522.2" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">5</text>
+<text x="627.8" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">6</text>
+<text x="733.3" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">7</text>
+<text x="838.9" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">8</text>
+<text x="944.4" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">9</text>
+<text x="1050.0" y="634" text-anchor="middle" font-family="Arial" font-size="12" fill="#536174">10</text>
+<path d="M 100.0,490.0 L 205.6,490.0 L 311.1,470.0 L 416.7,490.0 L 522.2,490.0 L 627.8,470.0 L 733.3,470.0 L 838.9,470.0 L 944.4,490.0 L 1050.0,490.0" fill="none" stroke="#0b6e99" stroke-width="3"/>
+<text x="1045" y="408" text-anchor="end" font-family="Arial" font-size="13" fill="#0b6e99">dev.top1_accuracy</text>
+<path d="M 100.0,493.3 L 205.6,493.3 L 311.1,479.8 L 416.7,493.3 L 522.2,493.3 L 627.8,443.9 L 733.3,443.9 L 838.9,479.8 L 944.4,493.3 L 1050.0,493.3" fill="none" stroke="#f08c46" stroke-width="3"/>
+<text x="1045" y="426" text-anchor="end" font-family="Arial" font-size="13" fill="#f08c46">test.top1_accuracy</text>
+<text x="100" y="665" font-family="Microsoft YaHei" font-size="13" fill="#536174">说明：该曲线来自字符级本地学习基线；Transformer 微调模型需另行下载 PyTorch 基础权重。</text>
+</svg>
