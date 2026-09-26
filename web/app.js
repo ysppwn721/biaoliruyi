@@ -1,7 +1,7 @@
 'use strict';
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let workspace = null, currentView = 'overview', filter = 'all', health = null, graphFact = null;
+let workspace = null, currentView = 'overview', filter = 'all', health = null, graphFact = null, quota = null;
 const statusNames = {consistent:'仍成立', inconsistent:'已失效', unverifiable:'无法判断'};
 const kindNames = {quote:'数值引用', growth:'增长率', ranking:'排名', threshold:'阈值判断', chart:'图表数据'};
 const classNames = {consistent:'green', inconsistent:'red', unverifiable:'amber'};
@@ -319,10 +319,11 @@ function renderDiagnosis(){
 function agentModal(){
   if(workspace.agent?.phase==='awaiting_decision'&&workspace.agent.revision===workspace.revision){showAgentResult();return;}
   const projectId=workspace.id, revision=workspace.revision;
-  modal('运行证据链验证智能体',`<p class="modal-intro">按准备、关联、诊断、人工决定、修复、复核的顺序处理当前已保存的数据。来源确认和文件修复分别等待你批准。</p><p class="hint">${health?.model.enabled?'关联阶段会把最多40条未确认文本论断及事实元数据发送给 DeepSeek，可能产生调用费用；模型只提出候选。':'无模型时使用规则候选，功能仍可运行。'} 图表使用规则来源。关闭待办窗口后可继续。</p>${drafts().size?'<p class="hint">右侧还有未应用的数值。若要核验这些变更，请先关闭窗口并点击“更新数据并验证”。</p>':''}<div class="modal-actions"><button class="button primary" id="startAgent">开始运行</button></div>`);
+  modal('运行证据链验证智能体',`<p class="modal-intro">按准备、关联、诊断、人工决定、修复、复核的顺序处理当前已保存的数据。来源确认和文件修复分别等待你批准。</p><p class="hint">${health?.model.enabled?'关联阶段会把最多40条未确认文本论断及事实元数据发送给 DeepSeek，可能产生调用费用；模型只提出候选。':'无模型时使用规则候选，功能仍可运行。'} 图表使用规则来源。关闭待办窗口后可继续。${quota&&typeof quota.client_remaining==='number'?` 今日剩余额度：本访客 ${quota.client_remaining} 次，全局 ${quota.global_remaining} 次。`:''}</p>${drafts().size?'<p class="hint">右侧还有未应用的数值。若要核验这些变更，请先关闭窗口并点击“更新数据并验证”。</p>':''}<div class="modal-actions"><button class="button primary" id="startAgent">开始运行</button></div>`);
   $('startAgent').onclick=async()=>{
     if(workspace.id!==projectId||workspace.revision!==revision){toast('项目已更新，请关闭窗口重新运行',true);return;}
     const result=await post('agent/run',{},'智能体正在关联与诊断，模型请求最长约60秒');
+    await refreshQuota();
     if(result)showAgentResult();
   };
 }
@@ -523,11 +524,30 @@ $('importSource').onclick=importSourceModal;
 $('demoChange').onclick=()=>{const values={sales_current:90,product_a:60,spending:110};document.querySelectorAll('[data-fact]').forEach(x=>{if(x.dataset.fact in values){x.value=values[x.dataset.fact];trackDraft(x);}});toast('已填写示例变更，点击“更新数据并验证”应用');};
 $('exportButton').onclick=deliveryModal;
 $('undoButton').onclick=()=>{modal('撤销上一次文件变更',`<p class="modal-intro">恢复上一次数据更新或修复之前的文件。操作记录会保留。</p><div class="modal-actions"><button class="button primary" id="applyUndo">确认恢复</button></div>`);$('applyUndo').onclick=async()=>{if(await post('undo',{},'恢复文件版本')){closeModal();toast('已恢复上一次文件变更之前的版本');}};};
-$('suggestButton').onclick=()=>{modal('请求 DeepSeek 关联建议',`<p class="modal-intro">将最多40条未确认论断及事实元数据发送至 ${esc(health.model.provider)} 服务，调用费用由服务提供方承担。模型只提出建议，结果仍需人工确认。</p><div class="modal-actions"><button class="button primary" id="callModel">发送并获取建议</button></div>`);$('callModel').onclick=async()=>{if(await post('suggest',{},'等待模型建议，最长约60秒')){closeModal();toast('建议已保存，在“查看依据”中审阅');}};};
+$('suggestButton').onclick=()=>{const left=quota&&typeof quota.client_remaining==='number'?`<p class="hint">今日剩余额度：本访客 ${quota.client_remaining} 次，全局 ${quota.global_remaining} 次。${quota.client_remaining<=0?'额度已用完，本次不会发起请求。':''}</p>`:'';modal('请求 DeepSeek 关联建议',`<p class="modal-intro">将最多40条未确认论断及事实元数据发送至 ${esc(health.model.provider)} 服务，调用费用由服务提供方承担。模型只提出建议，结果仍需人工确认。</p>${left}<div class="modal-actions"><button class="button primary" id="callModel">发送并获取建议</button></div>`);$('callModel').onclick=async()=>{if(await post('suggest',{},'等待模型建议，最长约60秒')){closeModal();await refreshQuota();toast('建议已保存，在“查看依据”中审阅');}};};
+// 演示环境由服务提供方付费，所以界面要明确显示"今天还剩多少次模型调用"：
+// 既是使用提示，也让"限额是设计的一部分"这件事对使用者可见。
+function quotaLabel(q){
+  if(!q || typeof q.client_remaining!=='number') return '';
+  return ` · 今日剩 ${q.client_remaining} 次`;
+}
+function quotaTitle(q){
+  if(!q || typeof q.client_remaining!=='number') return '';
+  return `模型调用限额：本访客已用 ${q.client_used}/${q.client_limit} 次，全局已用 ${q.global_used}/${q.global_limit} 次；按自然日重置，超出后自动降级为规则模式。`;
+}
+async function refreshQuota(){
+  try{ quota=await api('/api/quota'); }catch(e){ quota=null; }
+  const badge=$('modelBadge');
+  if(badge){
+    badge.textContent=(health&&health.model.enabled?'DeepSeek 已配置':'规则模式 · 无需 API')+quotaLabel(quota);
+    badge.title=quotaTitle(quota);
+  }
+  return quota;
+}
 async function init(){
   try{
     health=await api('/api/health');$('connection').innerHTML='工作空间已连接<small>本地持久化存储</small>';
-    $('modelBadge').textContent=health.model.enabled?'DeepSeek 已配置':'规则模式 · 无需 API';
+    await refreshQuota();
     const projects=await refreshProjects();const previous=localStorage.getItem('zhilian-project');
     if(projects.length)await loadProject(projects.find(p=>p.id===previous)?.id||projects[0].id);else render();
   }catch(e){$('welcome').classList.remove('hidden');$('connection').textContent='连接失败';toast(e.message,true);}

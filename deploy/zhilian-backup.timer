@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Zhilian demo data backup daily
+
+[Timer]
+# 每天 03:30（服务器为 Asia/Shanghai）执行；错过的任务开机后补跑一次。
+OnCalendar=*-*-* 03:30:00
+Persistent=true
+RandomizedDelaySec=10m
+
+[Install]
+WantedBy=timers.target

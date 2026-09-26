@@ -1,0 +1,12 @@
+[Unit]
+Description=Zhilian demo data backup
+Documentation=file:/opt/zhilian/biaoliruyi/deploy/backup.sh
+After=zhilian.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/zhilian/biaoliruyi
+ExecStart=/bin/bash /opt/zhilian/biaoliruyi/deploy/backup.sh
+# 备份是只读打包 + 写归档，不需要任何额外权限
+Nice=10
+IOSchedulingClass=idle
