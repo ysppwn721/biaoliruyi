@@ -35,11 +35,9 @@ def status() -> dict:
     configured = bool(os.getenv("ZHILIAN_LOCAL_RERANKER_PATH", "").strip()) or os.getenv(
         "ZHILIAN_LOCAL_RERANKER_ENABLED", "0").lower() in {"1", "true", "yes", "on"}
     imported = _imports() is not None
-    model = directory / "onnx" / "model_int8.onnx"
-    if not model.exists():
-        model = directory / "model_quantized.onnx"
+    model = _find_model_file(directory)
     return {
-        "enabled": configured and imported and model.exists() and (directory / "tokenizer.json").exists(),
+        "enabled": configured and imported and model.exists() and _tokenizer_file(directory).exists(),
         "configured": configured,
         "path": str(directory),
         "model": str(model),
@@ -53,13 +51,30 @@ def _fact_text(fact: dict) -> str:
 
 
 @lru_cache(maxsize=2)
+def _tokenizer_file(directory: Path) -> Path:
+    candidates = (directory / "tokenizer.json", directory / "onnx" / "tokenizer.json")
+    return next((path for path in candidates if path.exists()), candidates[0])
+
+
+def _find_model_file(directory: Path) -> Path:
+    candidates = (
+        directory / "onnx" / "model_int8.onnx",
+        directory / "model_int8.onnx",
+        directory / "model_quantized.onnx",
+        directory / "model_fp32.onnx",
+    )
+    return next((path for path in candidates if path.exists()), candidates[0])
+
+
+@lru_cache(maxsize=2)
 def _runtime(model_path: str):
     model = Path(model_path)
     imported = _imports()
     if imported is None:
         raise RuntimeError("本地 reranker 依赖未安装，请安装 onnxruntime、tokenizers 和 numpy")
     np, ort, Tokenizer = imported
-    tokenizer = Tokenizer.from_file(str(model.parent.parent / "tokenizer.json"))
+    model_directory = model.parent.parent if model.parent.name == "onnx" else model.parent
+    tokenizer = Tokenizer.from_file(str(_tokenizer_file(model_directory)))
     tokenizer.enable_truncation(max_length=int(os.getenv("ZHILIAN_RERANKER_MAX_LENGTH", "512")))
     tokenizer.enable_padding(pad_id=0, pad_token="<pad>")
     providers = ort.get_available_providers()
@@ -75,9 +90,9 @@ def _runtime(model_path: str):
 
 def _model_file() -> Path:
     directory = _model_dir()
-    for candidate in (directory / "onnx" / "model_int8.onnx", directory / "model_quantized.onnx"):
-        if candidate.exists():
-            return candidate
+    model = _find_model_file(directory)
+    if model.exists():
+        return model
     raise FileNotFoundError(f"未找到本地 reranker 模型：{directory}")
 
 
@@ -100,7 +115,13 @@ def score_pairs(claim_text: str, facts: list[dict], *, batch_size: int = 16) -> 
         if "token_type_ids" in names:
             arrays["token_type_ids"] = np.asarray(token_types, dtype=np.int64)
         output = session.run(None, {name: value for name, value in arrays.items() if name in names})[0]
-        flat = output.reshape(-1).tolist()
+        # BGE ONNX returns one raw score per pair; the fine-tuned BERT export
+        # returns two classification logits. Use the positive-vs-negative
+        # margin for the latter so both models share the same downstream gate.
+        if output.ndim == 2 and output.shape[1] >= 2:
+            flat = (output[:, 1] - output[:, 0]).tolist()
+        else:
+            flat = output.reshape(-1).tolist()
         for fact, raw in zip(facts[start:start + batch_size], flat):
             score = 1.0 / (1.0 + math.exp(-max(-60.0, min(60.0, float(raw)))))
             results.append({"fact_id": fact["id"], "score": round(score, 6), "raw_score": float(raw),

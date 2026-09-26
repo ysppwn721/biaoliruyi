@@ -1,0 +1,11 @@
+# Optional local reranker fine-tuning environment.
+# Keep separate from the runtime requirements so the application package stays small.
+# PyTorch CPU wheels are hosted on the official PyTorch index.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.14.0+cpu
+transformers==5.17.0
+accelerate==1.15.0
+scikit-learn==1.9.1
+sentencepiece==0.2.2
+# Fast text-layer extraction for the public annual-report PDF holdout.
+pymupdf>=1.24,<2

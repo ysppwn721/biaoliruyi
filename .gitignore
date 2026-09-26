@@ -24,3 +24,7 @@ _tmp_plan.pdf
 # 站点预览截图（本地校验用）
 site/_preview.png
 
+# 本地打包中间目录与可再生安装包
+build/
+dist/
+artifacts/

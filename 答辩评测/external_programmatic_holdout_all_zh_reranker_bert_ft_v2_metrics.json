@@ -1,0 +1,10 @@
+{
+  "model": "zh_reranker_bert_ft_v2",
+  "programmatic": true,
+  "file": "答辩评测\\external_programmatic_holdout_all.jsonl",
+  "groups": 36,
+  "claims": 576,
+  "rows": 1728,
+  "top1_accuracy": 0.413194,
+  "error_association_rate": 0.586806
+}
