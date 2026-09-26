@@ -29,7 +29,8 @@ a = Analysis(
     # The base installer must stay small.  Local reranking is an optional
     # add-on; without these packages reranker.status() safely falls back to
     # deterministic rules/API mode.
-    excludes=["torch", "transformers", "tensorflow", "pytest", "pandas", "matplotlib", "IPython", "mcp", "onnxruntime", "numpy", "tokenizers"],
+    excludes=["torch", "transformers", "tensorflow", "pytest", "pandas", "matplotlib", "IPython", "mcp", "onnxruntime", "numpy", "tokenizers",
+              "lxml.objectify", "lxml.html", "lxml.isoschematron", "PIL.ImageCms", "PIL.WebPImagePlugin"],
     noarchive=False,
 )
 pyz = PYZ(a.pure)

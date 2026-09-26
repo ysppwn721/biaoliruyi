@@ -98,7 +98,7 @@
     <h3>下载</h3>
     <p class="sec-lead">
       请按你的操作系统选择。若不确定，页面会自动高亮当前系统对应的版本。
-      Windows 原生便携包已可直接下载；macOS / Linux 提供目标系统构建包，运行其中的脚本即可生成对应架构的原生包。
+      Windows 原生便携包已可下载；macOS / Linux 提供目标系统构建包，运行其中的脚本即可生成对应架构的原生包。
     </p>
 
     <div class="plat" id="plat">
@@ -107,10 +107,12 @@
         <p class="pstate ready">可下载 · v0.2.1</p>
         <ul class="meta">
           <li>Windows 10 / 11（64 位）</li>
-          <li>原生便携包，约 34 MB</li>
-          <li>无需 Python，解压后直接运行 Zhilian.exe</li>
+          <li>原生便携包，合并后约 28 MB</li>
+          <li>无需 Python，合并分卷后解压运行 Zhilian.exe</li>
         </ul>
-        <a class="btn primary" href="downloads/知链_v0.2.1_Windows免安装.zip" download>下载免安装包</a>
+        <a class="btn primary" href="downloads/知链_v0.2.1_Windows免安装.zip.000" download>下载分卷 1 / 2</a>
+        <a class="btn" href="downloads/知链_v0.2.1_Windows免安装.zip.001" download>下载分卷 2 / 2</a>
+        <a class="textlink" href="downloads/合并Windows分卷.ps1" download>下载合并脚本</a>
       </article>
 
       <article class="platcard" data-os="macos">
@@ -149,7 +151,7 @@
     </div>
 
     <div class="dl-note">
-      <strong>说明</strong>：Windows 原生便携包已构建并验收。macOS 与 Linux 采用 PyInstaller
+      <strong>说明</strong>：Windows 原生便携包已构建并验收。Windows 分卷下载后运行合并脚本即可得到完整 ZIP；macOS 与 Linux 采用 PyInstaller
       在目标系统生成原生包，页面提供同一套构建包和脚本；跨平台二进制不能在 Windows 上交叉伪造，
       发布前需在真实机器上完成安装与文件读写验证。
     </div>
