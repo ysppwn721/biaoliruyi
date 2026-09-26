@@ -371,8 +371,9 @@ docker run --rm -e ZHILIAN_ACCESS_PASSWORD=你的密码 -p 8765:8765 biaoliruyi<
 </script>
 
 <script>
-// 同域演示入口；完整文件处理仍可通过 Windows 免安装包体验。
-window.DEMO_URL = '/demo/';
+// 真实工作台部署在独立子域（Cloudflare Tunnel → 云服务器），静态站由本 Worker 提供。
+// 两者分离：安装包等大文件不占服务器带宽，后端也无需暴露任何公网端口。
+window.DEMO_URL = 'https://demo.zhilian.space/';
 </script>
 <script>
 // 一键复制测试账号：减轻评委手输账密的负担
@@ -453,8 +454,9 @@ window.DEMO_URL = '/demo/';
     return;
   }
 
-  // 跨域探测：只判断可达性，不读响应内容
-  fetch(DEMO_URL + '/api/health', { mode: 'no-cors', cache: 'no-store' })
+  // 跨域探测：只判断可达性，不读响应内容。带上 no-cors 时 401 也算"主机在"，
+  // 这正是我们要判断的（演示环境需要登录是预期行为）。
+  fetch(DEMO_URL.replace(/\/+$/, '') + '/api/health', { mode: 'no-cors', cache: 'no-store' })
     .then(function () { report(true); })
     .catch(function () { report(false, '无法连接'); });
 })();
