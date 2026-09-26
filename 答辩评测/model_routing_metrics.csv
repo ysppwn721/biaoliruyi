@@ -1,0 +1,13 @@
+﻿system,split,group_count,decision_count,top1_accuracy,error_link_rate,ambiguity_abstain_rate,false_abstain_rate,prompt_injection_rate
+rule-only,dev,20,120,1.0,0.0,1.0,0.0,0.0
+rule-only,test,10,60,1.0,0.0,1.0,0.0,0.0
+rule-only,all,30,180,1.0,0.0,1.0,0.0,0.0
+local-reranker-all,dev,20,120,0.4,0.0,1.0,0.6,0.0
+local-reranker-all,test,10,60,0.4,0.0,1.0,0.6,0.0
+local-reranker-all,all,30,180,0.4,0.0,1.0,0.6,0.0
+api-all,dev,20,120,0.6,0.333333,0.0,0.2,0.0
+api-all,test,10,60,0.6,0.333333,0.0,0.2,0.0
+api-all,all,30,180,0.6,0.333333,0.0,0.2,0.0
+routed-rule-local-api,dev,20,120,1.0,0.0,1.0,0.0,0.0
+routed-rule-local-api,test,10,60,1.0,0.0,1.0,0.0,0.0
+routed-rule-local-api,all,30,180,1.0,0.0,1.0,0.0,0.0

@@ -1,0 +1,149 @@
+{
+  "policy": "rule unique/compound -> local multi -> API fallback zero/local abstain",
+  "counts": {
+    "unique_rule": 150,
+    "multi_local": 0,
+    "multi_api_fallback": 30,
+    "zero_api": 0,
+    "manual_abstain": 30,
+    "rows": 180,
+    "api_fallback_claims": 30,
+    "api_batches_at_40_theoretical_lower_bound": 1,
+    "local_pairs": 0
+  },
+  "metrics": [
+    {
+      "system": "rule-only",
+      "split": "dev",
+      "group_count": 20,
+      "decision_count": 120,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "rule-only",
+      "split": "test",
+      "group_count": 10,
+      "decision_count": 60,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "rule-only",
+      "split": "all",
+      "group_count": 30,
+      "decision_count": 180,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "local-reranker-all",
+      "split": "dev",
+      "group_count": 20,
+      "decision_count": 120,
+      "top1_accuracy": 0.4,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.6,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "local-reranker-all",
+      "split": "test",
+      "group_count": 10,
+      "decision_count": 60,
+      "top1_accuracy": 0.4,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.6,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "local-reranker-all",
+      "split": "all",
+      "group_count": 30,
+      "decision_count": 180,
+      "top1_accuracy": 0.4,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.6,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "api-all",
+      "split": "dev",
+      "group_count": 20,
+      "decision_count": 120,
+      "top1_accuracy": 0.6,
+      "error_link_rate": 0.333333,
+      "ambiguity_abstain_rate": 0.0,
+      "false_abstain_rate": 0.2,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "api-all",
+      "split": "test",
+      "group_count": 10,
+      "decision_count": 60,
+      "top1_accuracy": 0.6,
+      "error_link_rate": 0.333333,
+      "ambiguity_abstain_rate": 0.0,
+      "false_abstain_rate": 0.2,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "api-all",
+      "split": "all",
+      "group_count": 30,
+      "decision_count": 180,
+      "top1_accuracy": 0.6,
+      "error_link_rate": 0.333333,
+      "ambiguity_abstain_rate": 0.0,
+      "false_abstain_rate": 0.2,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "routed-rule-local-api",
+      "split": "dev",
+      "group_count": 20,
+      "decision_count": 120,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "routed-rule-local-api",
+      "split": "test",
+      "group_count": 10,
+      "decision_count": 60,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "routed-rule-local-api",
+      "split": "all",
+      "group_count": 30,
+      "decision_count": 180,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    }
+  ],
+  "caveat": "历史预测离线重放，不是新路由实测。标签只用于打分。批次数是忽略文档组/事实表隔离的理论下限，不是实际调用数或耗时。"
+}

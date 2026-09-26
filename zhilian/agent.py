@@ -78,7 +78,7 @@ def _candidate_buckets(ws, rules):
         lexical = engine.best_facts(claim['original'], ws['facts'])
         # Compound assertions (growth/ranking/budget) are already resolved by
         # typed deterministic rules and must not be split by a reranker.
-        if rule_refs and claim['kind'] in {'growth', 'ranking', 'chart'}:
+        if rule_refs and claim['kind'] in {'growth', 'ranking', 'threshold', 'chart'}:
             unique.append(claim)
         elif len(lexical) == 1:
             unique.append(claim)
@@ -246,6 +246,7 @@ def _advance(store, ws):
         unique, multi, zero = _candidate_buckets(ws, rules)
         local_ids = set()
         local_enabled = reranker.status()['enabled']
+        api_batches = 0
         if local_enabled and multi:
             try:
                 local = _tool(store, ws, 'suggest_links_local')['suggestions']
@@ -260,9 +261,15 @@ def _advance(store, ws):
         api_claims = zero + [c for c in multi if c['id'] not in local_ids]
         if llm.config()['enabled'] and api_claims and len(ws['facts']) <= 150:
             try:
-                remote = _tool(store, ws, 'suggest_links_llm',
-                               {'claim_ids': [c['id'] for c in api_claims]})['suggestions']
-                suggestions.extend(remote)
+                # Keep each request within the provider contract while still
+                # batching the difficult claims. A normal project therefore
+                # needs one request for <=40 claims, two for 41-80, etc.
+                for start in range(0, len(api_claims), 40):
+                    batch = api_claims[start:start + 40]
+                    api_batches += 1
+                    remote = _tool(store, ws, 'suggest_links_llm',
+                                   {'claim_ids': [c['id'] for c in batch]})['suggestions']
+                    suggestions.extend(remote)
             except Exception:
                 ws['audit'].append({'time': now(), 'event': 'Agent 模型降级',
                                     'detail': '困难样本模型不可用，继续使用规则候选，来源未自动确认'})
@@ -273,7 +280,7 @@ def _advance(store, ws):
         ws['agent']['model_routing'] = {
             'unique_rule_claims': len(unique), 'multi_candidate_claims': len(multi),
             'zero_candidate_claims': len(zero), 'local_reranker_suggestions': len(local_ids),
-            'api_candidate_claims': len(api_claims), 'api_suggestions': sum(
+            'api_candidate_claims': len(api_claims), 'api_batches': api_batches, 'api_suggestions': sum(
                 1 for item in suggestions if item.get('claim_id') not in local_ids),
         }
         byid = {r['claim_id']: r['refs'] for r in rules}
