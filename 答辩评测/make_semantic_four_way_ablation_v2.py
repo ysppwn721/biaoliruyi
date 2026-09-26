@@ -109,7 +109,9 @@ def chart(rows):
     labels = {'rule-only': '纯规则', 'local-only': '单独本地模型', 'rule-local': '规则+本地模型', 'rule-local-api': '规则+本地模型+API'}
     colors = {'top1_accuracy': '#0b6e99', 'error_association_rate': '#d86555', 'coverage': '#0b8a72', 'abstain_rate': '#f08c46'}
     metrics_to_plot = [('top1_accuracy', 'Top-1'), ('error_association_rate', '错误关联'), ('coverage', '覆盖率'), ('abstain_rate', '拒答率')]
-    W, H, left, top, width, height = 1240, 670, 105, 110, 1040, 405
+    # Reserve separate rows for the legend and the conclusion caption so that
+    # the long Chinese text cannot overlap the legend in exported slides.
+    W, H, left, top, width, height = 1240, 730, 105, 110, 1040, 405
     def y(value): return top + height - value * height
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">', '<rect width="100%" height="100%" fill="#fbfcfe"/>', '<style>text{font-family:"Microsoft YaHei",Arial,sans-serif}.title{font-size:26px;font-weight:700;fill:#172033}.muted{font-size:13px;fill:#536174}.axis{stroke:#8291a3}.grid{stroke:#dfe5ed}.label{font-size:14px;fill:#172033}</style>', '<text x="105" y="42" class="title">语义改写集四档配置对比</text>', '<text x="105" y="69" class="muted">72 条中文改写论断 · API 实际调用 2 批 · 程序化 gold，仅用于评测</text>']
     for tick in range(6):
@@ -123,9 +125,10 @@ def chart(rows):
             value = float(row[key]); xx = center + (mi - 1.5) * (bar_width + 5) - bar_width / 2; yy = y(value)
             out += [f'<rect x="{xx:.1f}" y="{yy:.1f}" width="{bar_width}" height="{top+height-yy:.1f}" fill="{colors[key]}"/>', f'<text x="{xx+bar_width/2:.1f}" y="{max(top+12,yy-7):.1f}" text-anchor="middle" class="muted">{value:.0%}</text>']
         out.append(f'<text x="{center:.1f}" y="{top+height+30}" text-anchor="middle" class="label">{labels[row["system"]]}</text>')
+    legend_y = H - 75
     for i, (key, label) in enumerate(metrics_to_plot):
-        xx = 155 + i * 240; out += [f'<rect x="{xx}" y="{H-65}" width="16" height="16" fill="{colors[key]}"/>', f'<text x="{xx+24}" y="{H-51}" class="muted">{label}</text>']
-    out += ['<text x="105" y="610" class="muted">结论：API 只补规则零候选；本地模型负责语义排序；所有来源仍需人工确认。</text>', '</svg>']
+        xx = 155 + i * 240; out += [f'<rect x="{xx}" y="{legend_y}" width="16" height="16" fill="{colors[key]}"/>', f'<text x="{xx+24}" y="{legend_y+14}" class="muted">{label}</text>']
+    out += [f'<text x="105" y="{H-20}" class="muted">结论：API 只补规则零候选；本地模型负责语义排序；所有来源仍需人工确认。</text>', '</svg>']
     return '\n'.join(out)
 
 
