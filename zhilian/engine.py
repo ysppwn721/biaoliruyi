@@ -67,6 +67,20 @@ def stable_id(*parts):
 GENERIC_SUBJECTS = ('总计', '整体', '全部')
 
 
+# 期间是封闭词表，同义写法属于确定性规则该覆盖的范围：真实文档写"报告期/本年/
+# 去年同期"，而事实表只写"本期/上期"。不归一化会让上期与本期同分并列，一条普通
+# 数值引用被判成"口径不唯一"，甚至让阈值/增长率拿不到唯一来源。
+PERIOD_SYNONYMS = {
+    '本期': ('本期', '本报告期', '报告期内', '报告期', '本年度', '本年', '当期', '今年'),
+    '上期': ('上期', '上年度同期', '上年同期', '去年同期', '上年度', '上年', '去年'),
+}
+
+
+def period_in_text(period, text):
+    """事实的期间是否在文本中以任意同义写法出现。"""
+    return any(word in text for word in PERIOD_SYNONYMS.get(period, (period,)) if word)
+
+
 def _descriptors(fact):
     """一条事实的**定位**描述符：指标与非泛指主体。
 
@@ -147,7 +161,7 @@ def best_facts(text, facts, *, period=None, index=None):
         score = 5
         if fact['subject'] not in GENERIC_SUBJECTS:
             score += 4
-        if fact['period'] and fact['period'] in text:
+        if fact['period'] and period_in_text(fact['period'], text):
             score += 3
         scored.append((score, fact))
     if not scored:

@@ -1,0 +1,280 @@
+{
+  "summary": {
+    "cases": 18,
+    "rule_recall": 0.3889,
+    "rule_top1": 0.3333,
+    "semantic_top1": 0.9444,
+    "semantic_top2_recall": 1.0,
+    "note": "改写只改措辞不改语义；规则硬门槛为 fact['metric'] in claim_text。"
+  },
+  "rows": [
+    {
+      "text": "本期销售额为125万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "原句（词面完全一致）",
+      "rule_refs": [
+        "sales_current"
+      ],
+      "rule_recall": true,
+      "rule_top1": true,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -1.391,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期销售额累计125万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "加动词「累计」",
+      "rule_refs": [
+        "sales_current"
+      ],
+      "rule_recall": true,
+      "rule_top1": true,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -1.4,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本报告期销售额为125万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "期间换说法：本期→本报告期",
+      "rule_refs": [
+        "sales_current"
+      ],
+      "rule_recall": true,
+      "rule_top1": true,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -2.132,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "报告期内销售金额为125万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "指标换说法：销售额→销售金额",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -2.949,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期销售收入为125万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "指标换说法：销售额→销售收入",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -1.703,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期营业总收入达125万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "指标换说法：销售额→营业总收入",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -2.739,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "公司本期实现营收125万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "指标换说法：销售额→营收",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -2.224,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期销售业绩为125万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "指标换说法：销售额→销售业绩",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -2.115,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "A产品销售量为80件",
+      "gold": [
+        "product_a"
+      ],
+      "how": "指标换说法：销量→销售量",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "product_a",
+      "semantic_top1_raw": -0.471,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "A产品出货量达80件",
+      "gold": [
+        "product_a"
+      ],
+      "how": "指标换说法：销量→出货量",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "product_a",
+      "semantic_top1_raw": -1.092,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期开支为80万元",
+      "gold": [
+        "spending"
+      ],
+      "how": "指标换说法：支出→开支",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "spending",
+      "semantic_top1_raw": -0.484,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期费用为80万元",
+      "gold": [
+        "spending"
+      ],
+      "how": "指标换说法：支出→费用",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "spending",
+      "semantic_top1_raw": -0.902,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期计划金额为100万元",
+      "gold": [
+        "budget"
+      ],
+      "how": "指标换说法：预算→计划",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "budget",
+      "semantic_top1_raw": -0.552,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期预算为100万元",
+      "gold": [
+        "budget"
+      ],
+      "how": "原句（词面完全一致）",
+      "rule_refs": [
+        "budget"
+      ],
+      "rule_recall": true,
+      "rule_top1": true,
+      "semantic_top1_id": "budget",
+      "semantic_top1_raw": 0.178,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "本期销售额超过120万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "原句（阈值）",
+      "rule_refs": [
+        "sales_current"
+      ],
+      "rule_recall": true,
+      "rule_top1": true,
+      "semantic_top1_id": "sales_current",
+      "semantic_top1_raw": -1.945,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "报告期销售额突破120万元",
+      "gold": [
+        "sales_current"
+      ],
+      "how": "阈值换说法：超过→突破",
+      "rule_refs": [
+        "sales_current"
+      ],
+      "rule_recall": true,
+      "rule_top1": true,
+      "semantic_top1_id": "sales_prev",
+      "semantic_top1_raw": -3.091,
+      "semantic_top1": false,
+      "gold_rank": 2
+    },
+    {
+      "text": "A产品销量最高",
+      "gold": [
+        "product_a",
+        "product_b"
+      ],
+      "how": "原句（排名，需两条）",
+      "rule_refs": [
+        "product_a"
+      ],
+      "rule_recall": true,
+      "rule_top1": false,
+      "semantic_top1_id": "product_a",
+      "semantic_top1_raw": -1.136,
+      "semantic_top1": true,
+      "gold_rank": 1
+    },
+    {
+      "text": "A产品销售量为各产品之最",
+      "gold": [
+        "product_a",
+        "product_b"
+      ],
+      "how": "排名换说法",
+      "rule_refs": [],
+      "rule_recall": false,
+      "rule_top1": false,
+      "semantic_top1_id": "product_a",
+      "semantic_top1_raw": -1.889,
+      "semantic_top1": true,
+      "gold_rank": 1
+    }
+  ]
+}

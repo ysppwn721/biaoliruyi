@@ -104,3 +104,21 @@ def test_many_facts_do_not_change_matching_result():
     many = BASE + [fact(f'extra{i}', f'主体{i}', f'指标{i}', '本期') for i in range(300)]
     for text in ['A产品销量最高', '本期销售额为125万元', '销量为80件']:
         assert ids(best_facts(text, many)) == ids(best_facts(text, BASE))
+
+
+def test_period_synonyms_disambiguate_current_vs_previous():
+    """期间同义写法必须能区分本期与上期，否则两条事实同分并列。
+
+    真实文档写「报告期内/本年度/去年同期」，事实表只写「本期/上期」。不归一化时
+    上期与本期同为 5 分，一条普通数值引用会被判成"口径不唯一"而返回两条。
+    """
+    for text in ('本报告期销售额为125万元', '报告期内销售额为125万元',
+                 '本年度销售额为125万元', '当期销售额为125万元'):
+        assert ids(best_facts(text, BASE)) == ['sales_current'], text
+    for text in ('去年同期销售额为100万元', '上年销售额为100万元'):
+        assert ids(best_facts(text, BASE)) == ['sales_prev'], text
+
+
+def test_period_synonyms_do_not_break_growth_pairing():
+    """含两期表述的句子仍应同时命中两期，不能被同义词规则收窄成一条。"""
+    assert set(ids(best_facts('本期销售额较上期增长', BASE))) == {'sales_prev', 'sales_current'}
