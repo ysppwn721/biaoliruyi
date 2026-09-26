@@ -184,6 +184,45 @@ def create_app(data_dir=None):
                 for f in files:
                     await f.close()
 
+    @app.post('/api/projects/{wid}/documents')
+    async def append_documents(wid: str, revision: int = Form(...), files: list[UploadFile] = File(...)):
+        """Append a bounded batch of Word/PPT/image files to an existing project.
+
+        The Excel source remains the project's single source of truth and is
+        deliberately rejected here.  Clients can upload dozens of documents by
+        repeating this endpoint; each request is committed as one transaction.
+        """
+        max_batch = int(os.getenv('ZHILIAN_MAX_APPEND_BATCH', '50'))
+        if len(files) > max_batch:
+            raise ValueError(f'单批最多追加{max_batch}份文档，请分批上传')
+        paths, total, names = [], 0, set()
+        with tempfile.TemporaryDirectory() as tmp:
+            try:
+                for f in files:
+                    filename = (f.filename or '').replace('\\', '/').split('/')[-1]
+                    suffix = Path(filename).suffix.lower()
+                    if not filename or filename in names or suffix not in ('.docx', '.pptx', *ocr.IMAGE_EXTENSIONS):
+                        raise ValueError('追加批次只接受docx、pptx或图片文件，不允许再次上传xlsx')
+                    if len(filename) > 150 or any(c in filename for c in '<>:"|?*'):
+                        raise ValueError('文件名无效或过长')
+                    names.add(filename)
+                    path = Path(tmp) / filename
+                    with path.open('wb') as out:
+                        while chunk := await f.read(1024 * 1024):
+                            total += len(chunk)
+                            if total > 100 * 1024 * 1024:
+                                raise ValueError('每批追加总大小不超过100MB')
+                            out.write(chunk)
+                    paths.append(path)
+                return await run_in_threadpool(store.append_documents, wid, revision, paths)
+            finally:
+                for f in files:
+                    await f.close()
+
+    @app.get('/api/projects/{wid}/batches/{batch_id}')
+    def batch_status(wid: str, batch_id: str):
+        return store.batch(wid, batch_id)
+
     @app.get('/api/projects/{wid}')
     def get_project(wid: str):
         with store.lock:

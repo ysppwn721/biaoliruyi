@@ -165,6 +165,70 @@ def test_upload_and_persistence(tmp_path, monkeypatch):
     assert second_client.get(f'/api/projects/{w["id"]}').json()['summary']['claims'] == 5
 
 
+def test_append_document_batch_keeps_one_excel_and_scans_new_files(tmp_path):
+    store = Store(tmp_path / 'data')
+    initial = create_demo(tmp_path / 'initial')
+    w = store.create('批量追加测试', initial[:2])
+    extra = create_demo(tmp_path / 'extra')[1]
+    extra_copy = tmp_path / 'extra' / '第二份报告.docx'
+    doc = Document(extra)
+    doc.add_paragraph('追加批次文档中的新内容')
+    doc.save(extra_copy)
+    before = store.read(w['id'])
+    updated = store.append_documents(w['id'], before['revision'], [extra_copy])
+    state = store.read(w['id'])
+    assert len([d for d in state['documents'] if d['kind'] == 'xlsx']) == 1
+    assert len(state['documents']) == 3
+    assert updated['batch']['status'] == 'done'
+    new_id = next(d['id'] for d in state['documents'] if d['name'] == extra_copy.name)
+    assert any(c['file_id'] == new_id for c in state['claims'])
+    assert store.batch(w['id'], updated['batch']['id'])['count'] == 1
+    with pytest.raises(ValueError, match='同名文件'):
+        store.append_documents(w['id'], updated['revision'], [extra_copy])
+
+
+def test_append_documents_api_rejects_excel_and_supports_batch(tmp_path, monkeypatch):
+    monkeypatch.delenv('ZHILIAN_ACCESS_PASSWORD', raising=False)
+    from zhilian.app import create_app
+    app = create_app(tmp_path / 'api')
+    client = TestClient(app)
+    paths = create_demo(tmp_path / 'input')
+    response = client.post('/api/projects', data={'name': '批次 API'},
+                           files=[('files', (p.name, p.read_bytes(), 'application/octet-stream')) for p in paths[:2]])
+    assert response.status_code == 200, response.text
+    w = response.json()
+    extra = tmp_path / 'input' / '追加报告.docx'
+    doc = Document(paths[1])
+    doc.add_paragraph('API 追加批次的新内容')
+    doc.save(extra)
+    response = client.post(f'/api/projects/{w["id"]}/documents', data={'revision': w['revision']},
+                           files=[('files', (extra.name, extra.read_bytes(), 'application/octet-stream'))])
+    assert response.status_code == 200, response.text
+    result = response.json()
+    assert result['batch']['count'] == 1
+    assert result['summary']['documents'] == 3
+    batch = client.get(f'/api/projects/{w["id"]}/batches/{result["batch"]["id"]}')
+    assert batch.status_code == 200 and batch.json()['status'] == 'done'
+    excel = paths[0]
+    rejected = client.post(f'/api/projects/{w["id"]}/documents', data={'revision': result['revision']},
+                           files=[('files', (excel.name, excel.read_bytes(), 'application/octet-stream'))])
+    assert rejected.status_code == 400
+
+
+def test_append_document_batch_rolls_back_when_one_file_is_invalid(tmp_path):
+    store = Store(tmp_path / 'data')
+    paths = create_demo(tmp_path / 'files')
+    w = store.create('追加回滚测试', paths[:2])
+    invalid = tmp_path / 'files' / '损坏.docx'
+    invalid.write_bytes(b'not an Office document')
+    before = store.read(w['id'])
+    with pytest.raises(ValueError, match='有效的 Office'):
+        store.append_documents(w['id'], before['revision'], [invalid])
+    after = store.read(w['id'])
+    assert after['revision'] == before['revision']
+    assert [d['name'] for d in after['documents']] == [d['name'] for d in before['documents']]
+
+
 def test_external_excel_import_repair_and_undo(tmp_path, monkeypatch):
     monkeypatch.delenv('ZHILIAN_ACCESS_PASSWORD', raising=False)
     from zhilian.app import create_app

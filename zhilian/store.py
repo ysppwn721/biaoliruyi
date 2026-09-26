@@ -242,6 +242,116 @@ class Store:
                 shutil.rmtree(folder)
                 raise
 
+    def append_documents(self, wid, revision, paths):
+        """Append a batch of result documents to an existing Excel project.
+
+        The operation is transactional: the current generation is copied to a
+        new generation, new documents are parsed there, and state is written
+        only after the complete batch has scanned successfully.  This keeps a
+        failed large upload from leaving half an imported project.
+        """
+        paths = [Path(p) for p in paths]
+        max_batch = int(os.getenv('ZHILIAN_MAX_APPEND_BATCH', '50'))
+        max_total = int(os.getenv('ZHILIAN_MAX_PROJECT_DOCUMENTS', '500'))
+        if not paths:
+            raise ValueError('请至少选择一份Word、PPT或图片文件')
+        if len(paths) > max_batch:
+            raise ValueError(f'单批最多追加{max_batch}份文档，请分批上传')
+        allowed = {'.docx', '.pptx', *ocr.IMAGE_EXTENSIONS}
+        if any(p.suffix.lower() not in allowed for p in paths):
+            raise ValueError('追加接口只接受Word、PPT或图片文件，不允许再次上传Excel')
+        names = [p.name for p in paths]
+        if any(not p.is_file() for p in paths):
+            raise ValueError('上传文件不存在或无法读取')
+        if len(set(names)) != len(names) or any(not n or len(n) > 150 or any(c in n for c in '<>:"|?*') for n in names):
+            raise ValueError('文件名重复、无效或过长')
+        with self.lock:
+            ws = self.read(wid)
+            self.verify(ws, revision)
+            if len(ws.get('documents', [])) + len(paths) > max_total:
+                raise ValueError(f'项目文档总数不能超过{max_total}份')
+            existing_names = {d['name'] for d in ws['documents']}
+            if existing_names.intersection(names):
+                raise ValueError('项目中已有同名文件，请重命名后再追加')
+            existing_hashes = {d.get('sha256') for d in ws['documents']}
+            incoming_hashes = [digest(p) for p in paths]
+            if any(h in existing_hashes for h in incoming_hashes):
+                raise ValueError('项目中已有相同内容的文件，请勿重复导入')
+            batch_id = 'b' + uuid.uuid4().hex[:16]
+            previous = copy.deepcopy(ws)
+            root = self.folder(wid)
+            generation = 'v' + uuid.uuid4().hex[:12]
+            target = root / generation
+            shutil.copytree(root / ws['generation'], target)
+            try:
+                new_documents = []
+                for path in paths:
+                    fid = uuid.uuid4().hex[:16]
+                    stored = f'{fid}{path.suffix.lower()}'
+                    shutil.copyfile(path, target / stored)
+                    document = {'id': fid, 'name': path.name, 'kind': path.suffix.lower()[1:],
+                                'stored_name': stored, 'warnings': [], 'batch_id': batch_id}
+                    ws['documents'].append(document)
+                    new_documents.append(document)
+                before_blocks = len(ws.get('blocks', []))
+                before_images = len(ws.get('images', []))
+                self.scan(ws, target, previous.get('claims', []))
+                # Only extract assets for the newly appended documents. Existing
+                # image descriptors were copied with the generation.
+                for document in new_documents:
+                    if document['kind'] == 'xlsx':
+                        continue
+                    ext = '.' + document['kind']
+                    if ext in ocr.IMAGE_EXTENSIONS:
+                        img_id = 'img' + uuid.uuid4().hex[:16]
+                        mime = ocr.IMAGE_EXTENSIONS[ext]
+                        stored = 'images/' + img_id + '.' + ocr.MIME_EXT.get(mime, 'bin')
+                        image_path = target / stored
+                        image_path.parent.mkdir(exist_ok=True)
+                        shutil.copyfile(target / document['stored_name'], image_path)
+                        ws.setdefault('images', []).append({'id': img_id, 'file_id': document['id'],
+                            'location': json.dumps(['image']), 'label': document['name'], 'mime': mime,
+                            'stored_name': stored, 'sha256': digest(image_path), 'ocr_text': None,
+                            'ocr_status': 'pending', 'ocr_error': None})
+                    else:
+                        images, warnings = read_images(target / document['stored_name'], document['id'])
+                        document['warnings'].extend(warnings)
+                        for item in images:
+                            stored = 'images/' + item['id'] + '.' + ocr.MIME_EXT.get(item['mime'], 'bin')
+                            image_path = target / stored
+                            image_path.parent.mkdir(exist_ok=True)
+                            image_path.write_bytes(item.pop('blob'))
+                            item.update(stored_name=stored, sha256=digest(image_path), ocr_text=None,
+                                        ocr_status='pending', ocr_error=None)
+                            ws.setdefault('images', []).append(item)
+                if len(ws.get('blocks', [])) == before_blocks and len(ws.get('images', [])) == before_images:
+                    raise ValueError('追加文件没有可处理的正文、幻灯片文字或图片')
+                ws['generation'] = generation
+                ws['revision'] += 1
+                ws['last_repair'] = None
+                ws.setdefault('batches', []).append({'id': batch_id, 'status': 'done',
+                    'created_at': now(), 'documents': [d['id'] for d in new_documents],
+                    'count': len(new_documents), 'revision': ws['revision']})
+                ws['audit'].append({'time': now(), 'event': '追加文档',
+                                    'detail': f'批次 {batch_id}；新增{len(new_documents)}份文档；等待关联确认'})
+                (target / 'previous-state.json').write_text(json.dumps(previous, ensure_ascii=False), encoding='utf-8')
+                self.write(ws)
+                result = self.public(ws)
+                result['batch'] = {'id': batch_id, 'status': 'done', 'count': len(new_documents),
+                                   'revision': ws['revision']}
+                return result
+            except Exception:
+                shutil.rmtree(target, ignore_errors=True)
+                raise
+
+    def batch(self, wid, batch_id):
+        with self.lock:
+            ws = self.read(wid)
+            item = next((b for b in ws.get('batches', []) if b.get('id') == batch_id), None)
+            if not item:
+                raise FileNotFoundError('批次不存在')
+            return copy.deepcopy(item)
+
     def public(self, ws):
         result = copy.deepcopy(ws)
         result['checks'], result['summary'] = inspect(ws)
