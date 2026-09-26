@@ -1,0 +1,33 @@
+# 应用本体运行时依赖（信创 / 国产化适配用）
+#
+# 与 requirements.txt 的区别：
+#   requirements.txt          = 开发 + 评测 + 训练全集（含 pandas、pdfplumber）
+#   requirements-runtime.txt  = 应用本体真正需要的（本文件）
+#
+# 依据（实测）：zhilian/ 目录完全没有使用 pandas 与 pdfplumber，
+# 它们只被 答辩评测/ 下的第三方数据集脚本使用。去掉后可显著减小
+# 国产系统上的适配面——运行时仅剩 lxml 与 Pillow 两个含编译扩展的包，
+# 而这两个在统信 UOS / 银河麒麟的发行版仓库中都有（python3-lxml、python3-pil）。
+#
+# 安装：
+#   pip install -r requirements-runtime.txt
+
+fastapi==0.141.1
+uvicorn==0.53.0
+python-multipart==0.0.32
+openpyxl>=3.1.5,<4
+python-docx>=1.1.2,<2
+python-pptx>=1.0.2,<2
+httpx==0.28.1
+# MCP 只读工具服务；zhilian/mcp_server.py 对 1.x / 2.x 都做了兼容。
+mcp>=1.30,<3
+
+# ---------------------------------------------------------------------------
+# 可选：本地重排模型（离线语义排序）。
+# 不安装这三项时，系统自动降级为「规则 + 在线 API」，功能不缺。
+# ⚠️ 龙芯 loongarch64 / mips64el / 申威 sw64 上通常没有可用轮子，
+#    这类平台请整组不装，走规则模式。
+# ---------------------------------------------------------------------------
+numpy>=1.26,<3
+onnxruntime>=1.18,<2
+tokenizers>=0.19,<1
