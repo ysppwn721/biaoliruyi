@@ -32,3 +32,8 @@ deployment,reranker_weight_mb,570,local_model,"bge-reranker-v2-m3 ONNX INT8约�
 evaluation,pdf_external_bert_top1,0.413194,external_programmatic_holdout_all_576,"36份公开年报、程序化标签，不是人工真值"
 evaluation,pdf_external_bge_top1,0.961806,external_programmatic_holdout_all_576,"36份公开年报、程序化标签，不是人工真值"
 evaluation,pdf_external_claims,576,external_programmatic_holdout_all_576,"36个文档组"
+evaluation,engine_true_top1_all,1.000000,consistency_280,"产品真实路径 office.read_document->engine.extract_claims；封闭夹具自洽性，非泛化"
+evaluation,engine_true_top1_dev,1.000000,consistency_280_dev231,"同上"
+evaluation,engine_true_top1_test,1.000000,consistency_280_test49,"同上，按文档组留出"
+evaluation,engine_true_error_link,0,consistency_280,"同上"
+evaluation,baseline_script_top1,0.657143,consistency_280,"⚠️ run_rule_baseline.py 脚本分数，非产品路径；threshold 单项 0/96"

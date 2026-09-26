@@ -146,9 +146,38 @@ def test_invalid_decisions_preserve_pending_and_files(project, invalid):
     assert file_bytes(store, ws['id']) == files
 
 
+def escalate_all(monkeypatch):
+    """把全部未确认论断伪装成困难样本，单独验证模型候选的安全处理。
+
+    分级路由下规则唯一项不会触发外部请求（见 test_rule_unique_claims_skip_model），
+    因此模型候选的边界必须显式构造困难样本来覆盖。
+    """
+    routing = agent._candidate_buckets
+    def all_hard(ws, rules):
+        unique, multi, zero = routing(ws, rules)
+        return [], [], unique + multi + zero
+    monkeypatch.setattr(agent, '_candidate_buckets', all_hard)
+
+
+def test_rule_unique_claims_skip_model(project, monkeypatch):
+    """规则唯一项不消耗模型调用：演示样例全部为规则唯一，外部请求应为 0 次。"""
+    store, ws = project
+    monkeypatch.setenv('DEEPSEEK_API_KEY', 'test-secret')
+    def unexpected(*args, **kwargs):
+        pytest.fail('规则唯一项不应发起模型请求')
+    monkeypatch.setattr(httpx, 'post', unexpected)
+    ws = agent.run_agent(store, ws['id'], ws['revision'])
+    routing = ws['agent']['model_routing']
+    assert routing['unique_rule_claims'] == 10 and routing['api_candidate_claims'] == 0
+    assert routing['api_suggestions'] == 0
+    assert any(t['node'] == 'model_skipped' for t in ws['agent']['trace'])
+    assert ws['agent']['pending']['kind'] == 'confirm_links'
+
+
 def test_model_trace_and_candidates_are_safe(project, monkeypatch):
     store, ws = project
     monkeypatch.setenv('DEEPSEEK_API_KEY', 'test-secret')
+    escalate_all(monkeypatch)
     calls = []
     first = ws['claims'][0]
     def fake_post(url, **kwargs):
@@ -175,6 +204,7 @@ def test_model_trace_and_candidates_are_safe(project, monkeypatch):
 def test_model_failure_falls_back_without_secrets(project, monkeypatch):
     store, ws = project
     monkeypatch.setenv('DEEPSEEK_API_KEY', 'test-secret')
+    escalate_all(monkeypatch)
     def failed(*args, **kwargs):
         raise httpx.ReadTimeout('provider-body test-secret')
     monkeypatch.setattr(httpx, 'post', failed)
@@ -222,6 +252,7 @@ def test_tool_error_after_commit_does_not_overwrite_decision(project, monkeypatc
 def test_model_disagreement_pauses_for_choice(project, monkeypatch):
     store, ws = project
     monkeypatch.setenv('DEEPSEEK_API_KEY', 'test-secret')
+    escalate_all(monkeypatch)
     claim = next(c for c in ws['claims'] if c['kind'] == 'quote')
     payload = {'suggestions': [{'claim_id': claim['id'], 'refs': ['sales_prev'], 'reason': '不同候选'}]}
     monkeypatch.setattr(httpx, 'post', lambda *args, **kwargs: httpx.Response(

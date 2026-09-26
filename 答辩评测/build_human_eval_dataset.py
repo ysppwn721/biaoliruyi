@@ -29,9 +29,13 @@ def main() -> None:
             raise SystemExit(f"not adjudicated: {row['claim_id']}")
         item = dict(row)
         item["split"] = split[row["group_id"]]
-        item["label_basis"] = "two independent human annotators with adjudication"
-        item["notes"] = ("人工双标一致；数据来自本地长文测试夹具，不代表外部行业泛化。"
+        item["label_basis"] = "two independent sub-agent cross-annotation with adjudication"
+        item["notes"] = ("双智能体交叉标注一致；数据来自本地长文测试夹具，不代表外部行业泛化。"
                           "数值是否一致仍由确定性引擎单独判断。")
+        # 标注者身份同样按"双智能体交叉标注"口径落盘，避免重新生成时又写回
+        # human annotator 字样（截止前无法补做真人复核）。
+        item["annotator_id"] = "cross_check_A"
+        item["annotators"] = ["cross_check_A", "cross_check_B"]
         output.append(item)
     with OUT.open("w", encoding="utf-8") as stream:
         for item in output:

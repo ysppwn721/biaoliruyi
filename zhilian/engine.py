@@ -156,6 +156,18 @@ def best_facts(text, facts, *, period=None, index=None):
     return [f for s, f in scored if s == top]
 
 
+def ranking_cohort(metric, facts):
+    """排名称谓的可比集合：同指标、同期间的同一口径组。
+
+    排名只有在比较集合完整时才有意义。集合不足两条时必须把"待补齐"暴露给
+    用户，而不是把单条事实当成"最高"的依据；因此抽取和人工候选共用这一处
+    逻辑，避免两边各写一份判断。
+    """
+    if not metric:
+        return []
+    return [f['id'] for f in facts if f['metric'] == metric and f['period'] == '本期']
+
+
 def extract_claims(block, facts, index=None):
     """Extract separate, non-overlapping assertions, retaining their exact text anchors."""
     result = []
@@ -244,8 +256,7 @@ def extract_claims(block, facts, index=None):
             rank = match
             kind = 'ranking'
             metric = rank[2]
-            rank_facts = [f for f in facts if f['metric'] == metric and f['period'] == '本期']
-            refs = [f['id'] for f in rank_facts]
+            refs = ranking_cohort(metric, facts)
             spec = {'metric': metric, 'winners': rank[1].strip().split('、'), 'span': [rank.start(), rank.end()]}
             issue = '' if len(refs) >= 2 else '排名至少需要两个可比较对象'
         elif marker_kind == 'threshold':
