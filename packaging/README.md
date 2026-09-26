@@ -1,6 +1,6 @@
 # 知链跨平台打包
 
-基础包不内置本地 reranker，当前 Windows 便携包约 26MB，启动后即可运行规则、智能体、Word/PPT/Excel 处理和可选 API。解压后可双击 `启动知链.bat` 或 `Zhilian.exe`。`models/bge-reranker-v2-m3-onnx-int8` 是独立的可选模型包，解压到安装包根目录的 `models/` 后再设置 `ZHILIAN_LOCAL_RERANKER_PATH`。
+基础包不内置本地 reranker，当前 Windows 便携包约 26MB，启动后即可运行规则、智能体、Word/PPT/Excel 处理和可选 API。解压后可双击 `启动知链.bat` 或 `Zhilian.exe`。同时提供 Inno Setup 标准安装版，支持选择安装目录、开始菜单、可选桌面快捷方式和卸载；用户项目数据保存在 `%LOCALAPPDATA%\Zhilian`，卸载程序不会删除这些数据。`models/bge-reranker-v2-m3-onnx-int8` 是独立的可选模型包，解压到安装包根目录的 `models/` 后再设置 `ZHILIAN_LOCAL_RERANKER_PATH`。
 
 ## Windows
 
@@ -12,6 +12,14 @@
 ```
 
 产物：`artifacts/Zhilian-0.2.1-windows-x64.zip`。解压后运行 `Zhilian/Zhilian.exe`。数据默认写入 `%LOCALAPPDATA%\Zhilian\data`，不会写入安装目录。
+
+标准安装版（需要 Inno Setup 6）：
+
+```powershell
+& "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" packaging\zhilian.iss
+```
+
+产物：`artifacts/Zhilian-0.2.1-windows-x64-setup.exe`。默认安装到当前用户的 `%LOCALAPPDATA%\Programs\Zhilian`，可在向导中修改位置；安装完成后可从开始菜单或桌面快捷方式启动。
 
 ## macOS / Linux
 

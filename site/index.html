@@ -102,7 +102,7 @@
     <h3>下载</h3>
     <p class="sec-lead">
       请按你的操作系统选择。若不确定，页面会自动高亮当前系统对应的版本。
-      Windows 原生便携包已可下载；macOS / Linux 提供目标系统构建包，运行其中的脚本即可生成对应架构的原生包。
+      Windows 标准安装版和免安装版均可下载；macOS / Linux 提供目标系统构建包，运行其中的脚本即可生成对应架构的原生包。
     </p>
 
     <div class="plat" id="plat">
@@ -111,11 +111,12 @@
         <p class="pstate ready">可下载 · v0.2.1</p>
         <ul class="meta">
           <li>Windows 10 / 11（64 位）</li>
-          <li>原生便携包，约 25 MB</li>
-          <li>无需 Python，解压后双击启动脚本或 Zhilian.exe</li>
+          <li>标准安装版约 23 MB，免安装版约 26 MB</li>
+          <li>无需 Python；安装版支持选择位置、快捷方式和卸载</li>
           <li>支持一份 Excel 对照多批 Word / PPT</li>
         </ul>
-        <a class="btn primary" href="downloads/知链_v0.2.1_Windows免安装.zip" download>下载免安装包</a>
+        <a class="btn primary" href="downloads/知链_v0.2.1_Windows安装版.exe" download>下载安装版</a>
+        <a class="textlink" href="downloads/知链_v0.2.1_Windows免安装.zip" download>下载免安装 ZIP</a>
       </article>
 
       <article class="platcard" data-os="macos">
@@ -156,7 +157,7 @@
     </div>
 
     <div class="dl-note">
-      <strong>说明</strong>：Windows 原生便携包已构建并验收。解压后可运行中文启动脚本或英文启动脚本；macOS 与 Linux 采用 PyInstaller
+      <strong>说明</strong>：Windows 安装版和免安装包已构建并完成健康检查。安装版支持标准安装流程；免安装包可运行中文启动脚本或英文启动脚本；macOS 与 Linux 采用 PyInstaller
       在目标系统生成原生包，页面提供同一套构建包和脚本；跨平台二进制不能在 Windows 上交叉伪造，
       发布前需在真实机器上完成安装与文件读写验证。
     </div>
@@ -167,7 +168,7 @@
         <p>含后端、前端、自动化测试与第三方许可声明，可自行构建与复现。</p>
         <ul class="meta">
           <li>版本 v0.2.1 ｜ 约 0.45 MB</li>
-          <li>运行 <code>pytest -q</code> 可复现全部 244 项测试</li>
+          <li>运行 <code>pytest -q</code> 可复现当前 250 项测试</li>
         </ul>
         <a class="btn" href="downloads/知链_源代码_v0.2.1.zip" download>下载源代码</a>
       </div>
@@ -178,6 +179,15 @@
           <li>事实ID · 主体 · 指标 · 期间 · 数值 · 单位 · 统计口径</li>
         </ul>
         <a class="btn" href="downloads/知链事实表模板.xlsx" download>下载模板</a>
+      </div>
+      <div class="dlcard">
+        <h4>Windows 标准安装版</h4>
+        <p>双击安装程序，选择安装位置并创建快捷方式；可从系统设置或开始菜单卸载。</p>
+        <ul class="meta">
+          <li>默认安装到当前用户目录，不需要管理员权限</li>
+          <li>用户项目数据与安装目录分离</li>
+        </ul>
+        <a class="btn" href="downloads/知链_v0.2.1_Windows安装版.exe" download>下载 Windows 安装版</a>
       </div>
       <div class="dlcard">
         <h4>Windows 免安装包</h4>
