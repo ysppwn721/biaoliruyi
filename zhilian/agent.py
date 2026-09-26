@@ -208,9 +208,16 @@ def _options(claim, facts, refs, suggestions, rules=None):
         if suggestion['claim_id'] == claim['id']:
             # 不把模型自由文本复制到审计或决策提示，避免回显外部敏感内容。
             add(suggestion['refs'], 'DeepSeek 提出的来源候选，仍需人工核对')
-    if not refs and claim['kind'] in ('quote', 'threshold') and (claim['kind'] == 'quote' or 'limit' in claim['spec']):
+    if not refs:
+        # 规则没给出候选时不能让界面进入"零选项"死结：人工必须至少有一个可勾
+        # 选项，否则 decide 会以"请选择真实存在的来源事实"失败，项目直接卡住。
+        if claim['kind'] == 'growth':
+            add((claim.get('spec') or {}).get('suggested_refs') or [],
+                '增长率需要同口径的上期与本期，请核对配对')
+            for metric, pair in engine.growth_pairs(facts)[:20]:
+                add(pair, f'增长率需要同口径的上期与本期；候选指标「{metric}」，请核对是否本文所指')
         for fact in engine.best_facts(claim['original'], facts):
-            add([fact['id']], '规则发现多个可能来源，请比较统计口径')
+            add([fact['id']], '规则发现可能来源，请比较统计口径')
     options.sort(key=lambda o: not o.get('remembered', False))
     return options
 

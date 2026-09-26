@@ -182,6 +182,35 @@ def ranking_cohort(metric, facts):
     return [f['id'] for f in facts if f['metric'] == metric and f['period'] == '本期']
 
 
+def growth_pair(metric, facts):
+    """增长率所需的同口径上期/本期配对；只有两侧各唯一时才成立。
+
+    与 ranking_cohort 同理：增长率论断的证据是一对事实，不是一条。当文本只提供
+    了其中一侧的线索时，用它的指标在事实表里补另一侧，避免把"无法确定"直接推成
+    无候选的死结——人工需要看到一个可勾选的配对。
+    """
+    if not metric:
+        return []
+    prev = [f['id'] for f in facts if f['metric'] == metric and f['period'] == '上期']
+    curr = [f['id'] for f in facts if f['metric'] == metric and f['period'] == '本期']
+    return [prev[0], curr[0]] if len(prev) == 1 and len(curr) == 1 else []
+
+
+def growth_pairs(facts):
+    """事实表里所有"上期+本期"齐全的指标配对，按指标去重后返回。
+
+    增长率句子常常只写「较上期增长25%」，上下文里也没有指标名，此时规则无法确定
+    它指哪个指标。与其给出零候选（界面上无任何可勾选项、decide 直接报错），不如把
+    事实表里所有成对的指标作为候选交给人工，每条都带确定性核验结论。
+    """
+    pairs = []
+    for metric in dict.fromkeys(f.get('metric') for f in facts):
+        pair = growth_pair(metric, facts)
+        if pair:
+            pairs.append((metric, pair))
+    return pairs
+
+
 def extract_claims(block, facts, index=None):
     """Extract separate, non-overlapping assertions, retaining their exact text anchors."""
     result = []
@@ -253,10 +282,16 @@ def extract_claims(block, facts, index=None):
             kind = 'growth'
             curr = best_facts(source_text, facts, period='本期', index=index)
             prev = best_facts(source_text, facts, period='上期', index=index)
+            suggested = []
             if len(curr) == len(prev) == 1:
                 refs = [prev[0]['id'], curr[0]['id']]
             else:
                 issue = '未唯一确定同口径的上期与本期数据，请确认关联'
+                # 只要有一侧唯一，就能用它的指标把另一侧补出来，作为人工候选；
+                # 否则这条论断在界面上会变成"零选项"的死结（无法勾选、无法确认）。
+                known = curr or prev
+                if len(known) == 1:
+                    suggested = growth_pair(known[0]['metric'], facts)
             # 方向词扩展：年报用「增加/减少/上升」，旧字典只有「增长/下降/持平」。
             # 同时用 number() 而非 float()，以支持千分位数值。
             direction_word = {'增长': 1, '增加': 1, '上升': 1,
@@ -264,6 +299,8 @@ def extract_claims(block, facts, index=None):
             spec = {'span': [growth.start(1), growth.end()],
                     'reported': float(number(growth[2])) if growth[2] else 0.0,
                     'qualitative': growth[2] is None, 'direction': direction_word}
+            if suggested:
+                spec['suggested_refs'] = suggested
             if direction_word < 0:
                 spec['reported'] = -abs(spec['reported'])
         elif marker_kind == 'ranking':
