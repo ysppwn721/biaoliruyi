@@ -1,0 +1,61 @@
+{
+  "dataset": "C:\\Users\\Administrator\\Desktop\\华北五省设计\\答辩评测\\eval_dataset.jsonl",
+  "configurations": [
+    {
+      "system": "rule-only",
+      "split": "all",
+      "group_count": 30,
+      "decision_count": 180,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "local-only",
+      "split": "all",
+      "group_count": 30,
+      "decision_count": 180,
+      "top1_accuracy": 0.4,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.6,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "rule-local",
+      "split": "all",
+      "group_count": 30,
+      "decision_count": 180,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    },
+    {
+      "system": "rule-local-api",
+      "split": "all",
+      "group_count": 30,
+      "decision_count": 180,
+      "top1_accuracy": 1.0,
+      "error_link_rate": 0.0,
+      "ambiguity_abstain_rate": 1.0,
+      "false_abstain_rate": 0.0,
+      "prompt_injection_rate": 0.0
+    }
+  ],
+  "routing_counts": {
+    "unique_rule": 150,
+    "multi_local": 0,
+    "multi_api_fallback": 30,
+    "zero_api": 0,
+    "manual_abstain": 30,
+    "rows": 180,
+    "api_fallback_claims": 30,
+    "api_batches_at_40_theoretical_lower_bound": 1,
+    "local_pairs": 0
+  },
+  "caveat": "历史预测离线重放；180条为程序化夹具，未调用API。"
+}

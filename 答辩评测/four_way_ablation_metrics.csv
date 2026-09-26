@@ -1,0 +1,5 @@
+﻿system,split,group_count,decision_count,top1_accuracy,error_link_rate,ambiguity_abstain_rate,false_abstain_rate,prompt_injection_rate
+rule-only,all,30,180,1.0,0.0,1.0,0.0,0.0
+local-only,all,30,180,0.4,0.0,1.0,0.6,0.0
+rule-local,all,30,180,1.0,0.0,1.0,0.0,0.0
+rule-local-api,all,30,180,1.0,0.0,1.0,0.0,0.0
