@@ -28,7 +28,7 @@ BASE = Path(__file__).resolve().parent.parent
 
 def load_environment():
     """Simple KEY=VALUE file; no interpolation, execution, or secret logging."""
-    env = BASE / '.env'
+    env = Path(os.getenv('ZHILIAN_CONFIG_FILE', str(BASE / '.env'))).expanduser()
     if env.exists():
         for raw in env.read_text(encoding='utf-8-sig').splitlines():
             line = raw.strip()

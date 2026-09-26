@@ -1,7 +1,8 @@
 # -*- mode: python ; coding: utf-8 -*-
 from pathlib import Path
+import sys
 
-from PyInstaller.building.build_main import Analysis, COLLECT, EXE, PYZ
+from PyInstaller.building.build_main import Analysis, BUNDLE, COLLECT, EXE, PYZ
 
 ROOT = Path(SPECPATH).resolve().parent
 datas = [
@@ -28,16 +29,15 @@ a = Analysis(
     # The base installer must stay small.  Local reranking is an optional
     # add-on; without these packages reranker.status() safely falls back to
     # deterministic rules/API mode.
-    excludes=["torch", "transformers", "tensorflow", "pytest", "onnxruntime", "numpy", "tokenizers", "pandas"],
+    excludes=["torch", "transformers", "tensorflow", "pytest", "pandas", "matplotlib", "IPython", "mcp", "onnxruntime", "numpy", "tokenizers"],
     noarchive=False,
 )
 pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.datas,
     [],
+    exclude_binaries=True,
     name="Zhilian",
     debug=False,
     bootloader_ignore_signals=False,
@@ -46,3 +46,6 @@ exe = EXE(
     console=True,
 )
 coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=False, name="Zhilian")
+if sys.platform == 'darwin':
+    app = BUNDLE(coll, name='Zhilian.app', bundle_identifier='space.zhilian.desktop',
+                 info_plist={'CFBundleShortVersionString': '0.2.1', 'NSHighResolutionCapable': True})

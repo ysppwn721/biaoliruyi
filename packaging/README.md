@@ -1,6 +1,6 @@
 # 知链跨平台打包
 
-基础包不内置本地 reranker，体积较小，启动后即可运行规则、智能体、Word/PPT/Excel 处理和可选 API。`models/bge-reranker-v2-m3-onnx-int8` 是独立的可选模型包，解压到安装包根目录的 `models/` 后再设置 `ZHILIAN_LOCAL_RERANKER_PATH`。
+基础包不内置本地 reranker，当前 Windows 便携包约 34MB，启动后即可运行规则、智能体、Word/PPT/Excel 处理和可选 API。`models/bge-reranker-v2-m3-onnx-int8` 是独立的可选模型包，解压到安装包根目录的 `models/` 后再设置 `ZHILIAN_LOCAL_RERANKER_PATH`。
 
 ## Windows
 
@@ -18,7 +18,7 @@
 在目标系统执行：
 
 ```bash
-python3 -m pip install -r requirements.txt pyinstaller==6.16.0
+python3 -m pip install -r packaging/requirements.txt
 bash packaging/build.sh
 ```
 
