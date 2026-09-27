@@ -111,8 +111,11 @@ def test_deepseek_web_workflow(monkeypatch,tmp_path):
     monkeypatch.setenv('ZHILIAN_ACCESS_PASSWORD','')
     client=TestClient(app_module.create_app(tmp_path/'data'))
     health=client.get('/api/health').json()
+    # 这里刻意用**完整字典相等**：任何新增字段都必须被有意识地审阅，
+    # 避免有人不小心把密钥或内部路径加到 health 里。
     assert health['model']=={'enabled':True,'model':'deepseek-flash',
-                             'provider':'DeepSeek','key_configured':True}
+                             'provider':'DeepSeek','base_url':'https://api.deepseek.com',
+                             'redact_numbers':False,'key_configured':True}
     assert 'test-secret' not in json.dumps(health)
     w=client.post('/api/projects/demo').json()
     first=w['claims'][0]
