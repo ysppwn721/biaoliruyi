@@ -1,7 +1,7 @@
 'use strict';
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let workspace = null, currentView = 'overview', filter = 'all', health = null, graphFact = null;
+let workspace = null, currentView = 'overview', filter = 'all', health = null, graphFact = null, quota = null;
 const statusNames = {consistent:'仍成立', inconsistent:'已失效', unverifiable:'无法判断'};
 const kindNames = {quote:'数值引用', growth:'增长率', ranking:'排名', threshold:'阈值判断', chart:'图表数据'};
 const classNames = {consistent:'green', inconsistent:'red', unverifiable:'amber'};
@@ -236,7 +236,17 @@ function renderSources(){
   const w=workspace, segments=w.unmatched_segments||[];
   const rules=(Array.isArray(w.link_rules)?w.link_rules:[]).filter(r=>r&&typeof r==='object');
   $('sourcesView').innerHTML=`<div class="file-grid">${w.documents.map(d=>`<article class="file-card"><span class="file-icon ${d.kind}">${d.kind==='xlsx'?'X':d.kind==='docx'?'W':'P'}</span><h3>${esc(d.name)}</h3><p>${d.kind==='xlsx'?'主要数据源':'关联成果'} · SHA256 ${esc(d.sha256.slice(0,12))}…</p><a class="button secondary small" href="${d.download_url}">↓ 下载当前版本</a></article>`).join('')}</div><section class="panel"><h2>结构化事实表</h2><p class="hint">主体、期间、单位与统计口径共同决定一条事实的含义。</p><div class="table-scroll"><table class="data-table"><thead><tr><th>ID</th><th>主体</th><th>指标</th><th>期间</th><th>数值</th><th>单位</th><th>口径</th><th>位置</th></tr></thead><tbody>${w.facts.map(f=>`<tr>${[f.id,f.subject,f.metric,f.period,f.value??'缺失',f.unit,f.scope,f.sheet+'!'+f.cell].map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></section><section class="panel" style="margin-top:20px"><h2>检查范围与未识别内容</h2><p class="hint">${segments.length} 个片段没有覆盖受支持论断，可能是标题、普通说明或不支持的表达，不能据此认定正确。</p><ul class="warning-list">${w.documents.flatMap(d=>(d.warnings||[]).map(x=>`<li>${esc(d.name)}：${esc(x)}</li>`)).join('')}<li>不验证业务因果关系或主观评价；不保证任意排版和嵌入对象保真。</li></ul><details><summary class="link-button">查看未识别文本</summary>${segments.map(b=>`<div class="evidence-block"><small>${esc(b.label)}</small><p>${esc(b.text)}</p></div>`).join('')||'<p class="hint">所有可读正文片段都已有受支持论断覆盖。</p>'}</details></section>`;
+  $('sourcesView').insertAdjacentHTML('afterbegin',`<section class="panel" style="margin-bottom:20px"><div class="panel-top"><div><h2>追加成果文档</h2><p class="hint">当前项目共 ${w.documents.length} 份文件。Excel 保持唯一，Word / PPT / 图片可分批追加，单批最多 50 份。</p></div><button class="button primary small" id="appendDocuments">＋ 追加文档</button></div></section>`);
+  $('appendDocuments').onclick=appendDocumentsModal;
   $('sourcesView').insertAdjacentHTML('beforeend',`<section class="panel" style="margin-top:20px"><h2>已学习关联规则</h2><p class="hint">规则仅用于候选排序与预选，仍需勾选批准。次数仅在人工确认时增加；再次确认会更新来源记录。</p>${rules.length?`<div class="table-scroll"><table class="data-table"><thead><tr><th>规则 key</th><th>事实 ID</th><th>统计口径</th><th>确认次数</th><th>最近来源论断</th><th>最近确认时间</th></tr></thead><tbody>${rules.map(r=>`<tr>${[r.key,r.fact_id,r.scope,r.hits,r.source_claim_id,r.created_at?localTime(r.created_at):''].map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'<p class="hint">尚无已确认的复用规则</p>'}</section>`);
+}
+function appendDocumentsModal(){
+  const revision=workspace.revision;
+  modal('追加成果文档',`<p class="modal-intro">选择本批新增的 Word、PPT 或图片。Excel 已在项目创建时绑定，不需要重复上传。</p><form id="appendForm"><label class="dropzone"><h3>选择一批文档</h3><p>单批最多 50 份，合计不超过 100MB；可重复操作继续追加</p><input id="appendFiles" type="file" accept=".docx,.pptx,.png,.jpg,.jpeg,.gif,.webp,.bmp,.tiff" multiple required></label><div id="appendStatus" class="upload-file-status">尚未选择文件</div><div class="modal-actions"><button type="button" class="button secondary" id="appendCancel">取消</button><button type="submit" class="button primary" id="appendSubmit" disabled>上传并识别</button></div></form>`);
+  const input=$('appendFiles'), submit=$('appendSubmit'), status=$('appendStatus');
+  input.onchange=()=>{const files=[...input.files], total=files.reduce((n,f)=>n+f.size,0);status.textContent=files.length?`已选择 ${files.length} 份 · ${(total/1024/1024).toFixed(2)} / 100 MB`:'尚未选择文件';submit.disabled=!files.length||files.length>50||total>100*1024*1024;};
+  $('appendCancel').onclick=closeModal;
+  $('appendForm').onsubmit=async e=>{e.preventDefault();const form=new FormData();form.set('revision',revision);[...input.files].forEach(f=>form.append('files',f,f.name));const result=await busy('追加文档并重新扫描',()=>api(`/api/projects/${workspace.id}/documents`,{method:'POST',body:form}));if(result){workspace=result;render();await refreshProjects();closeModal();toast(`已追加 ${result.batch.count} 份文档`);}};
 }
 function renderGraph(){
   const w=workspace,cs=graphFact?w.claims.filter(c=>c.refs.includes(graphFact)):w.claims;
@@ -309,10 +319,11 @@ function renderDiagnosis(){
 function agentModal(){
   if(workspace.agent?.phase==='awaiting_decision'&&workspace.agent.revision===workspace.revision){showAgentResult();return;}
   const projectId=workspace.id, revision=workspace.revision;
-  modal('运行证据链验证智能体',`<p class="modal-intro">按准备、关联、诊断、人工决定、修复、复核的顺序处理当前已保存的数据。来源确认和文件修复分别等待你批准。</p><p class="hint">${health?.model.enabled?'关联阶段会把最多40条未确认文本论断及事实元数据发送给 DeepSeek，可能产生调用费用；模型只提出候选。':'无模型时使用规则候选，功能仍可运行。'} 图表使用规则来源。关闭待办窗口后可继续。</p>${drafts().size?'<p class="hint">右侧还有未应用的数值。若要核验这些变更，请先关闭窗口并点击“更新数据并验证”。</p>':''}<div class="modal-actions"><button class="button primary" id="startAgent">开始运行</button></div>`);
+  modal('运行证据链验证智能体',`<p class="modal-intro">按准备、关联、诊断、人工决定、修复、复核的顺序处理当前已保存的数据。来源确认和文件修复分别等待你批准。</p><p class="hint">${health?.local_reranker?.enabled?'本地 BGE 会先处理规则多候选和零候选语义改写；低置信样本再升级 API。':health?.model.enabled?'关联阶段会把最多40条未确认文本论断及事实元数据发送给 DeepSeek，可能产生调用费用；模型只提出候选。':'无模型时使用规则候选，功能仍可运行。'} 图表使用规则来源。关闭待办窗口后可继续。${quota&&typeof quota.client_remaining==='number'?` 今日剩余额度：本访客 ${quota.client_remaining} 次，全局 ${quota.global_remaining} 次。`:''}</p>${drafts().size?'<p class="hint">右侧还有未应用的数值。若要核验这些变更，请先关闭窗口并点击“更新数据并验证”。</p>':''}<div class="modal-actions"><button class="button primary" id="startAgent">开始运行</button></div>`);
   $('startAgent').onclick=async()=>{
     if(workspace.id!==projectId||workspace.revision!==revision){toast('项目已更新，请关闭窗口重新运行',true);return;}
     const result=await post('agent/run',{},'智能体正在关联与诊断，模型请求最长约60秒');
+    await refreshQuota();
     if(result)showAgentResult();
   };
 }
@@ -335,7 +346,9 @@ function showAgentResult(){
   const canSelectAll=repair||pending.kind==='confirm_links';
   const titles={confirm_links:'智能体 · 审阅来源关联',resolve_ambiguity:'智能体 · 选择有歧义的来源',approve_repair:'智能体 · 预览并批准修复'};
   const sources=refs=>refs.map(id=>{const f=workspace.facts.find(f=>f.id===id);return f?`${factName(f)}：${f.value??'缺失'}${f.unit} · ${f.scope} · ${f.sheet}!${f.cell} [${id}]`:id;}).join('；');
-  modal(titles[pending.kind],`<p class="modal-intro">${repair?'只有勾选并批准的内容才写入文件，随后重新读取复核。':'请核对主体、期间、单位及统计口径。选择候选还不代表批准，需要勾选该项并提交。'} 共 ${pending.items.length} 项，可分批处理。</p>${canSelectAll?`<div class="claim-toolbar" style="margin-bottom:12px"><button type="button" class="button secondary small" id="agentSelectAll">全选</button><span id="agentSelectedCount" class="hint">已选 0 / ${pending.items.length} 项</span></div>`:''}<form id="agentForm">${pending.items.map((item,index)=>`<div class="diff-row"><label><input type="checkbox" data-agent-approve="${index}"> 批准此项 · ${esc(workspace.documents.find(d=>d.id===item.file_id)?.name)} · ${esc(item.label)}</label><div class="evidence-block">${esc(item.original)}</div><p class="hint">${esc(item.reason)}</p>${repair?`<div class="diff-new">修复为：${esc(item.expected)}</div><p class="hint">来源：${esc(sources(item.refs))}</p>`:`<label class="field-label" for="agentOption${index}">来源候选</label><select class="text-input" id="agentOption${index}">${pending.kind==='resolve_ambiguity'?'<option value="">请选择一个候选，或手动指定</option>':''}${item.options.map((o,n)=>`<option value="${n}" ${o.remembered?'selected ':''}${o.status==='unverifiable'?'disabled':''}>${esc(sources(o.refs))} · ${esc(o.reason)}${o.remembered?'（已记住）':''}${o.status==='unverifiable'?'（无法计算）':''}</option>`).join('')}<option value="manual">手动指定事实 ID</option></select><div id="agentManualGroup${index}" class="hidden"><label class="field-label" for="agentManual${index}">事实 ID（以逗号分隔，增长率按上期、本期；预算判断按支出、预算）</label><input class="text-input" id="agentManual${index}" value="${esc(item.refs.join(','))}"></div>`}</div>`).join('')}${repair?'':`<details><summary>查看事实 ID 与单元格</summary>${workspace.facts.map(f=>`<p class="hint">${esc(sources([f.id]))}</p>`).join('')}</details>`}<p class="hint">未勾选的条目保持待办。可关闭窗口稍后处理。</p><div class="modal-actions"><button class="button secondary" type="button" id="agentLater">稍后处理</button><button class="button primary" type="submit">${repair?'批准所选修复并复核':'确认所选来源并继续'}</button></div></form>`);
+  const route=agent.model_routing||{};
+  const routeHint=route.zero_candidate_claims!=null?`<p class="hint">本次路由：规则零候选 ${route.zero_candidate_claims} 项 · 本地零候选召回 ${route.local_zero_recall_claims||0} 项 · API 难例 ${route.api_candidate_claims||0} 项。</p>`:'';
+  modal(titles[pending.kind],`<p class="modal-intro">${repair?'只有勾选并批准的内容才写入文件，随后重新读取复核。':'请核对主体、期间、单位及统计口径。选择候选还不代表批准，需要勾选该项并提交。'} 共 ${pending.items.length} 项，可分批处理。</p>${routeHint}${canSelectAll?`<div class="claim-toolbar" style="margin-bottom:12px"><button type="button" class="button secondary small" id="agentSelectAll">全选</button><span id="agentSelectedCount" class="hint">已选 0 / ${pending.items.length} 项</span></div>`:''}<form id="agentForm">${pending.items.map((item,index)=>`<div class="diff-row"><label><input type="checkbox" data-agent-approve="${index}"> 批准此项 · ${esc(workspace.documents.find(d=>d.id===item.file_id)?.name)} · ${esc(item.label)}</label><div class="evidence-block">${esc(item.original)}</div><p class="hint">${esc(item.reason)}</p>${repair?`<div class="diff-new">修复为：${esc(item.expected)}</div><p class="hint">来源：${esc(sources(item.refs))}</p>`:`<label class="field-label" for="agentOption${index}">来源候选</label><select class="text-input" id="agentOption${index}">${pending.kind==='resolve_ambiguity'?'<option value="">请选择一个候选，或手动指定</option>':''}${item.options.map((o,n)=>`<option value="${n}" ${o.remembered?'selected ':''}${o.status==='unverifiable'?'disabled':''}>${esc(sources(o.refs))} · ${esc(o.reason)}${o.remembered?'（已记住）':''}${o.status==='unverifiable'?'（无法计算）':''}</option>`).join('')}<option value="manual">手动指定事实 ID</option></select><div id="agentManualGroup${index}" class="hidden"><label class="field-label" for="agentManual${index}">事实 ID（以逗号分隔，增长率按上期、本期；预算判断按支出、预算）</label><input class="text-input" id="agentManual${index}" value="${esc(item.refs.join(','))}"></div>`}</div>`).join('')}${repair?'':`<details><summary>查看事实 ID 与单元格</summary>${workspace.facts.map(f=>`<p class="hint">${esc(sources([f.id]))}</p>`).join('')}</details>`}<p class="hint">未勾选的条目保持待办。可关闭窗口稍后处理。</p><div class="modal-actions"><button class="button secondary" type="button" id="agentLater">稍后处理</button><button class="button primary" type="submit">${repair?'批准所选修复并复核':'确认所选来源并继续'}</button></div></form>`);
   $('agentLater').onclick=closeModal;
   if(canSelectAll){
     const boxes=()=>[...$('agentForm').querySelectorAll('[data-agent-approve]')];
@@ -447,7 +460,8 @@ function importSourceModal(){
 }
 function sourcePreviewModal(preview, file, projectId, revision){
   const facts=new Map(workspace.facts.map(f=>[f.id,f]));
-  modal('确认源表变更',`<p class="modal-intro">${esc(file.name)} · ${preview.changes.length} 项数值变化。以下为应用后的预计结果，当前文件尚未修改。</p><div class="preview-metrics"><div><strong>${preview.affected.length}</strong><span>受影响论断</span></div><div><strong>${preview.summary.consistent}</strong><span>仍然成立</span></div><div><strong>${preview.summary.inconsistent}</strong><span>计算不一致</span></div><div><strong>${preview.summary.unverifiable}</strong><span>无法判断</span></div></div><h3>数值变更</h3><div class="table-scroll"><table class="data-table"><thead><tr><th>来源事实</th><th>当前值</th><th>新值</th></tr></thead><tbody>${preview.changes.map(c=>{const f=facts.get(c.id);return `<tr><td>${esc(factName(f))}<small class="cell-meta">${esc(c.id)}</small></td><td>${esc(c.before??'缺失')} ${esc(f.unit)}</td><td class="changed-value">${esc(c.after??'缺失')} ${esc(f.unit)}</td></tr>`;}).join('')}</tbody></table></div><h3 class="section-heading">受影响的结论</h3><p class="hint">数值变化后，仍成立的结论会保留原文。候选来源需人工确认后才能修复。</p>${preview.affected.map(item=>{const c=workspace.claims.find(c=>c.id===item.claim_id);return `<div class="impact-row"><div><span class="file-tag">${esc(fileOf(c).name)} · ${esc(c.label)}</span>${statusBadge(c,item.after)}</div><p>${esc(c.original)}</p><small>${esc(statusNames[item.before.status])} → ${esc(statusNames[item.after.status])} · ${esc(item.after.reason)}</small>${item.after.status==='inconsistent'?`<div class="diff-new">预计修复为：${esc(item.after.expected)}</div>`:''}</div>`;}).join('')||'<p class="hint">这些来源事实目前没有关联到已识别的论断。</p>'}<p class="hint">确认后更新源表并重新验证，Word / PPT 将在你预览并确认修复后更新。${drafts().size?'右侧尚未应用的输入将被此次源表更新替换。':''}</p><div class="modal-actions"><button class="button secondary" id="chooseSourceAgain">重新选文件</button><button class="button primary" id="applySource">确认导入并验证</button></div>`);
+  const visibleAffected=preview.affected.filter(item=>item.before.status!==item.after.status || item.before.expected!==item.after.expected);
+  modal('确认源表变更',`<p class="modal-intro">${esc(file.name)} · ${preview.changes.length} 项数值变化。以下为应用后的预计结果，当前文件尚未修改。</p><div class="preview-metrics"><div><strong>${visibleAffected.length}</strong><span>需要关注</span></div><div><strong>${preview.summary.consistent}</strong><span>仍然成立</span></div><div><strong>${preview.summary.inconsistent}</strong><span>计算不一致</span></div><div><strong>${preview.summary.unverifiable}</strong><span>无法判断</span></div></div><h3>数值变更</h3><div class="table-scroll"><table class="data-table"><thead><tr><th>来源事实</th><th>当前值</th><th>新值</th></tr></thead><tbody>${preview.changes.map(c=>{const f=facts.get(c.id);return `<tr><td>${esc(factName(f))}<small class="cell-meta">${esc(c.id)}</small></td><td>${esc(c.before??'缺失')} ${esc(f.unit)}</td><td class="changed-value">${esc(c.after??'缺失')} ${esc(f.unit)}</td></tr>`;}).join('')}</tbody></table></div><h3 class="section-heading">需要关注的结论</h3><p class="hint">这里只显示状态或预计文本发生变化的结论；仍然成立且无需修改的内容已折叠。</p>${visibleAffected.map(item=>{const c=workspace.claims.find(c=>c.id===item.claim_id);return `<div class="impact-row"><div><span class="file-tag">${esc(fileOf(c).name)} · ${esc(c.label)}</span>${statusBadge(c,item.after)}</div><p>${esc(c.original)}</p><small>${esc(statusNames[item.before.status])} → ${esc(statusNames[item.after.status])} · ${esc(item.after.reason)}</small>${item.after.status==='inconsistent'?`<div class="diff-new">预计修复为：${esc(item.after.expected)}</div>`:''}</div>`;}).join('')||'<p class="hint">这次变化没有导致任何已识别结论需要修改。</p>'}<p class="hint">确认后更新源表并重新验证，Word / PPT 将在你预览并确认修复后更新。${drafts().size?'右侧尚未应用的输入将被此次源表更新替换。':''}</p><div class="modal-actions"><button class="button secondary" id="chooseSourceAgain">重新选文件</button><button class="button primary" id="applySource">确认导入并验证</button></div>`);
   $('chooseSourceAgain').onclick=importSourceModal;
   $('applySource').onclick=async()=>{
     const form=new FormData();form.set('file',file);form.set('revision',revision);
@@ -456,7 +470,7 @@ function sourcePreviewModal(preview, file, projectId, revision){
   };
 }
 async function demo(){
-  const result=await busy('正在创建真实 Office 演示文件',()=>api('/api/projects/demo',{method:'POST'}));
+  const result=await busy('正在创建真实 Office 演示文件',()=>api('/api/projects/demo?semantic=1',{method:'POST'}));
   if(result){closeModal();workspace=result;filter='all';switchView('overview');localStorage.setItem('zhilian-project',result.id);await refreshProjects();toast('演示已就绪：确认来源 → 载入演示变更 → 更新数据');}
 }
 function claimModal(id){
@@ -513,11 +527,30 @@ $('importSource').onclick=importSourceModal;
 $('demoChange').onclick=()=>{const values={sales_current:90,product_a:60,spending:110};document.querySelectorAll('[data-fact]').forEach(x=>{if(x.dataset.fact in values){x.value=values[x.dataset.fact];trackDraft(x);}});toast('已填写示例变更，点击“更新数据并验证”应用');};
 $('exportButton').onclick=deliveryModal;
 $('undoButton').onclick=()=>{modal('撤销上一次文件变更',`<p class="modal-intro">恢复上一次数据更新或修复之前的文件。操作记录会保留。</p><div class="modal-actions"><button class="button primary" id="applyUndo">确认恢复</button></div>`);$('applyUndo').onclick=async()=>{if(await post('undo',{},'恢复文件版本')){closeModal();toast('已恢复上一次文件变更之前的版本');}};};
-$('suggestButton').onclick=()=>{modal('请求 DeepSeek 关联建议',`<p class="modal-intro">将最多40条未确认论断及事实元数据发送至 ${esc(health.model.provider)} 服务，调用费用由服务提供方承担。模型只提出建议，结果仍需人工确认。</p><div class="modal-actions"><button class="button primary" id="callModel">发送并获取建议</button></div>`);$('callModel').onclick=async()=>{if(await post('suggest',{},'等待模型建议，最长约60秒')){closeModal();toast('建议已保存，在“查看依据”中审阅');}};};
+$('suggestButton').onclick=()=>{const left=quota&&typeof quota.client_remaining==='number'?`<p class="hint">今日剩余额度：本访客 ${quota.client_remaining} 次，全局 ${quota.global_remaining} 次。${quota.client_remaining<=0?'额度已用完，本次不会发起请求。':''}</p>`:'';modal('请求 DeepSeek 关联建议',`<p class="modal-intro">将最多40条未确认论断及事实元数据发送至 ${esc(health.model.provider)} 服务，调用费用由服务提供方承担。模型只提出建议，结果仍需人工确认。</p>${left}<div class="modal-actions"><button class="button primary" id="callModel">发送并获取建议</button></div>`);$('callModel').onclick=async()=>{if(await post('suggest',{},'等待模型建议，最长约60秒')){closeModal();await refreshQuota();toast('建议已保存，在“查看依据”中审阅');}};};
+// 演示环境由服务提供方付费，所以界面要明确显示"今天还剩多少次模型调用"：
+// 既是使用提示，也让"限额是设计的一部分"这件事对使用者可见。
+function quotaLabel(q){
+  if(!q || typeof q.client_remaining!=='number') return '';
+  return ` · 今日剩 ${q.client_remaining} 次`;
+}
+function quotaTitle(q){
+  if(!q || typeof q.client_remaining!=='number') return '';
+  return `模型调用限额：本访客已用 ${q.client_used}/${q.client_limit} 次，全局已用 ${q.global_used}/${q.global_limit} 次；按自然日重置，超出后自动降级为规则模式。`;
+}
+async function refreshQuota(){
+  try{ quota=await api('/api/quota'); }catch(e){ quota=null; }
+  const badge=$('modelBadge');
+  if(badge){
+    badge.textContent=(health&&health.model.enabled?'DeepSeek 已配置':'规则模式 · 无需 API')+quotaLabel(quota);
+    badge.title=quotaTitle(quota);
+  }
+  return quota;
+}
 async function init(){
   try{
     health=await api('/api/health');$('connection').innerHTML='工作空间已连接<small>本地持久化存储</small>';
-    $('modelBadge').textContent=health.model.enabled?'DeepSeek 已配置':'规则模式 · 无需 API';
+    await refreshQuota();
     const projects=await refreshProjects();const previous=localStorage.getItem('zhilian-project');
     if(projects.length)await loadProject(projects.find(p=>p.id===previous)?.id||projects[0].id);else render();
   }catch(e){$('welcome').classList.remove('hidden');$('connection').textContent='连接失败';toast(e.message,true);}

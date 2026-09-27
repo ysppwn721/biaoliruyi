@@ -37,9 +37,13 @@ def ocr_image(path, mime):
     if mime not in MIME_EXT:
         raise ValueError('此图片格式暂不支持 OCR，请转换为 PNG 或 JPEG 后重新导入')
     key = os.environ['DEEPSEEK_API_KEY'].strip()
+    # 端点必须与 llm 共用同一份配置。此处曾硬编码官方域名，导致设了
+    # ZHILIAN_LLM_BASE_URL 指向内网自建服务后，文字关联走内网、**图片 OCR 却
+    # 仍然打到公网**——能力声明与实际行为直接矛盾，且图片里往往含敏感内容。
+    endpoint = llm.config()['base_url'] + '/chat/completions'
     try:
         b64 = base64.b64encode(Path(path).read_bytes()).decode('ascii')
-        response = httpx.post('https://api.deepseek.com/chat/completions',
+        response = httpx.post(endpoint,
                               headers={'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'},
                               json={'model': config()['model'], 'temperature': 0, 'stream': False,
                                     'max_tokens': 4000,
