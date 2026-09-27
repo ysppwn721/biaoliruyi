@@ -1,4 +1,4 @@
-# zhilian.space 的线上载体是 Cloudflare Worker「biaoliruyi」（不是 Pages 项目）。
+# ⚠️ 唯一部署入口：本文件 + ./site 目录。不要在别处新建 wrangler*.toml 或\n# 另一份站点副本 —— 曾经因为 wrangler.publish.toml 指向 site_publish/（缺 downloads/）\n# 互相覆盖同一个 Worker，导致公网下载区整体 404。\n#\n# zhilian.space 的线上载体是 Cloudflare Worker「biaoliruyi」（不是 Pages 项目）。
 # 部署：npx wrangler deploy
 # 说明：本 Worker 只提供静态站点。在线演示（/demo/ 与 /api/*）需要 FastAPI 后端，
 # 因此前端会先探测 /api/health，探测失败时把"在线体验"按钮改成下载入口。

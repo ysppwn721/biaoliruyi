@@ -1,0 +1,10 @@
+# Worker 静态资产排除清单。
+#
+# 历史教训：这里曾写着 `downloads/**`，意图是"大文件改由后端服务器的 /downloads
+# 白名单路由提供"。但后端（zhilian/app.py）并没有这个路由 —— 结果 Worker 不传、
+# 后端不答，公网 /downloads/ 下所有文件整体 404，连事实表模板都下不了。
+#
+# 现行规则：能放进 Worker 的（≤25 MiB/文件）一律由 Worker 直接静态分发
+# （Cloudflare 边缘、不消耗服务器带宽）；超过 25 MiB 的文件不放 site/ 目录，
+# 统一放在仓库根的 downloads-large/（已 gitignore），链接指向 GitHub Release。
+# 因此这里不再需要任何排除项。

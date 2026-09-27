@@ -28,3 +28,12 @@ site/_preview.png
 build/
 dist/
 artifacts/
+
+# Cloudflare deploy staging
+site_publish/
+wrangler.publish.toml
+
+# 大文件下载（>25MiB 不能作为 Cloudflare Workers 资源，改走 GitHub Release）
+downloads-large/Zhilian-bge-reranker-v2-m3-onnx-int8.*
+downloads-large/Zhilian-0.2.1-linux-x86_64.tar.gz
+downloads-large/Zhilian-0.2.1-windows-x64.zip
